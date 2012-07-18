@@ -1,0 +1,11 @@
+2012-07-18  kjin  (revision 1)
+
+	* Created /trunk folder to make layout compliant with SVN best practices.
+
+2012-07-18  kjin  (revision 2)
+
+	* Initial import. Registration works, although ugly looking.
+
+Copyright 2012 kjin
+Copying and distribution of this file, with or without modification, are
+permitted provided the copyright notice and this notice are preserved.
