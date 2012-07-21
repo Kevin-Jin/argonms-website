@@ -3,14 +3,17 @@ if (!defined("allow entry"))
 	require('hackingattempt.php');
 
 function sendToPage($timeout, $message, $url) {
-	echo "<html>\r\n"
-		. "<head>\r\n"
-		. "<meta http-equiv=\"Refresh\" content=\"".$timeout."; ".$url."\">\r\n"
-		. "</head>\r\n"
-		. "<body>\r\n"
-		. "<p>".$message." momentarily (or click <a href=\"".$url."\">here</a> to do so immediately).</p>\r\n"
-		. "</body>\r\n"
-		. "</html>";
+	echo
+<<<EOD
+<html>
+<head>
+<meta http-equiv="Refresh" content="$timeout; $url">
+</head>
+<body>
+<p>$message momentarily (or click <a href="$url">here</a> to do so immediately).</p>
+</body>
+</html>
+EOD;
 }
 
 function loginAuthenticate() {

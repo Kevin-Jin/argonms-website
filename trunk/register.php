@@ -16,536 +16,539 @@ function nameCheck() {
 }
 
 function registerForm() {
-	echo "<?xml version=\"1.0\" encoding=\"us-ascii\"?>\r\n"
-		. "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\"\r\n"
-		. "  \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">\r\n"
-		. "<html xmlns=\"http://www.w3.org/1999/xhtml\" xml:lang=\"en\">\r\n"
-		. "<head>\r\n"
-		. "<title>Project Throwback Registration</title>\r\n"
-		. "<meta http-equiv=\"Content-Type\" content=\"text/html;charset=us-ascii\" />\r\n"
-		. "<link rel=\"stylesheet\" type=\"text/css\" href=\"common.css\" />\r\n"
-		. "<style type=\"text/css\">\r\n"
-		. "body {\r\n"
-		. "	font-family:\"Lucida Grande\", \"Lucida Sans Unicode\", Verdana, Arial, Helvetica, sans-serif;\r\n"
-		. "	font-size: 12px;\r\n"
-		. "}\r\n"
-		. "p, h1, form {\r\n"
-		. "	border: 0;\r\n"
-		. "	margin: 0;\r\n"
-		. "	padding: 0;\r\n"
-		. "}\r\n"
-		. ".spacer {\r\n"
-		. "	clear: both;\r\n"
-		. "	height: 1px;\r\n"
-		. "}\r\n"
-		. "/* ----------- Reg Form ----------- */\r\n"
-		. ".regform {\r\n"
-		. "	margin: 0 auto;\r\n"
-		. "	width: 400px;\r\n"
-		. "	padding: 14px;\r\n"
-		. "}\r\n"
-		. "\r\n"
-		. "/* ----------- stylized ----------- */\r\n"
-		. "#stylized {\r\n"
-		. "	border: solid 2px #b7ddf2;\r\n"
-		. "	background: #ebf4fb;\r\n"
-		. "	filter: alpha(opacity=80);\r\n"
-		. "	opacity: 0.8;\r\n"
-		. "}\r\n"
-		. "#stylized h1 {\r\n"
-		. "	font-size: 14px;\r\n"
-		. "	font-weight: bold;\r\n"
-		. "	margin-bottom: 8px;\r\n"
-		. "}\r\n"
-		. "#stylized p {\r\n"
-		. "	font-size: 11px;\r\n"
-		. "	color: #666666;\r\n"
-		. "	margin-bottom: 20px;\r\n"
-		. "	border-bottom: solid 1px #b7ddf2;\r\n"
-		. "	padding-bottom: 10px;\r\n"
-		. "}\r\n"
-		. "#stylized .small {\r\n"
-		. "	color: #666666;\r\n"
-		. "	display: block;\r\n"
-		. "	font-size: 11px;\r\n"
-		. "	font-weight: normal;\r\n"
-		. "	text-align: right;\r\n"
-		. "	width: 140px;\r\n"
-		. "}\r\n"
-		. "#stylized .row {\r\n"
-		. "	padding: 2px 0 20px 0;\r\n"
-		. "}\r\n"
-		. "#stylized .row .label {\r\n"
-		. "	display: block;\r\n"
-		. "	font-weight: bold;\r\n"
-		. "	text-align: right;\r\n"
-		. "	width: 140px;\r\n"
-		. "	float: left;\r\n"
-		. "}\r\n"
-		. "#stylized input {\r\n"
-		. "	font-size: 12px;\r\n"
-		. "	padding: 4px 2px;\r\n"
-		. "	border: solid 1px #aacfe4;\r\n"
-		. "	width: 194px;\r\n"
-		. "	margin: 2px 0 0 10px;\r\n"
-		. "}\r\n"
-		. "#stylized .birthdate {\r\n"
-		. "	float: left;\r\n"
-		. "	width: 200px;\r\n"
-		. "	margin: 2px 0 0 10px;\r\n"
-		. "}\r\n"
-		. "#stylized .birthdate input {\r\n"
-		. "	float: right;\r\n"
-		. "	width: 50px;\r\n"
-		. "	margin: 0 0 20px 0;\r\n"
-		. "	padding: 4px 0;\r\n"
-		. "}\r\n"
-		. "#stylized input#register {\r\n"
-		. "	clear: both;\r\n"
-		. "	margin: 0 0 0 150px;\r\n"
-		. "	padding: 0;\r\n"
-		. "	width: 125px;\r\n"
-		. "	height: 31px;\r\n"
-		. "	background: #666666;\r\n"
-		. "	text-align: center;\r\n"
-		. "	line-height: 31px;\r\n"
-		. "	color: #FFFFFF;\r\n"
-		. "	font-size: 11px;\r\n"
-		. "	font-weight: bold;\r\n"
-		. "	border: none;\r\n"
-		. "}\r\n"
-		. "\r\n"
-		. "/* -------- popup hint box -------- */\r\n"
-		. ".hintbox {\r\n"
-		. "	position: absolute;\r\n"
-		. "	top: 0;\r\n"
-		. "	background-color: #ebf4fb;\r\n"
-		. "	filter: alpha(opacity=80);\r\n"
-		. "	opacity: 0.8;\r\n"
-		. "	width: 150px; /*Default width of hint.*/\r\n"
-		. "	padding: 3px;\r\n"
-		. "	border:1px solid black;\r\n"
-		. "	font:normal 11px Verdana;\r\n"
-		. "	line-height:18px;\r\n"
-		. "	z-index:100;\r\n"
-		. "	border-right: 3px solid black;\r\n"
-		. "	border-bottom: 3px solid black;\r\n"
-		. "	visibility: hidden;\r\n"
-		. "}\r\n"
-		. "</style>\r\n"
-		. "<script type=\"text/javascript\" src=\"common.js\"></script>\r\n"
-		. "<script type=\"text/javascript\">\r\n"
-		. "// <![CDATA[\r\n"
-		. "var horizontal_offset = -8; //horizontal offset of hint box from text field, in pixels\r\n"
-		. "\r\n"
-		. "var vertical_offset = -8; //horizontal offset of hint box from text field, in pixels\r\n"
-		. "var ie = document.all;\r\n"
-		. "var ns6 = document.getElementById && !document.all;\r\n"
-		. "var nextZ = 0;\r\n"
-		. "\r\n"
-		. "function getPosOffset(what, offsettype) {\r\n"
-		. "	var totaloffset = (offsettype == \"left\") ? what.offsetLeft : what.offsetTop;\r\n"
-		. "	var parentEl = what.offsetParent;\r\n"
-		. "	while (parentEl != null){\r\n"
-		. "		totaloffset = (offsettype == \"left\") ? totaloffset + parentEl.offsetLeft : totaloffset + parentEl.offsetTop;\r\n"
-		. "		parentEl = parentEl.offsetParent;\r\n"
-		. "	}\r\n"
-		. "	return totaloffset;\r\n"
-		. "}\r\n"
-		. "\r\n"
-		. "function ieCompatTest() {\r\n"
-		. "	return (document.compatMode && document.compatMode!=\"BackCompat\") ? document.documentElement : document.body;\r\n"
-		. "}\r\n"
-		. "\r\n"
-		. "function clearBrowserEdge(dropmenuobj, obj, side) {\r\n"
-		. "	var edgeoffset = (side == \"right\") ? horizontal_offset * -1 : vertical_offset * -1;\r\n"
-		. "	if (side == \"right\") {\r\n"
-		. "		var windowedge = ie && !window.opera ? ieCompatTest().scrollLeft + ieCompatTest().clientWidth + 10 : window.pageXOffset + window.innerWidth;\r\n"
-		. "		if (windowedge - dropmenuobj.x < dropmenuobj.offsetWidth + horizontal_offset)\r\n"
-		. "			edgeoffset = dropmenuobj.offsetWidth + obj.offsetWidth + horizontal_offset;\r\n"
-		. "	} else {\r\n"
-		. "		var windowedge = ie && !window.opera ? ieCompatTest().scrollTop + ieCompatTest().clientHeight - 15 : window.pageYOffset + window.innerHeight - 18;\r\n"
-		. "		dropmenuobj.contentmeasure = dropmenuobj.offsetHeight;\r\n"
-		. "		if (windowedge - dropmenuobj.y < dropmenuobj.contentmeasure)\r\n"
-		. "			edgeoffset = dropmenuobj.contentmeasure - obj.offsetHeight;\r\n"
-		. "	}\r\n"
-		. "	return edgeoffset;\r\n"
-		. "}\r\n"
-		. "\r\n"
-		. "function showHint(menucontents, obj, tipwidth, error) {\r\n"
-		. "	if (ie || ns6) {\r\n"
-		. "		var dropmenuobj = getHintBox(obj);\r\n"
-		. "		dropmenuobj.innerHTML = menucontents;\r\n"
-		. "		if (tipwidth != \"\") {\r\n"
-		. "			dropmenuobj.widthobj = dropmenuobj.style;\r\n"
-		. "			dropmenuobj.widthobj.width = tipwidth;\r\n"
-		. "		}\r\n"
-		. "		dropmenuobj.x = getPosOffset(obj, \"left\") + obj.offsetWidth;\r\n"
-		. "		dropmenuobj.y = getPosOffset(obj, \"top\");\r\n"
-		. "		dropmenuobj.style.left = dropmenuobj.x - clearBrowserEdge(dropmenuobj, obj, \"right\") + \"px\";\r\n"
-		. "		dropmenuobj.style.top = dropmenuobj.y - clearBrowserEdge(dropmenuobj, obj, \"bottom\") + \"px\";\r\n"
-		. "		dropmenuobj.style.visibility = \"visible\";\r\n"
-		. "		dropmenuobj.style.zIndex = nextZ++;\r\n"
-		. "		if (error)\r\n"
-		. "			dropmenuobj.style.backgroundColor = \"#CC3300\";\r\n"
-		. "		else\r\n"
-		. "			dropmenuobj.style.backgroundColor = \"#FFCC66\";\r\n"
-		. "	}\r\n"
-		. "}\r\n"
-		. "\r\n"
-		. "function hideHint(obj) {\r\n"
-		. "	var dropmenuobj = document.getElementById(\"hintbox_\" + obj.getAttribute(\"id\"));\r\n"
-		. "	if (dropmenuobj != null) {\r\n"
-		. "		dropmenuobj.style.visibility = \"hidden\";\r\n"
-		. "		dropmenuobj.style.left = \"-500px\";\r\n"
-		. "	}\r\n"
-		. "}\r\n"
-		. "\r\n"
-		. "function hintVisible(obj) {\r\n"
-		. "	var dropmenuobj = document.getElementById(\"hintbox_\" + obj.getAttribute(\"id\"));\r\n"
-		. "	if (dropmenuobj != null)\r\n"
-		. "		return (dropmenuobj.style.visibility == \"visible\");\r\n"
-		. "	return false;\r\n"
-		. "}\r\n"
-		. "\r\n"
-		. "function createHintBox(id) {\r\n"
-		. "	var divblock = document.createElement(\"div\");\r\n"
-		. "	divblock.setAttribute(\"id\", \"hintbox_\" + id);\r\n"
-		. "	divblock.setAttribute(\"class\", \"hintbox\");\r\n"
-		. "	document.body.appendChild(divblock);\r\n"
-		. "	return divblock;\r\n"
-		. "}\r\n"
-		. "\r\n"
-		. "function getHintBox(obj) {\r\n"
-		. "	var dropmenuobj = document.getElementById(\"hintbox_\" + obj.getAttribute(\"id\"));\r\n"
-		. "	if (document.getElementById(\"hintbox_\" + obj.getAttribute(\"id\")))\r\n"
-		. "		return dropmenuobj;\r\n"
-		. "	dropmenuobj = createHintBox(obj.getAttribute(\"id\"));\r\n"
-		. "	return dropmenuobj;\r\n"
-		. "}\r\n"
-		. "\r\n"
-		. "var usernameOk = false;\r\n"
-		. "var passwordOk = false;\r\n"
-		. "\r\n"
-		. "function hintTextMatch(obj, menucontents) {\r\n"
-		. "	if (!hintVisible(obj))\r\n"
-		. "		return false;\r\n"
-		. "	return (getHintBox(obj).innerHTML == menucontents);\r\n"
-		. "}\r\n"
-		. "\r\n"
-		. "function checkUsername(obj) {\r\n"
-		. "	var xmlhttp;\r\n"
-		. "	if (window.XMLHttpRequest) {\r\n"
-		. "		//code for IE7+, Firefox, Chrome, Opera, Safari\r\n"
-		. "  		xmlhttp = new XMLHttpRequest();\r\n"
-		. "	} else {\r\n"
-		. "		//code for IE6, IE5\r\n"
-		. "		xmlhttp = new ActiveXObject(\"Microsoft.XMLHTTP\");\r\n"
-		. "	}\r\n"
-		. "	xmlhttp.onreadystatechange = function() {\r\n"
-		. "		if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {\r\n"
-		. "			var resp = xmlhttp.responseText;\r\n"
-		. "			if (resp != \"\") { //we'll return an empty string for no conflicts\r\n"
-		. "				showHint(\"The username \" + resp + \" is already being used.\", obj, \"250px\", true);\r\n"
-		. "				usernameOk = false;\r\n"
-		. "				updateSubmitButton();\r\n"
-		. "			}\r\n"
-		. "		}\r\n"
-		. "	}\r\n"
-		. "	xmlhttp.open(\"GET\", \"index.php?action=namecheck&name=\" + obj.value, true);\r\n"
-		. "	xmlhttp.send();\r\n"
-		. "}\r\n"
-		. "\r\n"
-		. "function showUsernameHint(obj) {\r\n"
-		. "	if (!hintVisible(obj) && obj.value.length == 0) {\r\n"
-		. "		var message = \"Must be between 4-12 characters long. Permitted characters: uppercase and lowercase letters, numbers, and underscore\";\r\n"
-		. "		showHint(message, obj, \"250px\", false);\r\n"
-		. "		obj.onblur = function(obj2, event) {\r\n"
-		. "			if (hintTextMatch(obj, message))\r\n"
-		. "				hideHint(obj);\r\n"
-		. "			obj.onblur = null;\r\n"
-		. "		};\r\n"
-		. "	} else {\r\n"
-		. "		getHintBox(obj).style.zIndex = nextZ++;\r\n"
-		. "	}\r\n"
-		. "}\r\n"
-		. "\r\n"
-		. "function changingUsername(obj, event) {\r\n"
-		. "	var code = event.charCode;\r\n"
-		. "	if (code != 0)\r\n"
-		. "		hideHint(obj);\r\n"
-		. "	if (!(code >= 48 && code <= 57 || code >= 65 && code <= 90 || code >= 97 && code <= 122 || code == 95 || code == 13 || code == 0)) {\r\n"
-		. "		showHint(\"Permitted characters: uppercase and lowercase letters, numbers, and underscore\", obj, \"250px\", false);\r\n"
-		. "		event.returnValue = false;\r\n"
-		. "		event.preventDefault();\r\n"
-		. "	}\r\n"
-		. "}\r\n"
-		. "\r\n"
-		. "function usernameChanged(obj, event) {\r\n"
-		. "	var code = event.keyCode;\r\n"
-		. "	if (code == 8 || code == 46)\r\n"
-		. "		hideHint(obj); //backspace and delete will not fire onkeypress/changingUsername in webkit, so we have to remove hintbox here\r\n"
-		. "	if (!hintVisible(obj)) {\r\n"
-		. "		var length = obj.value.length;\r\n"
-		. "		if (length < 4) {\r\n"
-		. "			usernameOk = false;\r\n"
-		. "			showHint(\"Must be at least 4 characters long\", obj, \"250px\", true);\r\n"
-		. "		} else if (length > 12) {\r\n"
-		. "			usernameOk = false;\r\n"
-		. "			showHint(\"Must be less than 13 characters long\", obj, \"250px\", true);\r\n"
-		. "		} else {\r\n"
-		. "			checkUsername(obj);\r\n"
-		. "			usernameOk = true;\r\n"
-		. "		}\r\n"
-		. "		updateSubmitButton();\r\n"
-		. "	}\r\n"
-		. "}\r\n"
-		. "\r\n"
-		. "function showPasswordHint(obj) {\r\n"
-		. "	if (!hintVisible(obj) && obj.value.length == 0) {\r\n"
-		. "		var message = \"Must be between 5-12 characters long. Permitted characters: uppercase and lowercase letters, numbers, and underscore\";\r\n"
-		. "		showHint(message, obj, \"250px\", false);\r\n"
-		. "		obj.onblur = function(obj2, event) {\r\n"
-		. "			if (hintTextMatch(obj, message))\r\n"
-		. "				hideHint(obj);\r\n"
-		. "			obj.onblur = null;\r\n"
-		. "		};\r\n"
-		. "	} else {\r\n"
-		. "		getHintBox(obj).style.zIndex = nextZ++;\r\n"
-		. "	}\r\n"
-		. "}\r\n"
-		. "\r\n"
-		. "function changingPassword(obj, event) {\r\n"
-		. "	var code = event.charCode;\r\n"
-		. "	if (code != 0)\r\n"
-		. "		hideHint(obj);\r\n"
-		. "	if (!(code >= 48 && code <= 57 || code >= 65 && code <= 90 || code >= 97 && code <= 122 || code == 95 || code == 13 || code == 0)) {\r\n"
-		. "		showHint(\"Permitted characters: uppercase and lowercase letters, numbers, and underscore\", obj, \"250px\", false);\r\n"
-		. "		event.returnValue = false;\r\n"
-		. "		event.preventDefault();\r\n"
-		. "	}\r\n"
-		. "}\r\n"
-		. "\r\n"
-		. "function passwordChanged(obj, event) {\r\n"
-		. "	var code = event.keyCode;\r\n"
-		. "	if (code == 8 || code == 46)\r\n"
-		. "		hideHint(obj); //backspace and delete will not fire onkeypress/changingPassword in webkit, so we have to remove hintbox here\r\n"
-		. "	if (!hintVisible(obj)) {\r\n"
-		. "		var length = obj.value.length;\r\n"
-		. "		if (length < 5) {\r\n"
-		. "			passwordOk = false;\r\n"
-		. "			showHint(\"Must be at least 5 characters long\", obj, \"250px\", true);\r\n"
-		. "		} else if (length > 12) {\r\n"
-		. "			passwordOk = false;\r\n"
-		. "			showHint(\"Must be less than 13 characters long\", obj, \"250px\", true);\r\n"
-		. "		} else {\r\n"
-		. "			passwordOk = true;\r\n"
-		. "		}\r\n"
-		. "		updateSubmitButton();\r\n"
-		. "	}\r\n"
-		. "}\r\n"
-		. "\r\n"
-		. "function updateSubmitButton() {\r\n"
-		. "	document.getElementById(\"register\").disabled = (!usernameOk || !passwordOk);\r\n"
-		. "}\r\n"
-		. "\r\n"
-		. "function updateValidBirthdays(obj) {\r\n"
-		. "	var days = document.getElementById(\"birthdayselect\");\r\n"
-		. "	//february will always be a leap year...\r\n"
-		. "	switch (obj.selectedIndex) {\r\n"
-		. "		case 0: //january\r\n"
-		. "		case 2: //march\r\n"
-		. "		case 4: //may\r\n"
-		. "		case 6: //july\r\n"
-		. "		case 7: //august\r\n"
-		. "		case 9: //october\r\n"
-		. "		case 11: //december\r\n"
-		. "			switch (days.length) {\r\n"
-		. "				case 29: //last was february\r\n"
-		. "					var option = document.createElement(\"option\");\r\n"
-		. "					option.text = \"30\";\r\n"
-		. "					option.setAttribute(\"value\", \"30\");\r\n"
-		. "					days.add(option, null);\r\n"
-		. "					option = document.createElement(\"option\");\r\n"
-		. "					option.text = \"31\";\r\n"
-		. "					option.setAttribute(\"value\", \"31\");\r\n"
-		. "					days.add(option, null);\r\n"
-		. "					break;\r\n"
-		. "				case 30: //last was either april, june, september, november\r\n"
-		. "					var option = document.createElement(\"option\");\r\n"
-		. "					option.text = \"31\";\r\n"
-		. "					option.setAttribute(\"value\", \"31\");\r\n"
-		. "					days.add(option, null);\r\n"
-		. "					break;\r\n"
-		. "				case 31: //last was either january, february, march, may, july, august, october, december\r\n"
-		. "					break;\r\n"
-		. "			}\r\n"
-		. "			break;\r\n"
-		. "		case 3: //april\r\n"
-		. "		case 5: //june\r\n"
-		. "		case 8: //september\r\n"
-		. "		case 10: //november\r\n"
-		. "			switch (days.length) {\r\n"
-		. "				case 29: //last was february\r\n"
-		. "					var option = document.createElement(\"option\");\r\n"
-		. "					option.text = \"30\";\r\n"
-		. "					option.setAttribute(\"value\", \"30\");\r\n"
-		. "					days.add(option, null);\r\n"
-		. "					break;\r\n"
-		. "				case 30: //last was either april, june, september, november\r\n"
-		. "					break;\r\n"
-		. "				case 31: //last was either january, february, march, may, july, august, october, december\r\n"
-		. "					days.remove(30);\r\n"
-		. "					break;\r\n"
-		. "			}\r\n"
-		. "			break;\r\n"
-		. "		case 1: //february\r\n"
-		. "			switch (days.length) {\r\n"
-		. "				case 29: //last was february\r\n"
-		. "					break;\r\n"
-		. "				case 30: //last was either april, june, september, november\r\n"
-		. "					days.remove(29);\r\n"
-		. "					break;\r\n"
-		. "				case 31: //last was either january, february, march, may, july, august, october, december\r\n"
-		. "					days.remove(30);\r\n"
-		. "					days.remove(29);\r\n"
-		. "					break;\r\n"
-		. "			}\r\n"
-		. "			break;\r\n"
-		. "	}\r\n"
-		. "}\r\n"
-		. "\r\n"
-		. "function windowLoaded() {\r\n"
-		. "	window.onresize = function(event) {\r\n"
-		. "		var elements;\r\n"
-		. "		if (document.getElementsByClassName) {\r\n"
-		. "			elements = document.getElementsByClassName(\"hintbox\");\r\n"
-		. "		} else {\r\n"
-		. "			var hasClassName = new RegExp(\"(?:^|\\s)\" + className + \"(?:$|\\s)\");\r\n"
-		. "			var allElements = document.getElementsByTagName(\"*\");\r\n"
-		. "			elements = [];\r\n"
-		. "\r\n"
-		. "			var element;\r\n"
-		. "			for (var i = 0; (element = allElements[i]) != null; i++) {\r\n"
-		. "				var elementClass = element.className;\r\n"
-		. "				if (elementClass && elementClass.indexOf(className) != -1 && hasClassName.test(elementClass))\r\n"
-		. "					elements.push(element);\r\n"
-		. "			}\r\n"
-		. "		}\r\n"
-		. "		var element;\r\n"
-		. "		for (var i = 0; i < elements.length; i++) {\r\n"
-		. "			element = elements[i];\r\n"
-		. "			if (element.style.visibility == \"visible\") {\r\n"
-		. "				var elementName = element.getAttribute(\"id\");\r\n"
-		. "				var obj = document.getElementById(elementName.substring(8, elementName.length));\r\n"
-		. "				element.x = getPosOffset(obj, \"left\") + obj.offsetWidth;\r\n"
-		. "				element.y = getPosOffset(obj, \"top\");\r\n"
-		. "				element.style.left = element.x - clearBrowserEdge(element, obj, \"right\") + \"px\";\r\n"
-		. "				element.style.top = element.y - clearBrowserEdge(element, obj, \"bottom\") + \"px\";\r\n"
-		. "			}\r\n"
-		. "		}\r\n"
-		. "	};\r\n"
-		. "	//instead of just cutting off the user when > 12 characters, give them an error/hint if js is enabled\r\n"
-		. "	document.getElementById(\"unamefield\").setAttribute(\"maxlength\", null);\r\n"
-		. "	document.getElementById(\"pwdfield\").setAttribute(\"maxlength\", null);\r\n"
-		. "\r\n"
-		. "	//in case the user's browser saved some of the form data for some reason,\r\n"
-		. "	//make sure our state is synced up.\r\n"
-		. "	var obj = document.getElementById(\"unamefield\");\r\n"
-		. "	var length = obj.value.length;\r\n"
-		. "	if (length >= 4 && length <= 12) {\r\n"
-		. "		checkUsername(obj);\r\n"
-		. "		usernameOk = true;\r\n"
-		. "	}\r\n"
-		. "	obj = document.getElementById(\"pwdfield\");\r\n"
-		. "	length = obj.value.length;\r\n"
-		. "	if (length >= 5 && length <= 12)\r\n"
-		. "		passwordOk = true;\r\n"
-		. "	updateSubmitButton();\r\n"
-		. "}\r\n"
-		. "\r\n"
-		. "setStartupFunction(windowLoaded);\r\n"
-		. "// ]]>\r\n"
-		. "</script>\r\n"
-		. "</head>\r\n"
-		. "<body>\r\n"
-		. "\r\n"
-		. "<div id=\"stylized\" class=\"regform\">\r\n"
-		. "<form action=\"index.php?action=regsubmit\" method=\"post\">\r\n"
-		. "<h1>Project Throwback Registration</h1>\r\n"
-		. "<p>Please be sure to read and act on any red prompt before hitting Submit.</p>\r\n"
-		. "<div class=\"row\">\r\n"
-		. "<div class=\"label\">Username<span class=\"small\">Your account's login ID</span></div>\r\n"
-		. "<input type=\"text\" id=\"unamefield\" name=\"username\" maxlength=\"12\" onclick=\"showUsernameHint(this);\" onkeypress=\"changingUsername(this, event);\" onkeyup=\"usernameChanged(this, event);\" onpaste=\"event.returnValue = false;\" oncut=\"event.returnValue = false;\" />\r\n"
-		. "</div>\r\n"
-		. "\r\n"
-		. "<div class=\"row\">\r\n"
-		. "<div class=\"label\">Password</div>\r\n"
-		. "<input type=\"password\" id=\"pwdfield\" name=\"password\" maxlength=\"12\" onclick=\"showPasswordHint(this);\" onkeypress=\"changingPassword(this, event);\" onkeyup=\"passwordChanged(this, event);\" onpaste=\"event.returnValue = false;\" oncut=\"event.returnValue = false;\" />\r\n"
-		. "</div>\r\n"
-		. "\r\n"
-		. "<div class=\"row\">\r\n"
-		. "<div class=\"label\">Birthday\r\n"
-		. "<span class=\"small\">Only needed for character deletion</span>\r\n"
-		. "</div>\r\n"
-		. "<div class=\"birthdate\">\r\n"
-		. "<select id=\"birthmonthselect\" name=\"birthmonth\" onchange=\"updateValidBirthdays(this);\">\r\n"
-		. "<option value=\"1\">January</option>\r\n"
-		. "<option value=\"2\">February</option>\r\n"
-		. "<option value=\"3\">March</option>\r\n"
-		. "<option value=\"4\">April</option>\r\n"
-		. "<option value=\"5\">May</option>\r\n"
-		. "<option value=\"6\">June</option>\r\n"
-		. "<option value=\"7\">July</option>\r\n"
-		. "<option value=\"8\">August</option>\r\n"
-		. "<option value=\"9\">September</option>\r\n"
-		. "<option value=\"10\">October</option>\r\n"
-		. "<option value=\"11\">November</option>\r\n"
-		. "<option value=\"12\">December</option>\r\n"
-		. "</select>\r\n"
-		. "<select id=\"birthdayselect\" name=\"birthday\">\r\n"
-		. "<option value=\"1\">1</option>\r\n"
-		. "<option value=\"2\">2</option>\r\n"
-		. "<option value=\"3\">3</option>\r\n"
-		. "<option value=\"4\">4</option>\r\n"
-		. "<option value=\"5\">5</option>\r\n"
-		. "<option value=\"6\">6</option>\r\n"
-		. "<option value=\"7\">7</option>\r\n"
-		. "<option value=\"8\">8</option>\r\n"
-		. "<option value=\"9\">9</option>\r\n"
-		. "<option value=\"10\">10</option>\r\n"
-		. "<option value=\"11\">11</option>\r\n"
-		. "<option value=\"12\">12</option>\r\n"
-		. "<option value=\"13\">13</option>\r\n"
-		. "<option value=\"14\">14</option>\r\n"
-		. "<option value=\"15\">15</option>\r\n"
-		. "<option value=\"16\">16</option>\r\n"
-		. "<option value=\"17\">17</option>\r\n"
-		. "<option value=\"18\">18</option>\r\n"
-		. "<option value=\"19\">19</option>\r\n"
-		. "<option value=\"20\">20</option>\r\n"
-		. "<option value=\"21\">21</option>\r\n"
-		. "<option value=\"22\">22</option>\r\n"
-		. "<option value=\"23\">23</option>\r\n"
-		. "<option value=\"24\">24</option>\r\n"
-		. "<option value=\"25\">25</option>\r\n"
-		. "<option value=\"26\">26</option>\r\n"
-		. "<option value=\"27\">27</option>\r\n"
-		. "<option value=\"28\">28</option>\r\n"
-		. "<option value=\"29\">29</option>\r\n"
-		. "<option value=\"30\">30</option>\r\n"
-		. "<option value=\"31\">31</option>\r\n"
-		. "</select>\r\n"
-		. "<input type=\"text\" id=\"birthyearfield\" name=\"birthyear\" maxlength=\"4\" onkeyup=\"this.value = this.value.replace(/[^\d]/, '')\" />\r\n"
-		. "</div>\r\n"
-		. "</div>\r\n"
-		. "<div><input id=\"register\" type=\"submit\" value=\"Register\" /></div>\r\n"
-		. "<div class=\"spacer\"></div>\r\n"
-		. "</form>\r\n"
-		. "</div>\r\n"
-		. "\r\n"
-		. "</body>\r\n"
-		. "</html>";
+	echo
+<<<EOD
+<?xml version="1.0" encoding="us-ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>Project Throwback Registration</title>
+<meta http-equiv="Content-Type" content="text/html;charset=us-ascii" />
+<link rel="stylesheet" type="text/css" href="common.css" />
+<style type="text/css">
+body {
+	font-family:"Lucida Grande", "Lucida Sans Unicode", Verdana, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+}
+p, h1, form {
+	border: 0;
+	margin: 0;
+	padding: 0;
+}
+.spacer {
+	clear: both;
+	height: 1px;
+}
+/* ----------- Reg Form ----------- */
+.regform {
+	margin: 0 auto;
+	width: 400px;
+	padding: 14px;
+}
+
+/* ----------- stylized ----------- */
+#stylized {
+	border: solid 2px #b7ddf2;
+	background: #ebf4fb;
+	filter: alpha(opacity=80);
+	opacity: 0.8;
+}
+#stylized h1 {
+	font-size: 14px;
+	font-weight: bold;
+	margin-bottom: 8px;
+}
+#stylized p {
+	font-size: 11px;
+	color: #666666;
+	margin-bottom: 20px;
+	border-bottom: solid 1px #b7ddf2;
+	padding-bottom: 10px;
+}
+#stylized .small {
+	color: #666666;
+	display: block;
+	font-size: 11px;
+	font-weight: normal;
+	text-align: right;
+	width: 140px;
+}
+#stylized .row {
+	padding: 2px 0 20px 0;
+}
+#stylized .row .label {
+	display: block;
+	font-weight: bold;
+	text-align: right;
+	width: 140px;
+	float: left;
+}
+#stylized input {
+	font-size: 12px;
+	padding: 4px 2px;
+	border: solid 1px #aacfe4;
+	width: 194px;
+	margin: 2px 0 0 10px;
+}
+#stylized .birthdate {
+	float: left;
+	width: 200px;
+	margin: 2px 0 0 10px;
+}
+#stylized .birthdate input {
+	float: right;
+	width: 50px;
+	margin: 0 0 20px 0;
+	padding: 4px 0;
+}
+#stylized input#register {
+	clear: both;
+	margin: 0 0 0 150px;
+	padding: 0;
+	width: 125px;
+	height: 31px;
+	background: #666666;
+	text-align: center;
+	line-height: 31px;
+	color: #FFFFFF;
+	font-size: 11px;
+	font-weight: bold;
+	border: none;
+}
+
+/* -------- popup hint box -------- */
+.hintbox {
+	position: absolute;
+	top: 0;
+	background-color: #ebf4fb;
+	filter: alpha(opacity=80);
+	opacity: 0.8;
+	width: 150px; /*Default width of hint.*/
+	padding: 3px;
+	border:1px solid black;
+	font:normal 11px Verdana;
+	line-height:18px;
+	z-index:100;
+	border-right: 3px solid black;
+	border-bottom: 3px solid black;
+	visibility: hidden;
+}
+</style>
+<script type="text/javascript" src="common.js"></script>
+<script type="text/javascript">
+// <![CDATA[
+var horizontal_offset = -8; //horizontal offset of hint box from text field, in pixels
+
+var vertical_offset = -8; //horizontal offset of hint box from text field, in pixels
+var ie = document.all;
+var ns6 = document.getElementById && !document.all;
+var nextZ = 0;
+
+function getPosOffset(what, offsettype) {
+	var totaloffset = (offsettype == "left") ? what.offsetLeft : what.offsetTop;
+	var parentEl = what.offsetParent;
+	while (parentEl != null){
+		totaloffset = (offsettype == "left") ? totaloffset + parentEl.offsetLeft : totaloffset + parentEl.offsetTop;
+		parentEl = parentEl.offsetParent;
+	}
+	return totaloffset;
+}
+
+function ieCompatTest() {
+	return (document.compatMode && document.compatMode!="BackCompat") ? document.documentElement : document.body;
+}
+
+function clearBrowserEdge(dropmenuobj, obj, side) {
+	var edgeoffset = (side == "right") ? horizontal_offset * -1 : vertical_offset * -1;
+	if (side == "right") {
+		var windowedge = ie && !window.opera ? ieCompatTest().scrollLeft + ieCompatTest().clientWidth + 10 : window.pageXOffset + window.innerWidth;
+		if (windowedge - dropmenuobj.x < dropmenuobj.offsetWidth + horizontal_offset)
+			edgeoffset = dropmenuobj.offsetWidth + obj.offsetWidth + horizontal_offset;
+	} else {
+		var windowedge = ie && !window.opera ? ieCompatTest().scrollTop + ieCompatTest().clientHeight - 15 : window.pageYOffset + window.innerHeight - 18;
+		dropmenuobj.contentmeasure = dropmenuobj.offsetHeight;
+		if (windowedge - dropmenuobj.y < dropmenuobj.contentmeasure)
+			edgeoffset = dropmenuobj.contentmeasure - obj.offsetHeight;
+	}
+	return edgeoffset;
+}
+
+function showHint(menucontents, obj, tipwidth, error) {
+	if (ie || ns6) {
+		var dropmenuobj = getHintBox(obj);
+		dropmenuobj.innerHTML = menucontents;
+		if (tipwidth != "") {
+			dropmenuobj.widthobj = dropmenuobj.style;
+			dropmenuobj.widthobj.width = tipwidth;
+		}
+		dropmenuobj.x = getPosOffset(obj, "left") + obj.offsetWidth;
+		dropmenuobj.y = getPosOffset(obj, "top");
+		dropmenuobj.style.left = dropmenuobj.x - clearBrowserEdge(dropmenuobj, obj, "right") + "px";
+		dropmenuobj.style.top = dropmenuobj.y - clearBrowserEdge(dropmenuobj, obj, "bottom") + "px";
+		dropmenuobj.style.visibility = "visible";
+		dropmenuobj.style.zIndex = nextZ++;
+		if (error)
+			dropmenuobj.style.backgroundColor = "#CC3300";
+		else
+			dropmenuobj.style.backgroundColor = "#FFCC66";
+	}
+}
+
+function hideHint(obj) {
+	var dropmenuobj = document.getElementById("hintbox_" + obj.getAttribute("id"));
+	if (dropmenuobj != null) {
+		dropmenuobj.style.visibility = "hidden";
+		dropmenuobj.style.left = "-500px";
+	}
+}
+
+function hintVisible(obj) {
+	var dropmenuobj = document.getElementById("hintbox_" + obj.getAttribute("id"));
+	if (dropmenuobj != null)
+		return (dropmenuobj.style.visibility == "visible");
+	return false;
+}
+
+function createHintBox(id) {
+	var divblock = document.createElement("div");
+	divblock.setAttribute("id", "hintbox_" + id);
+	divblock.setAttribute("class", "hintbox");
+	document.body.appendChild(divblock);
+	return divblock;
+}
+
+function getHintBox(obj) {
+	var dropmenuobj = document.getElementById("hintbox_" + obj.getAttribute("id"));
+	if (document.getElementById("hintbox_" + obj.getAttribute("id")))
+		return dropmenuobj;
+	dropmenuobj = createHintBox(obj.getAttribute("id"));
+	return dropmenuobj;
+}
+
+var usernameOk = false;
+var passwordOk = false;
+
+function hintTextMatch(obj, menucontents) {
+	if (!hintVisible(obj))
+		return false;
+	return (getHintBox(obj).innerHTML == menucontents);
+}
+
+function checkUsername(obj) {
+	var xmlhttp;
+	if (window.XMLHttpRequest) {
+		//code for IE7+, Firefox, Chrome, Opera, Safari
+  		xmlhttp = new XMLHttpRequest();
+	} else {
+		//code for IE6, IE5
+		xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	xmlhttp.onreadystatechange = function() {
+		if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+			var resp = xmlhttp.responseText;
+			if (resp != "") { //we'll return an empty string for no conflicts
+				showHint("The username " + resp + " is already being used.", obj, "250px", true);
+				usernameOk = false;
+				updateSubmitButton();
+			}
+		}
+	}
+	xmlhttp.open("GET", "index.php?action=namecheck&name=" + obj.value, true);
+	xmlhttp.send();
+}
+
+function showUsernameHint(obj) {
+	if (!hintVisible(obj) && obj.value.length == 0) {
+		var message = "Must be between 4-12 characters long. Permitted characters: uppercase and lowercase letters, numbers, and underscore";
+		showHint(message, obj, "250px", false);
+		obj.onblur = function(obj2, event) {
+			if (hintTextMatch(obj, message))
+				hideHint(obj);
+			obj.onblur = null;
+		};
+	} else {
+		getHintBox(obj).style.zIndex = nextZ++;
+	}
+}
+
+function changingUsername(obj, event) {
+	var code = event.charCode;
+	if (code != 0)
+		hideHint(obj);
+	if (!(code >= 48 && code <= 57 || code >= 65 && code <= 90 || code >= 97 && code <= 122 || code == 95 || code == 13 || code == 0)) {
+		showHint("Permitted characters: uppercase and lowercase letters, numbers, and underscore", obj, "250px", false);
+		event.returnValue = false;
+		event.preventDefault();
+	}
+}
+
+function usernameChanged(obj, event) {
+	var code = event.keyCode;
+	if (code == 8 || code == 46)
+		hideHint(obj); //backspace and delete will not fire onkeypress/changingUsername in webkit, so we have to remove hintbox here
+	if (!hintVisible(obj)) {
+		var length = obj.value.length;
+		if (length < 4) {
+			usernameOk = false;
+			showHint("Must be at least 4 characters long", obj, "250px", true);
+		} else if (length > 12) {
+			usernameOk = false;
+			showHint("Must be less than 13 characters long", obj, "250px", true);
+		} else {
+			checkUsername(obj);
+			usernameOk = true;
+		}
+		updateSubmitButton();
+	}
+}
+
+function showPasswordHint(obj) {
+	if (!hintVisible(obj) && obj.value.length == 0) {
+		var message = "Must be between 5-12 characters long. Permitted characters: uppercase and lowercase letters, numbers, and underscore";
+		showHint(message, obj, "250px", false);
+		obj.onblur = function(obj2, event) {
+			if (hintTextMatch(obj, message))
+				hideHint(obj);
+			obj.onblur = null;
+		};
+	} else {
+		getHintBox(obj).style.zIndex = nextZ++;
+	}
+}
+
+function changingPassword(obj, event) {
+	var code = event.charCode;
+	if (code != 0)
+		hideHint(obj);
+	if (!(code >= 48 && code <= 57 || code >= 65 && code <= 90 || code >= 97 && code <= 122 || code == 95 || code == 13 || code == 0)) {
+		showHint("Permitted characters: uppercase and lowercase letters, numbers, and underscore", obj, "250px", false);
+		event.returnValue = false;
+		event.preventDefault();
+	}
+}
+
+function passwordChanged(obj, event) {
+	var code = event.keyCode;
+	if (code == 8 || code == 46)
+		hideHint(obj); //backspace and delete will not fire onkeypress/changingPassword in webkit, so we have to remove hintbox here
+	if (!hintVisible(obj)) {
+		var length = obj.value.length;
+		if (length < 5) {
+			passwordOk = false;
+			showHint("Must be at least 5 characters long", obj, "250px", true);
+		} else if (length > 12) {
+			passwordOk = false;
+			showHint("Must be less than 13 characters long", obj, "250px", true);
+		} else {
+			passwordOk = true;
+		}
+		updateSubmitButton();
+	}
+}
+
+function updateSubmitButton() {
+	document.getElementById("register").disabled = (!usernameOk || !passwordOk);
+}
+
+function updateValidBirthdays(obj) {
+	var days = document.getElementById("birthdayselect");
+	//february will always be a leap year...
+	switch (obj.selectedIndex) {
+		case 0: //january
+		case 2: //march
+		case 4: //may
+		case 6: //july
+		case 7: //august
+		case 9: //october
+		case 11: //december
+			switch (days.length) {
+				case 29: //last was february
+					var option = document.createElement("option");
+					option.text = "30";
+					option.setAttribute("value", "30");
+					days.add(option, null);
+					option = document.createElement("option");
+					option.text = "31";
+					option.setAttribute("value", "31");
+					days.add(option, null);
+					break;
+				case 30: //last was either april, june, september, november
+					var option = document.createElement("option");
+					option.text = "31";
+					option.setAttribute("value", "31");
+					days.add(option, null);
+					break;
+				case 31: //last was either january, february, march, may, july, august, october, december
+					break;
+			}
+			break;
+		case 3: //april
+		case 5: //june
+		case 8: //september
+		case 10: //november
+			switch (days.length) {
+				case 29: //last was february
+					var option = document.createElement("option");
+					option.text = "30";
+					option.setAttribute("value", "30");
+					days.add(option, null);
+					break;
+				case 30: //last was either april, june, september, november
+					break;
+				case 31: //last was either january, february, march, may, july, august, october, december
+					days.remove(30);
+					break;
+			}
+			break;
+		case 1: //february
+			switch (days.length) {
+				case 29: //last was february
+					break;
+				case 30: //last was either april, june, september, november
+					days.remove(29);
+					break;
+				case 31: //last was either january, february, march, may, july, august, october, december
+					days.remove(30);
+					days.remove(29);
+					break;
+			}
+			break;
+	}
+}
+
+function windowLoaded() {
+	window.onresize = function(event) {
+		var elements;
+		if (document.getElementsByClassName) {
+			elements = document.getElementsByClassName("hintbox");
+		} else {
+			var hasClassName = new RegExp("(?:^|\s)" + className + "(?:$|\s)");
+			var allElements = document.getElementsByTagName("*");
+			elements = [];
+
+			var element;
+			for (var i = 0; (element = allElements[i]) != null; i++) {
+				var elementClass = element.className;
+				if (elementClass && elementClass.indexOf(className) != -1 && hasClassName.test(elementClass))
+					elements.push(element);
+			}
+		}
+		var element;
+		for (var i = 0; i < elements.length; i++) {
+			element = elements[i];
+			if (element.style.visibility == "visible") {
+				var elementName = element.getAttribute("id");
+				var obj = document.getElementById(elementName.substring(8, elementName.length));
+				element.x = getPosOffset(obj, "left") + obj.offsetWidth;
+				element.y = getPosOffset(obj, "top");
+				element.style.left = element.x - clearBrowserEdge(element, obj, "right") + "px";
+				element.style.top = element.y - clearBrowserEdge(element, obj, "bottom") + "px";
+			}
+		}
+	};
+	//instead of just cutting off the user when > 12 characters, give them an error/hint if js is enabled
+	document.getElementById("unamefield").setAttribute("maxlength", null);
+	document.getElementById("pwdfield").setAttribute("maxlength", null);
+
+	//in case the user's browser saved some of the form data for some reason,
+	//make sure our state is synced up.
+	var obj = document.getElementById("unamefield");
+	var length = obj.value.length;
+	if (length >= 4 && length <= 12) {
+		checkUsername(obj);
+		usernameOk = true;
+	}
+	obj = document.getElementById("pwdfield");
+	length = obj.value.length;
+	if (length >= 5 && length <= 12)
+		passwordOk = true;
+	updateSubmitButton();
+}
+
+setStartupFunction(windowLoaded);
+// ]]>
+</script>
+</head>
+<body>
+
+<div id="stylized" class="regform">
+<form action="index.php?action=regsubmit" method="post">
+<h1>Project Throwback Registration</h1>
+<p>Please be sure to read and act on any red prompt before hitting Submit.</p>
+<div class="row">
+<div class="label">Username<span class="small">Your account's login ID</span></div>
+<input type="text" id="unamefield" name="username" maxlength="12" onclick="showUsernameHint(this);" onkeypress="changingUsername(this, event);" onkeyup="usernameChanged(this, event);" onpaste="event.returnValue = false;" oncut="event.returnValue = false;" />
+</div>
+
+<div class="row">
+<div class="label">Password</div>
+<input type="password" id="pwdfield" name="password" maxlength="12" onclick="showPasswordHint(this);" onkeypress="changingPassword(this, event);" onkeyup="passwordChanged(this, event);" onpaste="event.returnValue = false;" oncut="event.returnValue = false;" />
+</div>
+
+<div class="row">
+<div class="label">Birthday
+<span class="small">Only needed for character deletion</span>
+</div>
+<div class="birthdate">
+<select id="birthmonthselect" name="birthmonth" onchange="updateValidBirthdays(this);">
+<option value="1">January</option>
+<option value="2">February</option>
+<option value="3">March</option>
+<option value="4">April</option>
+<option value="5">May</option>
+<option value="6">June</option>
+<option value="7">July</option>
+<option value="8">August</option>
+<option value="9">September</option>
+<option value="10">October</option>
+<option value="11">November</option>
+<option value="12">December</option>
+</select>
+<select id="birthdayselect" name="birthday">
+<option value="1">1</option>
+<option value="2">2</option>
+<option value="3">3</option>
+<option value="4">4</option>
+<option value="5">5</option>
+<option value="6">6</option>
+<option value="7">7</option>
+<option value="8">8</option>
+<option value="9">9</option>
+<option value="10">10</option>
+<option value="11">11</option>
+<option value="12">12</option>
+<option value="13">13</option>
+<option value="14">14</option>
+<option value="15">15</option>
+<option value="16">16</option>
+<option value="17">17</option>
+<option value="18">18</option>
+<option value="19">19</option>
+<option value="20">20</option>
+<option value="21">21</option>
+<option value="22">22</option>
+<option value="23">23</option>
+<option value="24">24</option>
+<option value="25">25</option>
+<option value="26">26</option>
+<option value="27">27</option>
+<option value="28">28</option>
+<option value="29">29</option>
+<option value="30">30</option>
+<option value="31">31</option>
+</select>
+<input type="text" id="birthyearfield" name="birthyear" maxlength="4" onkeyup="this.value = this.value.replace(/[^\d]/, '')" />
+</div>
+</div>
+<div><input id="register" type="submit" value="Register" /></div>
+<div class="spacer"></div>
+</form>
+</div>
+
+</body>
+</html>
+EOD;
 }
 
 function doRegister() {
