@@ -53,12 +53,11 @@ function showGraph() {
 	$entries = 0;
 	if ($ps->execute()) {
 		$rs = $ps->get_result();
+		$tz = new DateTimeZone("America/New_York");
 		for (; $array = $rs->fetch_array(); $entries++) {
 			//MySQL string representation of dates is yyyy-MM-dd
 			//(or Y-m-d in PHP, standardized as ISO 8601)
-			//time zone doesn't actually matter since changing string to time
-			//back to string has no net difference...
-			$day[$entries] = new DateTime($array[0] . " " . $array[3], new DateTimeZone("America/New_York"));
+			$day[$entries] = new DateTime($array[0] . " " . $array[3], $tz);
 			$unique[$entries] = $array[1];
 			$max[$entries] = $array[2];
 		}
@@ -79,7 +78,7 @@ $(function () {
 	var activeTimes = {
 EOD;
 	for ($i = 0; $i < $entries; $i++)
-		echo $day[$i]->format("'n/j/y':'g:i:s A'") . ","; // 'M/d/yy':'h:mm:ss a'
+		echo $day[$i]->format("'n/j/y':'g:i:s A T'") . ","; // 'M/d/yy':'h:mm:ss a'
 	echo
 <<<EOD
 };
@@ -127,8 +126,8 @@ EOD;
 			},
 			tooltip: {
 				formatter: function() {
-					return '<b>' + this.series.name + '</b><br/>' +
-						this.x + ': '+ this.y + ' player(s)<br/>' +
+					return '<b>' + this.x + '</b><br/>' +
+						this.series.name + ': '+ this.y + ' player(s)<br/>' +
 						
 EOD;
 	echo "'Most active time: ' + activeTimes[this.x]";
