@@ -1,12 +1,12 @@
-2012-07-18  kjin  (revision 1)
+2012-07-18  GoldenKevin  (revision 1)
 
 	* Created /trunk folder to make layout compliant with SVN best practices.
 
-2012-07-18  kjin  (revision 2)
+2012-07-18  GoldenKevin  (revision 2)
 
 	* Initial import. Registration works, although ugly looking.
 
-2012-07-18  kjin  (revision 3)
+2012-07-18  GoldenKevin  (revision 3)
 
 	* Heredocs used more extensively to make HTML documents in PHP functions
 	more readable.
@@ -14,6 +14,16 @@
 	* Added a link to the forum on the bottom of the front page that appears
 	when the user clicks "I agree."
 
-Copyright 2012 kjin
+2012-07-21  GoldenKevin  (revision 4)
+
+	* Added new actions ranking, status, and graph. Graph library courtesy of
+	Highcharts and jQuery.
+
+2012-07-21  GoldenKevin  (revision 5)
+
+	* Front page opens ToS instead of graph.
+	* Rearranged tooltip text for graph.
+
+Copyright 2012 GoldenKevin
 Copying and distribution of this file, with or without modification, are
 permitted provided the copyright notice and this notice are preserved.
