@@ -3,8 +3,8 @@ define("allow entry", 1);
 $file;
 $function;
 if (!isset($_REQUEST["action"])) {
-	$file = "disclaimer.php";
-	$function = "showTerms";
+	$file = "ranking.php";
+	$function = "showGraph";
 } else {
 	$actionArray = array(
 		'login' => array('loginattempt.php', 'loginAuthenticate'),
@@ -13,7 +13,10 @@ if (!isset($_REQUEST["action"])) {
 		'regsubmit' => array('register.php', 'doRegister'),
 		'about' => array('disclaimer.php', 'showAbout'),
 		'letsbefriends' => array('disclaimer.php', 'showLetsBeFriends'),
-		'ad' => array('ad.php', 'showAd')
+		'ad' => array('ad.php', 'showAd'),
+		'ranking' => array('ranking.php', 'showRanking'),
+		'status' => array('ranking.php', 'showStatus'),
+		'graph' => array('ranking.php', 'showGraphs')
 	);
 
 	if (array_key_exists($_REQUEST["action"], $actionArray)) {
