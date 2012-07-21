@@ -6,6 +6,14 @@
 
 	* Initial import. Registration works, although ugly looking.
 
+2012-07-18  kjin  (revision 3)
+
+	* Heredocs used more extensively to make HTML documents in PHP functions
+	more readable.
+	* Commented out a part of the disclaimer that is not necessarily true, yet.
+	* Added a link to the forum on the bottom of the front page that appears
+	when the user clicks "I agree."
+
 Copyright 2012 kjin
 Copying and distribution of this file, with or without modification, are
 permitted provided the copyright notice and this notice are preserved.
