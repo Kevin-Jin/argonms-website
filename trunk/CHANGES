@@ -24,6 +24,13 @@
 	* Front page opens ToS instead of graph.
 	* Rearranged tooltip text for graph.
 
+2012-09-30  GoldenKevin  (revision 6)
+
+	* Corrected an instruction on the registration form.
+	* Population graphs now show dates in order.
+	* Amended showLetsBeFriends() disclaimer.
+	* Added my name to About page to clarify the point of view.
+
 Copyright 2012 GoldenKevin
 Copying and distribution of this file, with or without modification, are
 permitted provided the copyright notice and this notice are preserved.

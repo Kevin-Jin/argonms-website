@@ -475,7 +475,7 @@ setStartupFunction(windowLoaded);
 <div id="stylized" class="regform">
 <form action="index.php?action=regsubmit" method="post">
 <h1>Project Throwback Registration</h1>
-<p>Please be sure to read and act on any red prompt before hitting Submit.</p>
+<p>Please be sure to read and act on any red prompt before hitting Register.</p>
 <div class="row">
 <div class="label">Username<span class="small">Your account's login ID</span></div>
 <input type="text" id="unamefield" name="username" maxlength="12" onclick="showUsernameHint(this);" onkeypress="changingUsername(this, event);" onkeyup="usernameChanged(this, event);" onpaste="event.returnValue = false;" oncut="event.returnValue = false;" />
