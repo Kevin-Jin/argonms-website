@@ -49,7 +49,7 @@ function showGraph() {
 	$unique = array();
 	$max = array();
 	$con = makeDatabaseConnection();
-	$ps = $con->prepare("SELECT `day`,`uniquelogins`,`maxconcurrentlogins`,`mostactivetime` FROM `dailystats`");
+	$ps = $con->prepare("SELECT `day`,`uniquelogins`,`maxconcurrentlogins`,`mostactivetime` FROM `dailystats` ORDER BY `day`");
 	$entries = 0;
 	if ($ps->execute()) {
 		$rs = $ps->get_result();
