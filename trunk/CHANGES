@@ -31,6 +31,12 @@
 	* Amended showLetsBeFriends() disclaimer.
 	* Added my name to About page to clarify the point of view.
 
+2012-10-03  GoldenKevin  (revision 7)
+
+	* Hardcoded timezone in ranking.php moved to config.php.
+	* Log page hits per day and number of registrations per day.
+	* Amended showLetsBeFriends() disclaimer.
+
 Copyright 2012 GoldenKevin
 Copying and distribution of this file, with or without modification, are
 permitted provided the copyright notice and this notice are preserved.

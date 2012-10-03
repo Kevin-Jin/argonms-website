@@ -6,4 +6,6 @@ $dbhost = 'localhost';
 $dbuser = 'root';
 $dbpass = '';
 $dbname = 'argonms';
+
+$timezone = new DateTimeZone('America/New_York');
 ?>

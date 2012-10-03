@@ -53,11 +53,12 @@ function showGraph() {
 	$entries = 0;
 	if ($ps->execute()) {
 		$rs = $ps->get_result();
-		$tz = new DateTimeZone("America/New_York");
+
+		require('config.php');
 		for (; $array = $rs->fetch_array(); $entries++) {
 			//MySQL string representation of dates is yyyy-MM-dd
 			//(or Y-m-d in PHP, standardized as ISO 8601)
-			$day[$entries] = new DateTime($array[0] . " " . $array[3], $tz);
+			$day[$entries] = new DateTime($array[0] . " " . $array[3], $timezone);
 			$unique[$entries] = $array[1];
 			$max[$entries] = $array[2];
 		}
