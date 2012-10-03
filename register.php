@@ -597,6 +597,15 @@ function doRegister() {
 			$ps->bind_param('sssi', $_POST["username"], $passhash, $salt, $birthday);
 			$ps->execute();
 			$ps->close();
+
+			require('config.php');
+			$now = new DateTime(NULL, $timezone);
+			$now = $now->format("Y-m-d");
+			$ps = $con->prepare("INSERT INTO `websitestats` (`day`,`registrations`) VALUES (?,1) ON DUPLICATE KEY UPDATE `registrations` = `registrations` + 1");
+			$ps->bind_param('s', $now);
+			$ps->execute();
+			$ps->close();
+
 			echo 'User '.$_POST["username"].' registered successfully.';
 		}
 		$con->close();
