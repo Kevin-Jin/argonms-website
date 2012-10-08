@@ -24,14 +24,9 @@ function showTerms() {
 	position: absolute;
 	background: white;
 	width: 800px;
-	padding: 10px;
 }
 
-#content.outer #revealed.inner {
-	background: #B8D1CA;
-}
-
-#content.outer #terms.inner {
+#content.outer #terms.inner .body {
 	background: #FADA8F;
 }
 
@@ -39,7 +34,7 @@ form#login {
 	padding: 10px;
 }
 
-h1 {
+.body h1 {
 	margin-top: 0;
 }
 </style>
@@ -48,8 +43,11 @@ h1 {
 <script type="text/javascript" src="common.js"></script>
 <script type="text/javascript">
 // <![CDATA[
-setStartupFunction(function() {
-	document.getElementById("agree").setAttribute("href", "javascript: $('#terms').hide('blind', 500);");
+$(document).ready(function() {
+	$('#agree').click(function(event) {
+		event.preventDefault();
+		$('#terms').hide('blind', 500);
+	});
 });
 // ]]>
 </script>
@@ -58,6 +56,7 @@ setStartupFunction(function() {
 <div id="content" class="outer">
 
 <div id="revealed" class="inner">
+<div class="body">
 <form id="login" action="index.php?action=login&back={$_SERVER['PHP_SELF']}" method="post">
 <p>You must log in in order to access your account control panel and other portions of this site.</p>
 <p>Username:<input type="text" id="unamefield" name="username" maxlength="12" />Password:<input type="password" id="passwordfield" name="password" maxlength="12" /><input id="login" type="submit" value="Login" /></p>
@@ -67,12 +66,15 @@ setStartupFunction(function() {
 <p><a href="index.php?action=graph" title="View graphs that illustrate how much we have grown">Click here to view population statistics.</a></p>
 </div>
 
-
 EOD;
-	if (!isset($_REQUEST["nonjs"])) {
+	require_once('common.php');
+	showFooter();
+	if (!isset($_REQUEST["revealed"])) {
 		echo
 <<<EOD
+
 <div id="terms" class="inner">
+<div class="body">
 <h1>Project Throwback Disclaimer</h1>
 <p>The service, i.e. this website and the related MapleStory server emulator, is strictly for educational purposes only. MapleStory is a trademark of Nexon, i.e. NEXON Korea Corp., NEXON America Inc., and all other subsidiaries of NEXON Korea Corp. The service is independent of Nexon, which is neither affiliated with nor involved in the production of the service, and does not sponsor or endorse the service. We respect Nexon's trademark as well as their business and proprietary interests.</p>
 <p>We, the maintainers, administrators, and owner of the service, do not intend to make a profit nor induce losses for Nexon. Some funds may be collected by means of ex gratia donations for service upkeep expenses ONLY. Users who have donated any amount to the service will not receive any benefits or be given preferential treatment, nor will their donations be transmuted into any form of in-game currency. It is not our intent to take potential customers from Nexon or compete with Nexon using its own intellectual property.</p>
@@ -93,16 +95,17 @@ EOD;*/
 <<<EOD
 <p>Please read the above statement carefully before proceeding.</p>
 <div class="buttonset">
-<a id="agree" class="positive" href="/pjtb/index.php?nonjs">I agree</a>
+<a id="agree" class="positive" href="/pjtb/index.php?revealed">I agree</a>
 <a id="disagree" class="negative" href="http://www.google.com">I disagree</a>
 </div>
-
+</div>
 
 EOD;
 	}
 
 	echo
 <<<EOD
+
 </div>
 </div>
 </body>

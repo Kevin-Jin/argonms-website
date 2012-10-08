@@ -1,3 +1,21 @@
+.footer {
+	width: 780px;
+	background: #D9B7A4;
+	padding: 10px;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+	font-size: 50%;
+}
+
+.body {
+	width: 780px;
+	background: #B8D1CA;
+	padding: 10px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
 .buttonset {
 	text-align: center;
 }
