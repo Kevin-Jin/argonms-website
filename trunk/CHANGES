@@ -37,6 +37,11 @@
 	* Log page hits per day and number of registrations per day.
 	* Amended showLetsBeFriends() disclaimer.
 
+2012-10-08  GoldenKevin  (revision 8)
+
+	* Slightly revised wording of disclaimer.
+	* Front page is slightly more polished and uses JavaScript more extensively.
+
 Copyright 2012 GoldenKevin
 Copying and distribution of this file, with or without modification, are
 permitted provided the copyright notice and this notice are preserved.
