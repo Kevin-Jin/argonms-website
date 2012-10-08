@@ -51,6 +51,7 @@ function showGraph() {
 	$con = makeDatabaseConnection();
 	$ps = $con->prepare("SELECT `day`,`uniquelogins`,`maxconcurrentlogins`,`mostactivetime` FROM `dailystats` ORDER BY `day`");
 	$entries = 0;
+	$highestYValue = 0;
 	if ($ps->execute()) {
 		$rs = $ps->get_result();
 
@@ -61,10 +62,18 @@ function showGraph() {
 			$day[$entries] = new DateTime($array[0] . " " . $array[3], $timezone);
 			$unique[$entries] = $array[1];
 			$max[$entries] = $array[2];
+			if ($array[1] > $highestYValue)
+				$highestYValue = $array[1];
+			if ($array[2] > $highestYValue)
+				$highestYValue = $array[2];
 		}
 	}
 	$ps->close();
 	$con->close();
+
+	$xAxisTickInterval = max((int) ($entries / 7), 1);
+	$yAxisTickInterval = max((int) ($highestYValue / 10), 1);
+
 	echo
 <<<EOD
 <!DOCTYPE HTML>
@@ -73,7 +82,8 @@ function showGraph() {
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 		<title>Project Throwback In Game Population Statistics</title>
 
-		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="common.css" />
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 		<script type="text/javascript">
 $(function () {
 	var activeTimes = {
@@ -113,7 +123,8 @@ EOD;
 		echo "'" . $day[$i]->format("n/j/y") . "',"; //M/d/yy
 	echo
 <<<EOD
-]
+],
+				tickInterval: {$xAxisTickInterval}
 			},
 			yAxis: {
 				title: {
@@ -123,7 +134,8 @@ EOD;
 					value: 0,
 					width: 1,
 					color: '#808080'
-				}]
+				}],
+				tickInterval: {$yAxisTickInterval}
 			},
 			tooltip: {
 				formatter: function() {
@@ -171,7 +183,17 @@ EOD;
 		<script src="highcharts.js"></script>
 	</head>
 	<body>
-		<div id="container" style="min-width: 400px; height: 400px; margin: 0 auto"></div>
+		<div class="body">
+			<div id="container" style="min-width: 400px; height: 400px; margin: 0 auto">
+				<p>JavaScript must be enabled in order to view this content.</p>
+			</div>
+		</div>
+
+EOD;
+		require_once('common.php');
+		showFooter();
+		echo
+<<<EOD
 	</body>
 </html>
 EOD;
