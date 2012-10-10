@@ -1,12 +1,36 @@
 <?php
+/*
+ * Project Throwback website
+ * Copyright (C) 2012  GoldenKevin
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 define("allow entry", 1);
+
+/**
+ * 
+ *
+ * @author GoldenKevin
+ */
 
 session_start();
 if (!isset($_SESSION['visited'])) {
 	//increment hit counter
 	$_SESSION['visited'] = true;
 
-	require_once('databasemanager.php');
+	require('databasemanager.php');
 	$con = makeDatabaseConnection();
 
 	require('config.php');
@@ -21,31 +45,34 @@ if (!isset($_SESSION['visited'])) {
 }
 
 $file;
-$function;
+$class;
 if (!isset($_REQUEST["action"])) {
-	$file = "disclaimer.php";
-	$function = "showTerms";
+	$file = "pjtbTermsPage.php";
+	$class = "pjtbTermsPage";
 } else {
 	$actionArray = array(
-		'login' => array('loginattempt.php', 'loginAuthenticate'),
-		'namecheck' => array('register.php', 'nameCheck'),
-		'regform' => array('register.php', 'registerForm'),
-		'regsubmit' => array('register.php', 'doRegister'),
-		'about' => array('disclaimer.php', 'showAbout'),
-		'letsbefriends' => array('disclaimer.php', 'showLetsBeFriends'),
-		'ad' => array('ad.php', 'showAd'),
-		'ranking' => array('ranking.php', 'showRanking'),
-		'status' => array('ranking.php', 'showStatus'),
-		'graph' => array('ranking.php', 'showGraph')
+		'login' => array('pjtbLoginRedirectPage.php', 'pjtbLoginRedirectPage'),
+		'namecheck' => array('pjtbNameCheckPage.php', 'pjtbNameCheckPage'),
+		'regform' => array('pjtbRegistrationFormPage.php', 'pjtbRegistrationFormPage'),
+		'regsubmit' => array('pjtbRegistrationSubmitPage.php', 'pjtbRegistrationSubmitPage'),
+		'about' => array('pjtbAboutPage.php', 'pjtbAboutPage'),
+		'letsbefriends' => array('pjtbFinalStatement.php', 'pjtbFinalStatement'),
+		'ad' => array('pjtbAdPage.php', 'pjtbAdPage'),
+		'ranking' => array('pjtbRankingPage.php', 'pjtbRankingPage'),
+		'status' => array('pjtbStatusPage.php', 'pjtbStatusPage'),
+		'graph' => array('pjtbGraphPage.php', 'pjtbGraphPage'),
+		'rates' => array('pjtbRatesPage.php', 'pjtbRatesPage')
 	);
 
 	if (array_key_exists($_REQUEST["action"], $actionArray)) {
 		$file = $actionArray[$_REQUEST["action"]][0];
-		$function = $actionArray[$_REQUEST["action"]][1];
+		$class = $actionArray[$_REQUEST["action"]][1];
 	} else {
 		require('hackingattempt.php');
 	}
 }
-require_once($file);
-call_user_func($function);
+
+require($file);
+$instance = new $class();
+echo $instance->getHtml();
 ?>

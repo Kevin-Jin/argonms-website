@@ -25,13 +25,22 @@ if (!defined("allow entry"))
  *
  * @author GoldenKevin
  */
+class pjtbNameCheckPage {
+	public final function getHtml() {
+		$name = "";
 
-$dbhost = 'localhost';
-$dbuser = 'root';
-$dbpass = '';
-$dbname = 'argonms';
+		require('databasemanager.php');
+		$con = makeDatabaseConnection();
+		$ps = $con->prepare("SELECT COUNT(*) FROM `accounts` WHERE `name` = ?");
+		$ps->bind_param('s', $_GET["name"]);
+		$ps->execute();
+		$ps->bind_result($usermatchcount);
+		if ($ps->fetch() && $usermatchcount > 0)
+			$name = $_GET["name"];
+		$ps->close();
+		$con->close();
 
-$timezone = new DateTimeZone('America/Los_Angeles');
-
-$login_server_ip = 'pjtb.net';
+		return $name;
+	}
+}
 ?>
