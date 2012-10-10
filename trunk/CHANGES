@@ -51,6 +51,20 @@
 	* Graph now only displays eight x-axis labels and eleven y-axis labels so
 	labels never overlap each other.
 
+2012-10-10  GoldenKevin  (revision 10)
+
+	* Default time zone for graphs and stat logging is America/Los_Angeles, to
+	correspond with default time zone of ArgonMS.
+	* Code is now object oriented. All pages are in separate classes. All
+	classes are in their own PHP files.
+	* All pages - including simple text pages, registration form, and redirect
+	pages - except hackingattempt now share the same style.
+	* Registration form redirects user to control panel if successful, or back
+	to the registration form if not.
+	* Added support for action=rates.
+	* require_once usages replaced with require.
+	* Added AGPL license header to all PHP source files.
+
 Copyright 2012 GoldenKevin
 Copying and distribution of this file, with or without modification, are
 permitted provided the copyright notice and this notice are preserved.
