@@ -27,13 +27,13 @@ require("pjtbBasePage.php");
  *
  * @author GoldenKevin
  */
-class pjtbLoginRedirectPage extends pjtbBasePage {
+class pjtbLoginSubmitPage extends pjtbBasePage {
 	private $timeout;
 	private $message;
 	private $url;
 
 	public function __construct() {
-		if (!isset($_POST["username"]) || !isset($_POST["password"]) || !isset($_REQUEST["back"]))
+		if (!isset($_POST["username"]) || !isset($_POST["password"]))
 			require('hackingattempt.php');
 
 		require('databasemanager.php');
@@ -84,18 +84,21 @@ class pjtbLoginRedirectPage extends pjtbBasePage {
 						$ps->bind_param('ssi', $passhash, $salt, $array[0]);
 						$ps->execute();
 					}
+					require('config.php');
 					$this->timeout = 3;
 					$this->message = "You have successfully logged in. You will be brought to your account's control panel";
-					$this->url = "index.php?action=cp";
+					$this->url = $portal_path . "?action=cp";
 				} else {
+					require('config.php');
 					$this->timeout = 3;
 					$this->message = "That password is incorrect. You will be brought back to the last page";
-					$this->url = $_REQUEST["back"];
+					$this->url = $portal_path . "?action=loginform";
 				}
 			} else {
+				require('config.php');
 				$this->timeout = 3;
 				$this->message = "That username is incorrect. You will be brought back to the last page";
-				$this->url = $_REQUEST["back"];
+				$this->url = $portal_path . "?action=loginform";
 			}
 		}
 		$ps->close();

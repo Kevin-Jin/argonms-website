@@ -29,11 +29,12 @@ require("pjtbBasePage.php");
  */
 class pjtbRegistrationFormPage extends pjtbBasePage {
 	protected function getBodyContent() {
+		require('config.php');
 		return
 <<<EOD
 
 <div id="stylized" class="regform">
-<form action="index.php?action=regsubmit" method="post">
+<form action="{$portal_path}?action=regsubmit" method="post">
 <h1>Project Throwback Registration</h1>
 <p>Please be sure to read and act on any red prompt before hitting Register.</p>
 <div class="row">
@@ -114,15 +115,16 @@ EOD;
 	}
 
 	protected function getHtmlHeader() {
+		require('config.php');
 		return parent::getHtmlHeader() .
 <<<EOD
 
 <style type="text/css">
-.body {
+.regform {
 	font-family:"Lucida Grande", "Lucida Sans Unicode", Verdana, Arial, Helvetica, sans-serif;
 	font-size: 12px;
 }
-.body p, h1, form {
+.regform p, .regform h1, .regform form {
 	border: 0;
 	margin: 0;
 	padding: 0;
@@ -346,7 +348,7 @@ function checkUsername(obj) {
 			}
 		}
 	}
-	xmlhttp.open("GET", "index.php?action=namecheck&name=" + obj.value, true);
+	xmlhttp.open("GET", "{$portal_path}?action=namecheck&name=" + obj.value, true);
 	xmlhttp.send();
 }
 
