@@ -45,7 +45,75 @@ EOD;
 	}
 
 	protected function getPageHeader() {
-		return "";
+		require('config.php');
+
+		$topLevelLinks = array(
+			'Main' => array($portal_path, 'a', array(
+				'Rankings' => $portal_path . '?action=ranking',
+				'Graphs' => $portal_path . '?action=graph',
+				'Server Status' => $portal_path . '?action=status'
+			)),
+			//TODO: "User" top level menu should have different links if logged in - i.e. Control Panel instead of Log in and Register
+			'User' => array($portal_path . '?action=loginform', 'b', array(
+				'Log in' => $portal_path . '?action=loginform',
+				'Register' => $portal_path . '?action=regform'
+			)),
+			'Forum' => array('/forum', 'c', array())
+		);
+
+		$currentPage = $_SERVER['PHP_SELF'];
+		if ($currentPage == $portal_path && isset($_REQUEST["action"]))
+			$currentPage .= '?action=' . $_REQUEST["action"];
+
+		$header =
+<<<EOD
+<div class="header">
+<h1>Project Throwback</h1>
+<ul class="droplinemenu">
+
+EOD;
+		foreach ($topLevelLinks as $topLevelText=>$subLevelLinks) {
+			$topLevelDefault = ($currentPage == $subLevelLinks[0]);
+
+			$menuEntry =
+<<<EOD
+<a href="{$subLevelLinks[0]}">{$topLevelText}</a>
+<ul>
+
+EOD;
+			if (!empty($subLevelLinks[2])) {
+				foreach ($subLevelLinks[2] as $subLevelText=>$subLevelLink) {
+					if ($currentPage == $subLevelLink) {
+						$menuEntry .= '<li class="current"><a href="' . $subLevelLink . '">' . $subLevelText . "</a></li>\n";
+						$topLevelDefault = true;
+					} else {
+						$menuEntry .= '<li><a href="' . $subLevelLink . '">' . $subLevelText . "</a></li>\n";
+					}
+				}
+			} else {
+				$menuEntry .= "<li class=\"spacer\"></li>\n";
+			}
+			if ($topLevelDefault)
+				$menuEntry = "<li id=\"$subLevelLinks[1]\" class=\"current\">\n" . $menuEntry;
+			else
+				$menuEntry = "<li id=\"$subLevelLinks[1]\">\n" . $menuEntry;
+			$menuEntry .=
+<<<EOD
+</ul>
+</li>
+
+EOD;
+
+			$header .= $menuEntry;
+		}
+		$header .=
+<<<EOD
+</ul>
+<div class="droplinemenuspacer">Choose a page from above.</div>
+</div>
+
+EOD;
+		return $header;
 	}
 
 	protected function getPageBody() {
@@ -66,6 +134,8 @@ EOD;
 <p>&copy; 2012 Project Throwback. All Rights Reserved.</p>
 <p>MapleStory is a registered trademark of NEXON Corporation. It is used on this web site under nominative fair use.</p>
 <p>Disclaimer: The owner and operators of this web site do not engage in illegal activities, nor do they know any individuals who do. This web site is intended to serve a web management interface to users and testers of a service developed for educational purposes, to inform the aforementioned users and testers of any news related to said service, and to accept ex gratia donations for said service.</p>
+<br />
+<p>This site has been tested and works best on Microsoft Internet Explorer 7+, Mozilla Firefox, and Google Chrome.</p>
 </div>
 </div>
 EOD;

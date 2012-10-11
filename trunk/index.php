@@ -51,7 +51,8 @@ if (!isset($_REQUEST["action"])) {
 	$class = "pjtbTermsPage";
 } else {
 	$actionArray = array(
-		'login' => array('pjtbLoginRedirectPage.php', 'pjtbLoginRedirectPage'),
+		'loginform' => array('pjtbLoginFormPage.php', 'pjtbLoginFormPage'),
+		'loginsubmit' => array('pjtbLoginSubmitPage.php', 'pjtbLoginSubmitPage'),
 		'namecheck' => array('pjtbNameCheckPage.php', 'pjtbNameCheckPage'),
 		'regform' => array('pjtbRegistrationFormPage.php', 'pjtbRegistrationFormPage'),
 		'regsubmit' => array('pjtbRegistrationSubmitPage.php', 'pjtbRegistrationSubmitPage'),

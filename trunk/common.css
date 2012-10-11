@@ -1,19 +1,28 @@
-.footer {
-	width: 780px;
-	background: #D9B7A4;
-	padding: 10px;
+.header, .body, .footer {
 	margin-left: auto;
 	margin-right: auto;
+	width: 780px;
+	padding: 10px;
+}
+
+.header {
+	width: 800px;
+	padding: 5px 0 0 0;
+	background: skyblue;
+}
+
+.body {
+	background: #B8D1CA;
+}
+
+.footer {
+	background: #D9B7A4;
 	text-align: center;
 	font-size: 50%;
 }
 
-.body {
-	width: 780px;
-	background: #B8D1CA;
-	padding: 10px;
-	margin-left: auto;
-	margin-right: auto;
+.header h1 {
+	text-align: center;
 }
 
 .buttonset {
@@ -79,4 +88,87 @@ button.positive, .buttonset a.positive {
 	background-color: #D12F19;
 	border:1px solid  #D12F19;
 	color: #FFF000;
+}
+
+/*
+ * Drop line menu inspired by http://www.cssplay.co.uk/menus/pro_dropline.html
+ * Developed in clean room by GoldenKevin
+ */
+ul.droplinemenu {
+	list-style-type: none;
+	padding: 0;
+	text-align: center;
+	width: 100%;
+	margin-bottom: 0;
+}
+
+ul.droplinemenu li {
+	display: inline;
+}
+
+ul.droplinemenu li a {
+	margin: 0;
+	padding: 5px;
+	display: inline;
+}
+
+ul.droplinemenu li a, ul.droplinemenu li ul li a {
+	text-decoration: none;
+	color: black;
+	font-style: normal;
+}
+
+ul.droplinemenu li:hover ul, ul.droplinemenu li ul:hover {
+	z-index: 2;
+}
+
+ul.droplinemenu ul, div.droplinemenuspacer {
+	position: absolute;
+	z-index: 0;
+	margin: 4px 0 0 0;
+	padding: 10px 0;
+	width: 800px;
+	text-align: center;
+}
+
+div.droplinemenuspacer {
+	background: gray;
+	position: relative;
+}
+
+ul.droplinemenu ul li {
+	display: inline;
+	margin: 0 5px;
+	padding: 5px 10px;
+	outline-style:solid;
+	outline-width:1px;
+}
+
+ul.droplinemenu ul li.spacer {
+	outline-style: none;
+}
+
+ul.droplinemenu li#a a, ul.droplinemenu li#a ul {
+	background: #6BC1E7;
+}
+
+ul.droplinemenu li#b a, ul.droplinemenu li#b ul {
+	background: #5EBBE3;
+}
+
+ul.droplinemenu li#c a, ul.droplinemenu li#c ul {
+	background: #44B0DF;
+}
+
+ul.droplinemenu li#d a, ul.droplinemenu li#d ul {
+	background: #239BCF;
+}
+
+ul.droplinemenu li.current ul {
+	z-index: 1;
+}
+
+ul.droplinemenu li.current ul li.current a {
+	font-style: italic;
+	font-weight: bold;
 }

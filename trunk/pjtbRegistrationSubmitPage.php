@@ -38,32 +38,38 @@ class pjtbRegistrationSubmitPage extends pjtbBasePage {
 
 		//client side JS should've checked these, but just in case there was a glitch, or js is disabled...
 		if (!is_numeric($_POST["birthyear"])) {
+			require('config.php');
 			$this->timeout = 3;
 			$this->message = "Birthyear must be a number! You will be brought back to the last page";
-			$this->url = "index.php?action=regform";
+			$this->url = $portal_path . "?action=regform";
 		} else if (strlen($_POST["password"]) < 5) {
+			require('config.php');
 			$this->timeout = 3;
 			$this->message = "Password is too short. Your password must be at between 5-12 characters long. Please try another.<br />You will be brought back to the last page";
-			$this->url = "index.php?action=regform";
+			$this->url = $portal_path . "?action=regform";
 		} else if (strlen($_POST["password"]) > 12) {
+			require('config.php');
 			$this->timeout = 3;
 			$this->message = "Password is too long. Your password must be at between 5-12 characters long. Please try another.<br />You will be brought back to the last page";
-			$this->url = "index.php?action=regform";
+			$this->url = $portal_path . "?action=regform";
 		} else if (strlen($_POST["username"]) < 4) {
+			require('config.php');
 			$this->timeout = 3;
 			$this->message = "Username is too short. Your username must be between 4-12 characters long. Please try another.<br />You will be brought back to the last page";
-			$this->url = "index.php?action=regform";
+			$this->url = $portal_path . "?action=regform";
 		} else if (strlen($_POST["username"]) > 12) {
+			require('config.php');
 			$this->timeout = 3;
 			$this->message = "Username is too long. Your username must be between 4-12 characters long. Please try another.<br />You will be brought back to the last page";
-			$this->url = "index.php?action=regform";
+			$this->url = $portal_path . "?action=regform";
 		} else if (!preg_match('/^[A-Za-z0-9_]+$/', $_POST["username"])) {
 			//Surprisingly enough, the client does not give "You have entered an incorrect LOGIN ID" for any
 			//names with at least one non-alphanumeric character (and underscore), except for period and at sign.
 			//But, let's just limit them to alphanumeric and underscore anyway.
+			require('config.php');
 			$this->timeout = 3;
 			$this->message = "Username must only consist of the characters a-z (lowercase letters), A-Z (uppercase letters), 0-9 (numbers), and _ (underscore). Please try another.<br />You will be brought back to the last page";
-			$this->url = "index.php?action=regform";
+			$this->url = $portal_path . "?action=regform";
 		} else {
 			require('databasemanager.php');
 			$con = makeDatabaseConnection();
@@ -78,9 +84,10 @@ class pjtbRegistrationSubmitPage extends pjtbBasePage {
 			$ps->close();
 
 			if ($alreadyexists) {
+				require('config.php');
 				$this->timeout = 3;
 				$this->message = "That username is already being used. Please try another.<br />You will be brought back to the last page";
-				$this->url = "index.php?action=regform";
+				$this->url = $portal_path . "?action=regform";
 			} else {
 				require('hashfunctions.php');
 				$salt = makeSalt();
@@ -103,7 +110,7 @@ class pjtbRegistrationSubmitPage extends pjtbBasePage {
 
 				$this->timeout = 3;
 				$this->message = "User {$_POST["username"]} registered successfully. You will be brought to your account's control panel";
-				$this->url = "index.php?action=cp";
+				$this->url = $portal_path . "?action=cp";
 			}
 			$con->close();
 		}

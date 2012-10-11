@@ -20,29 +20,16 @@
 if (!defined("allow entry"))
 	require('hackingattempt.php');
 
-require("pjtbBasePage.php");
+require("pjtbLoginFormPage.php");
 
 /**
  * 
  *
  * @author GoldenKevin
  */
-class pjtbTermsPage extends pjtbBasePage {
+class pjtbTermsPage extends pjtbLoginFormPage {
 	protected function getBodyContent() {
-		return
-<<<EOD
-<form id="login" action="index.php?action=login&back={$_SERVER['PHP_SELF']}" method="post">
-<p>You must log in in order to access your account control panel and other portions of this site.</p>
-<p>Username:<input type="text" id="unamefield" name="username" maxlength="12" />Password:<input type="password" id="passwordfield" name="password" maxlength="12" /><input id="login" type="submit" value="Login" /></p>
-<p>Or click <a href="index.php?action=regform">here</a> to register.</p>
-</form>
-<p><a href="forum" title="Enter the forums for help, news, and discussion">Click here to visit the forum.</a></p>
-<p><a href="index.php?action=graph" title="View graphs that illustrate how much we have grown">Click here to view population statistics.</a></p>
-EOD;
-	}
-
-	protected function getTitle() {
-		return "Project Throwback";
+		return parent::getBodyContent() . "\n<p>You may navigate the site through the bar above.</p>";
 	}
 
 	protected function getHtmlHeader() {
@@ -57,6 +44,7 @@ EOD;
 }
 
 #content.outer .inner {
+	z-index: 3;
 	position: absolute;
 	background: white;
 	width: 800px;

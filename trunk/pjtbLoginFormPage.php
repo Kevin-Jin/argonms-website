@@ -20,20 +20,28 @@
 if (!defined("allow entry"))
 	require('hackingattempt.php');
 
+require("pjtbBasePage.php");
+
 /**
  * 
  *
  * @author GoldenKevin
  */
+class pjtbLoginFormPage extends pjtbBasePage {
+	protected function getBodyContent() {
+		require('config.php');
+		return
+<<<EOD
+<form id="login" action="{$portal_path}?action=loginsubmit" method="post">
+<p>You must log in in order to access your account control panel and other portions of this site.</p>
+<p>Username:<input type="text" id="unamefield" name="username" maxlength="12" />Password:<input type="password" id="passwordfield" name="password" maxlength="12" /><input id="login" type="submit" value="Login" /></p>
+<p>Or click <a href="{$portal_path}?action=regform">here</a> to register.</p>
+</form>
+EOD;
+	}
 
-$dbhost = 'localhost';
-$dbuser = 'root';
-$dbpass = '';
-$dbname = 'argonms';
-
-$timezone = new DateTimeZone('America/Los_Angeles');
-
-$login_server_ip = 'localhost';
-
-$portal_path = '/index.php';
+	protected function getTitle() {
+		return "Project Throwback";
+	}
+}
 ?>

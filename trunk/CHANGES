@@ -65,6 +65,17 @@
 	* require_once usages replaced with require.
 	* Added AGPL license header to all PHP source files.
 
+2012-10-11  GoldenKevin  (revision 11)
+
+	* Added a dropline menu to the page header to improve navigation.
+	* Added support for action=loginform in a new pjtbLoginFormPage.
+	phpTermsPage class inherits from the newly created class to place a login
+	form on it. Unsuccessful logins now redirect to this page rather than
+	phpTermsPage.
+	* pjtbLoginRedirectPage class and its file renamed to pjtbLoginSubmitPage.
+	action=login is now action=loginsubmit.
+	* Default login server IP is localhost.
+
 Copyright 2012 GoldenKevin
 Copying and distribution of this file, with or without modification, are
 permitted provided the copyright notice and this notice are preserved.
