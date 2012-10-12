@@ -109,7 +109,6 @@ ul.droplinemenu li {
 ul.droplinemenu li a {
 	margin: 0;
 	padding: 5px;
-	display: inline;
 }
 
 ul.droplinemenu li a, ul.droplinemenu li ul li a {
@@ -122,29 +121,28 @@ ul.droplinemenu li:hover ul, ul.droplinemenu li ul:hover {
 	z-index: 2;
 }
 
-ul.droplinemenu ul, div.droplinemenuspacer {
+ul.droplinemenu li ul, div.droplinemenuspacer {
 	position: absolute;
 	z-index: 0;
 	margin: 4px 0 0 0;
 	padding: 10px 0;
 	width: 800px;
-	text-align: center;
 }
 
 div.droplinemenuspacer {
+	text-align: center;
 	background: gray;
 	position: relative;
 }
 
-ul.droplinemenu ul li {
-	display: inline;
+ul.droplinemenu li ul li {
 	margin: 0 5px;
 	padding: 5px 10px;
 	outline-style:solid;
 	outline-width:1px;
 }
 
-ul.droplinemenu ul li.spacer {
+ul.droplinemenu li ul li.spacer {
 	outline-style: none;
 }
 
@@ -164,11 +162,21 @@ ul.droplinemenu li#d a, ul.droplinemenu li#d ul {
 	background: #239BCF;
 }
 
-ul.droplinemenu li.current ul {
+ul.droplinemenu li.current a {
+	font-style: italic;
+	font-weight: bold;
+}
+
+ul.droplinemenu li.current ul li a {
+	font-style: normal;
+	font-weight: normal;
+}
+
+ul.droplinemenu li.current ul, ul.droplinemenu li.default ul {
 	z-index: 1;
 }
 
-ul.droplinemenu li.current ul li.current a {
+ul.droplinemenu li.default ul li.current a {
 	font-style: italic;
 	font-weight: bold;
 }
