@@ -76,6 +76,15 @@
 	action=login is now action=loginsubmit.
 	* Default login server IP is localhost.
 
+2012-10-12  GoldenKevin  (revision 12)
+
+	* Cleaned up common.css so some properties are more specific while redundant
+	ones are eliminated.
+	* Fixed extraneous html tag in pjtbBasePage.
+	* Main button now goes to the front page without the Disclaimer.
+	* Top level menu items are now bold and italicized if their URL matches the
+	current page's URL and is not in one of its sub level menu items.
+
 Copyright 2012 GoldenKevin
 Copying and distribution of this file, with or without modification, are
 permitted provided the copyright notice and this notice are preserved.

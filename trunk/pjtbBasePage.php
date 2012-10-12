@@ -48,7 +48,7 @@ EOD;
 		require('config.php');
 
 		$topLevelLinks = array(
-			'Main' => array($portal_path, 'a', array(
+			'Main' => array($portal_path . '?revealed', 'a', array(
 				'Rankings' => $portal_path . '?action=ranking',
 				'Graphs' => $portal_path . '?action=graph',
 				'Server Status' => $portal_path . '?action=status'
@@ -62,8 +62,11 @@ EOD;
 		);
 
 		$currentPage = $_SERVER['PHP_SELF'];
-		if ($currentPage == $portal_path && isset($_REQUEST["action"]))
-			$currentPage .= '?action=' . $_REQUEST["action"];
+		if ($currentPage == $portal_path)
+			if (isset($_REQUEST["action"]))
+				$currentPage .= '?action=' . $_REQUEST["action"];
+			else
+				$currentPage .= '?revealed';
 
 		$header =
 <<<EOD
@@ -73,7 +76,7 @@ EOD;
 
 EOD;
 		foreach ($topLevelLinks as $topLevelText=>$subLevelLinks) {
-			$topLevelDefault = ($currentPage == $subLevelLinks[0]);
+			$topLevelMenuItemClass = ($currentPage == $subLevelLinks[0]) ? "current" : NULL;
 
 			$menuEntry =
 <<<EOD
@@ -85,7 +88,7 @@ EOD;
 				foreach ($subLevelLinks[2] as $subLevelText=>$subLevelLink) {
 					if ($currentPage == $subLevelLink) {
 						$menuEntry .= '<li class="current"><a href="' . $subLevelLink . '">' . $subLevelText . "</a></li>\n";
-						$topLevelDefault = true;
+						$topLevelMenuItemClass = "default";
 					} else {
 						$menuEntry .= '<li><a href="' . $subLevelLink . '">' . $subLevelText . "</a></li>\n";
 					}
@@ -93,8 +96,8 @@ EOD;
 			} else {
 				$menuEntry .= "<li class=\"spacer\"></li>\n";
 			}
-			if ($topLevelDefault)
-				$menuEntry = "<li id=\"$subLevelLinks[1]\" class=\"current\">\n" . $menuEntry;
+			if ($topLevelMenuItemClass != NULL)
+				$menuEntry = "<li id=\"$subLevelLinks[1]\" class=\"$topLevelMenuItemClass\">\n" . $menuEntry;
 			else
 				$menuEntry = "<li id=\"$subLevelLinks[1]\">\n" . $menuEntry;
 			$menuEntry .=
@@ -150,7 +153,6 @@ EOD;
 		$body = $this->getHtmlBody();
 		return
 <<<EOD
-<html>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
