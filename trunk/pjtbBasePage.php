@@ -36,10 +36,10 @@ abstract class pjtbBasePage {
 <<<EOD
 <meta http-equiv="Content-Type" content="text/html;charset=us-ascii" />
 <title>{$title}</title>
-<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
+<link rel="stylesheet" type="text/css" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" />
 <link rel="stylesheet" type="text/css" href="common.css" />
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.23/jquery-ui.min.js"></script>
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.23/jquery-ui.min.js"></script>
 <script type="text/javascript" src="common.js"></script>
 EOD;
 	}
@@ -138,8 +138,7 @@ EOD;
 <p>MapleStory is a registered trademark of NEXON Corporation. It is used on this web site under nominative fair use.</p>
 <p>Disclaimer: The owner and operators of this web site do not engage in illegal activities, nor do they know any individuals who do. This web site is intended to serve a web management interface to users and testers of a service developed for educational purposes, to inform the aforementioned users and testers of any news related to said service, and to accept ex gratia donations for said service.</p>
 <br />
-<p>This site has been tested and works best on Microsoft Internet Explorer 7+, Mozilla Firefox, and Google Chrome.</p>
-</div>
+<p>This site has been tested and works best on Microsoft Internet Explorer 8+, Mozilla Firefox, and Google Chrome.</p>
 </div>
 EOD;
 	}

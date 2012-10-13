@@ -32,9 +32,9 @@ class pjtbLoginFormPage extends pjtbBasePage {
 		require('config.php');
 		return
 <<<EOD
-<form id="login" action="{$portal_path}?action=loginsubmit" method="post">
+<form id="loginform" action="{$portal_path}?action=loginsubmit" method="post">
 <p>You must log in in order to access your account control panel and other portions of this site.</p>
-<p>Username:<input type="text" id="unamefield" name="username" maxlength="12" />Password:<input type="password" id="passwordfield" name="password" maxlength="12" /><input id="login" type="submit" value="Login" /></p>
+<p>Username:<input type="text" id="unamefield" name="username" maxlength="12" />Password:<input type="password" id="passwordfield" name="password" maxlength="12" /><input id="loginsubmit" type="submit" value="Login" /></p>
 <p>Or click <a href="{$portal_path}?action=regform">here</a> to register.</p>
 </form>
 EOD;
