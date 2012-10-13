@@ -77,6 +77,7 @@ EOD;
 <<<EOD
 
 <script type="text/javascript">
+// <![CDATA[
 $(function () {
 	var activeTimes = {
 EOD;
@@ -171,8 +172,9 @@ EOD;
 		});
 	});
 });
+// ]]>
 </script>
-<script src="highcharts.js"></script>
+<script type="text/javascript" src="highcharts.js"></script>
 EOD;
 		return $header;
 	}

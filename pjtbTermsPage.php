@@ -54,7 +54,7 @@ class pjtbTermsPage extends pjtbLoginFormPage {
 	background: #FADA8F;
 }
 
-form#login {
+form#loginform {
 	padding: 10px;
 }
 
@@ -87,6 +87,7 @@ EOD;
 		if (!isset($_REQUEST["revealed"])) {
 			$body .=
 <<<EOD
+</div>
 
 <div id="terms" class="inner">
 <div class="body">
@@ -114,9 +115,11 @@ EOD*/
 <a id="disagree" class="negative" href="http://www.google.com">I disagree</a>
 </div>
 </div>
+</div>
 
 EOD;
 		}
+		$body .= "\n</div>";
 		return $body;
 	}
 }

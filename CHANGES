@@ -85,6 +85,16 @@
 	* Top level menu items are now bold and italicized if their URL matches the
 	current page's URL and is not in one of its sub level menu items.
 
+2012-10-13  GoldenKevin  (revision 13)
+
+	* Use protocol-relative URL for jquery-ui.css to silence Internet Explorer's
+	warnings about non-HTTPS content.
+	* Added type attribute for JQuery and Highcharts external script links in
+	HTML header.
+	* Differentiated IDs for login form and login button in pjtbLoginFormPage.
+	* Corrected some mismatched div tags and unescaped internal JavaScript.
+	* Corrected supported browsers statement in footer.
+
 Copyright 2012 GoldenKevin
 Copying and distribution of this file, with or without modification, are
 permitted provided the copyright notice and this notice are preserved.
