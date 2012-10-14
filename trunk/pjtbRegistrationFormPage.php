@@ -336,7 +336,8 @@ function changingUsername(e) {
 	var code = e.which;
 	if (code != 0)
 		hideHint($(this));
-	if (!(code >= 48 && code <= 57 || code >= 65 && code <= 90 || code >= 97 && code <= 122 || code == 95 || code == 13 || code == 0 || code == 8 || code == 46)) {
+	//digit keys; uppercase letter keys; lowercase letter keys; underscore; enter; F5, arrow keys, etc.; backspace; tab key
+	if (!(code >= 48 && code <= 57 || code >= 65 && code <= 90 || code >= 97 && code <= 122 || code == 95 || code == 13 || code == 0 || code == 8 || code == 9)) {
 		showHint("Permitted characters: uppercase and lowercase letters, numbers, and underscore", $(this), "250px", false);
 		e.returnValue = false;
 		(e.preventDefault) ? e.preventDefault() : e.returnValue = false;
@@ -365,7 +366,7 @@ function usernameChanged(e) {
 
 function showPasswordHint(e) {
 	if (!hintVisible($(this)) && $(this).val().length == 0) {
-		var message = "Must be between 5-12 characters long. Permitted characters: uppercase and lowercase letters, numbers, and underscore";
+		var message = "Must be between 5-12 characters long. Permitted characters: uppercase letters, lowercase letters, and numbers";
 		showHint(message, $(this), "250px", false);
 		$(this).on('blur', function(e2) {
 			if (hintTextMatch($(this), message))
@@ -381,8 +382,10 @@ function changingPassword(e) {
 	var code = e.which;
 	if (code != 0)
 		hideHint($(this));
-	if (!(code >= 48 && code <= 57 || code >= 65 && code <= 90 || code >= 97 && code <= 122 || code == 95 || code == 13 || code == 0 || code == 8 || code == 46)) {
-		showHint("Permitted characters: uppercase and lowercase letters, numbers, and underscore", $(this), "250px", false);
+	//digit keys; uppercase letter keys; lowercase letter keys; enter; F5, arrow keys, etc.; backspace; tab key
+	//client supports sending practically any printable ASCII character in a password, but we'll make it easier on ourselves here
+	if (!(code >= 48 && code <= 57 || code >= 65 && code <= 90 || code >= 97 && code <= 122 || code == 13 || code == 0 || code == 8 || code == 9)) {
+		showHint("Permitted characters: uppercase letters, lowercase letters, and numbers", $(this), "250px", false);
 		(e.preventDefault) ? e.preventDefault() : e.returnValue = false;
 	}
 }
@@ -509,6 +512,7 @@ $(document).ready(function() {
 		passwordOk = true;
 	updateSubmitButton();
 
+	//TODO: disable paste in Opera
 	$('#unamefield, #pwdfield').on('cut paste', function(e) {
 		//cut may delete character count to below requirement
 		//paste may insert character count to above limit or introduce illegal characters
@@ -517,10 +521,14 @@ $(document).ready(function() {
 	});
 	$('#unamefield').on('click', showUsernameHint).on('keypress', changingUsername).on('keyup', usernameChanged);
 	$('#pwdfield').on('click', showPasswordHint).on('keypress', changingPassword).on('keyup', passwordChanged);
-	$('#birthyearfield').on('keydown', function(e) {
+	$('#birthyearfield').on('keypress', function(e) {
 		var code = e.which;
-		if (code < 48 || code > 57) //only let digits be entered into birthyear
+		//digit keys; enter; F5, arrow keys, etc.; backspace; tab key
+		if (!(code >= 48 && code <= 57 || code == 13 || code == 0 || code == 8 || code == 9))
 			(e.preventDefault) ? e.preventDefault() : e.returnValue = false;
+	}).on('paste', function(e) {
+		//paste may introduce illegal characters, so just don't let it happen
+		(e.preventDefault) ? e.preventDefault() : e.returnValue = false;
 	});
 });
 // ]]>

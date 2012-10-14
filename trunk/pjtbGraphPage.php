@@ -76,7 +76,7 @@ EOD;
 		$header .=
 <<<EOD
 
-<script type="text/javascript" src="//code.highcharts.com/highcharts.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highcharts/2.3.1/highcharts.js"></script>
 <script type="text/javascript">
 // <![CDATA[
 var activeTimes = {

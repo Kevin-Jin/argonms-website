@@ -117,6 +117,25 @@
 	is easier to choose the behavior of the User top level menu item based on
 	whether or not the user is logged in.
 
+2012-10-14  GoldenKevin  (revision 15)
+
+	* Allow use of tab in registration form in Opera.
+	* Disallow use of periods in registration form.
+	* Disable paste on birthyear field in registration field.
+	* Fixed birthyear field allowing illegal characters (keydown vs. keypress).
+	* Use a different CDN for highcharts.js because the previous one did not
+	support HTTPS.
+	* Add pjtbRatesPage to accessible pages on menu bar.
+	* Rates are displayed on pjtbRatesPage.
+	* Revised pjtbFinalStatement wording.
+	* Added stubs for action=cp and action=contact and added links to them to
+	menu bar.
+	* action=letsbefriends is now action=predmca, and can now be accessed by
+	pjtbContactPage.
+	* Added formatting for rankings table.
+	* Hardcoded link in pjtbTermsPage for non-JS enabled browsers now uses
+	$portal_path in config.php.
+
 Copyright 2012 GoldenKevin
 Copying and distribution of this file, with or without modification, are
 permitted provided the copyright notice and this notice are preserved.

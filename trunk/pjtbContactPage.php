@@ -20,28 +20,24 @@
 if (!defined("allow entry"))
 	require('hackingattempt.php');
 
+require("pjtbBasePage.php");
+
 /**
  * 
  *
  * @author GoldenKevin
  */
+class pjtbContactPage extends pjtbBasePage {
+	protected function getBodyContent() {
+		return
+<<<EOD
+<strong><em>This page is under construction!</em></strong>
+<p>If you are a representative of Nexon, please read <a href="index.php?action=predmca">this statement</a>, prepared by the staff, before serving us a DMCA notice.</p>
+EOD;
+	}
 
-$dbhost = 'localhost';
-$dbuser = 'root';
-$dbpass = '';
-$dbname = 'argonms';
-
-$rates = array(
-	"1" => array(
-		"Exp" => 1,
-		"Meso" => 1,
-		"Drop" => 1
-	)
-);
-
-$timezone = new DateTimeZone('America/Los_Angeles');
-
-$login_server_ip = 'localhost';
-
-$portal_path = '/index.php';
+	protected function getTitle() {
+		return "Project Throwback";
+	}
+}
 ?>

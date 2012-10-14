@@ -50,7 +50,8 @@ EOD;
 		$topLevelLinks['Main'] = array($portal_path . '?revealed', 'a', array(
 			'Rankings' => $portal_path . '?action=ranking',
 			'Graphs' => $portal_path . '?action=graph',
-			'Server Status' => $portal_path . '?action=status'
+			'Server Status' => $portal_path . '?action=status',
+			'Rates' => $portal_path . '?action=rates'
 		));
 		//TODO: "User" top level menu should have different links if logged in - i.e. Control Panel instead of Log in and Register
 		$topLevelLinks['User'] = array($portal_path . '?action=loginform', 'b', array(
@@ -58,6 +59,12 @@ EOD;
 			'Register' => $portal_path . '?action=regform'
 		));
 		$topLevelLinks['Forum'] = array('/forum', 'c', array());
+		$topLevelLinks['About'] = array($portal_path/* . '?action=about'*/, 'd', array(
+			//'About' => $portal_path . '?action=about',
+			//'Ad' => $portal_path . '?action=ad',
+			'Contact us' => $portal_path . '?action=contact',
+			'' => $portal_path . '?action=predmca',
+		));
 
 		$currentPage = $_SERVER['PHP_SELF'];
 		if ($currentPage == $portal_path)
