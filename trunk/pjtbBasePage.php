@@ -40,26 +40,24 @@ abstract class pjtbBasePage {
 <link rel="stylesheet" type="text/css" href="common.css" />
 <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.23/jquery-ui.min.js"></script>
-<script type="text/javascript" src="common.js"></script>
 EOD;
 	}
 
 	protected function getPageHeader() {
 		require('config.php');
 
-		$topLevelLinks = array(
-			'Main' => array($portal_path . '?revealed', 'a', array(
-				'Rankings' => $portal_path . '?action=ranking',
-				'Graphs' => $portal_path . '?action=graph',
-				'Server Status' => $portal_path . '?action=status'
-			)),
-			//TODO: "User" top level menu should have different links if logged in - i.e. Control Panel instead of Log in and Register
-			'User' => array($portal_path . '?action=loginform', 'b', array(
-				'Log in' => $portal_path . '?action=loginform',
-				'Register' => $portal_path . '?action=regform'
-			)),
-			'Forum' => array('/forum', 'c', array())
-		);
+		$topLevelLinks = array();
+		$topLevelLinks['Main'] = array($portal_path . '?revealed', 'a', array(
+			'Rankings' => $portal_path . '?action=ranking',
+			'Graphs' => $portal_path . '?action=graph',
+			'Server Status' => $portal_path . '?action=status'
+		));
+		//TODO: "User" top level menu should have different links if logged in - i.e. Control Panel instead of Log in and Register
+		$topLevelLinks['User'] = array($portal_path . '?action=loginform', 'b', array(
+			'Log in' => $portal_path . '?action=loginform',
+			'Register' => $portal_path . '?action=regform'
+		));
+		$topLevelLinks['Forum'] = array('/forum', 'c', array());
 
 		$currentPage = $_SERVER['PHP_SELF'];
 		if ($currentPage == $portal_path)
@@ -138,7 +136,7 @@ EOD;
 <p>MapleStory is a registered trademark of NEXON Corporation. It is used on this web site under nominative fair use.</p>
 <p>Disclaimer: The owner and operators of this web site do not engage in illegal activities, nor do they know any individuals who do. This web site is intended to serve a web management interface to users and testers of a service developed for educational purposes, to inform the aforementioned users and testers of any news related to said service, and to accept ex gratia donations for said service.</p>
 <br />
-<p>This site has been tested and works best on Microsoft Internet Explorer 8+, Mozilla Firefox, and Google Chrome.</p>
+<p>This site has been tested and works best on Microsoft Internet Explorer 8+, Mozilla Firefox, Google Chrome, and Opera.</p>
 </div>
 EOD;
 	}

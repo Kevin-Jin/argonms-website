@@ -39,12 +39,12 @@ class pjtbRegistrationFormPage extends pjtbBasePage {
 <p>Please be sure to read and act on any red prompt before hitting Register.</p>
 <div class="row">
 <div class="label">Username<span class="small">Your account's login ID</span></div>
-<input type="text" id="unamefield" name="username" maxlength="12" onclick="showUsernameHint(this);" onkeypress="changingUsername(this, event);" onkeyup="usernameChanged(this, event);" onpaste="event.returnValue = false;" oncut="event.returnValue = false;" />
+<input type="text" id="unamefield" name="username" maxlength="12" />
 </div>
 
 <div class="row">
 <div class="label">Password</div>
-<input type="password" id="pwdfield" name="password" maxlength="12" onclick="showPasswordHint(this);" onkeypress="changingPassword(this, event);" onkeyup="passwordChanged(this, event);" onpaste="event.returnValue = false;" oncut="event.returnValue = false;" />
+<input type="password" id="pwdfield" name="password" maxlength="12" />
 </div>
 
 <div class="row">
@@ -99,7 +99,7 @@ class pjtbRegistrationFormPage extends pjtbBasePage {
 <option value="30">30</option>
 <option value="31">31</option>
 </select>
-<input type="text" id="birthyearfield" name="birthyear" maxlength="4" onkeyup="this.value = this.value.replace(/[^\d]/, '')" />
+<input type="text" id="birthyearfield" name="birthyear" maxlength="4" />
 </div>
 </div>
 <div><input id="register" type="submit" value="Register" /></div>
@@ -229,41 +229,33 @@ EOD;
 	visibility: hidden;
 }
 </style>
-<script type="text/javascript" src="common.js"></script>
 <script type="text/javascript">
 // <![CDATA[
 var horizontal_offset = -8; //horizontal offset of hint box from text field, in pixels
 
-var vertical_offset = -8; //horizontal offset of hint box from text field, in pixels
+var vertical_offset = -8; //vertical offset of hint box from text field, in pixels
 var ie = document.all;
 var ns6 = document.getElementById && !document.all;
 var nextZ = 0;
 
 function getPosOffset(what, offsettype) {
-	var totaloffset = (offsettype == "left") ? what.offsetLeft : what.offsetTop;
-	var parentEl = what.offsetParent;
-	while (parentEl != null){
-		totaloffset = (offsettype == "left") ? totaloffset + parentEl.offsetLeft : totaloffset + parentEl.offsetTop;
-		parentEl = parentEl.offsetParent;
-	}
-	return totaloffset;
+	return (offsettype == "left") ? what.offset().left : what.offset().top;
 }
 
 function ieCompatTest() {
 	return (document.compatMode && document.compatMode!="BackCompat") ? document.documentElement : document.body;
 }
 
-function clearBrowserEdge(dropmenuobj, obj, side) {
-	var edgeoffset = (side == "right") ? horizontal_offset * -1 : vertical_offset * -1;
+function clearBrowserEdge(dropmenuobj, obj, side, x, y) {
+	var edgeoffset = (side == "right") ? -horizontal_offset : -vertical_offset;
 	if (side == "right") {
 		var windowedge = ie && !window.opera ? ieCompatTest().scrollLeft + ieCompatTest().clientWidth + 10 : window.pageXOffset + window.innerWidth;
-		if (windowedge - dropmenuobj.x < dropmenuobj.offsetWidth + horizontal_offset)
-			edgeoffset = dropmenuobj.offsetWidth + obj.offsetWidth + horizontal_offset;
+		if (windowedge - x < dropmenuobj.outerWidth() + horizontal_offset)
+			edgeoffset = dropmenuobj.outerWidth() + obj.outerWidth() + horizontal_offset;
 	} else {
 		var windowedge = ie && !window.opera ? ieCompatTest().scrollTop + ieCompatTest().clientHeight - 15 : window.pageYOffset + window.innerHeight - 18;
-		dropmenuobj.contentmeasure = dropmenuobj.offsetHeight;
-		if (windowedge - dropmenuobj.y < dropmenuobj.contentmeasure)
-			edgeoffset = dropmenuobj.contentmeasure - obj.offsetHeight;
+		if (windowedge - y < dropmenuobj.outerHeight())
+			edgeoffset = dropmenuobj.outerHeight() - obj.outerHeight();
 	}
 	return edgeoffset;
 }
@@ -271,53 +263,39 @@ function clearBrowserEdge(dropmenuobj, obj, side) {
 function showHint(menucontents, obj, tipwidth, error) {
 	if (ie || ns6) {
 		var dropmenuobj = getHintBox(obj);
-		dropmenuobj.innerHTML = menucontents;
-		if (tipwidth != "") {
-			dropmenuobj.widthobj = dropmenuobj.style;
-			dropmenuobj.widthobj.width = tipwidth;
-		}
-		dropmenuobj.x = getPosOffset(obj, "left") + obj.offsetWidth;
-		dropmenuobj.y = getPosOffset(obj, "top");
-		dropmenuobj.style.left = dropmenuobj.x - clearBrowserEdge(dropmenuobj, obj, "right") + "px";
-		dropmenuobj.style.top = dropmenuobj.y - clearBrowserEdge(dropmenuobj, obj, "bottom") + "px";
-		dropmenuobj.style.visibility = "visible";
-		dropmenuobj.style.zIndex = nextZ++;
+		dropmenuobj.html(menucontents);
+		if (tipwidth != "")
+			dropmenuobj.css('width', tipwidth);
+		var x = getPosOffset(obj, "left") + obj.outerWidth();
+		var y = getPosOffset(obj, "top");
+		dropmenuobj.css('left', x - clearBrowserEdge(dropmenuobj, obj, "right", x, y) + "px");
+		dropmenuobj.css('top', y - clearBrowserEdge(dropmenuobj, obj, "bottom", x, y) + "px");
+		dropmenuobj.css('visibility', "visible");
+		dropmenuobj.css('z-index', nextZ++);
 		if (error)
-			dropmenuobj.style.backgroundColor = "#CC3300";
+			dropmenuobj.css('background', "#CC3300");
 		else
-			dropmenuobj.style.backgroundColor = "#FFCC66";
+			dropmenuobj.css('background', "#FFCC66");
 	}
 }
 
 function hideHint(obj) {
-	var dropmenuobj = document.getElementById("hintbox_" + obj.getAttribute("id"));
-	if (dropmenuobj != null) {
-		dropmenuobj.style.visibility = "hidden";
-		dropmenuobj.style.left = "-500px";
-	}
+	$("#hintbox_" + obj.attr("id")).css("visibility", "hidden").css("left", "-500px");
 }
 
 function hintVisible(obj) {
-	var dropmenuobj = document.getElementById("hintbox_" + obj.getAttribute("id"));
-	if (dropmenuobj != null)
-		return (dropmenuobj.style.visibility == "visible");
-	return false;
+	return $("#hintbox_" + obj.attr("id")).css("visibility") == "visible";
 }
 
 function createHintBox(id) {
-	var divblock = document.createElement("div");
-	divblock.setAttribute("id", "hintbox_" + id);
-	divblock.setAttribute("class", "hintbox");
-	document.body.appendChild(divblock);
-	return divblock;
+	return $('<div id="hintbox_' + id + '" class="hintbox"></div>').appendTo('body');
 }
 
 function getHintBox(obj) {
-	var dropmenuobj = document.getElementById("hintbox_" + obj.getAttribute("id"));
-	if (document.getElementById("hintbox_" + obj.getAttribute("id")))
+	var dropmenuobj = $("#hintbox_" + obj.attr("id"));
+	if (dropmenuobj.length !== 0)
 		return dropmenuobj;
-	dropmenuobj = createHintBox(obj.getAttribute("id"));
-	return dropmenuobj;
+	return createHintBox(obj.attr("id"));
 }
 
 var usernameOk = false;
@@ -326,114 +304,101 @@ var passwordOk = false;
 function hintTextMatch(obj, menucontents) {
 	if (!hintVisible(obj))
 		return false;
-	return (getHintBox(obj).innerHTML == menucontents);
+	return (getHintBox(obj).html() == menucontents);
 }
 
 function checkUsername(obj) {
-	var xmlhttp;
-	if (window.XMLHttpRequest) {
-		//code for IE7+, Firefox, Chrome, Opera, Safari
-  		xmlhttp = new XMLHttpRequest();
-	} else {
-		//code for IE6, IE5
-		xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-	}
-	xmlhttp.onreadystatechange = function() {
-		if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-			var resp = xmlhttp.responseText;
-			if (resp != "") { //we'll return an empty string for no conflicts
-				showHint("The username " + resp + " is already being used.", obj, "250px", true);
-				usernameOk = false;
-				updateSubmitButton();
-			}
+	$.get("{$portal_path}?action=namecheck&name=" + obj.val(), function(resp) {
+		if (resp != "") { //we'll return an empty string for no conflicts
+			showHint("The username " + resp + " is already being used.", obj, "250px", true);
+			usernameOk = false;
+			updateSubmitButton();
 		}
-	}
-	xmlhttp.open("GET", "{$portal_path}?action=namecheck&name=" + obj.value, true);
-	xmlhttp.send();
+	});
 }
 
-function showUsernameHint(obj) {
-	if (!hintVisible(obj) && obj.value.length == 0) {
+function showUsernameHint(e) {
+	if (!hintVisible($(this)) && $(this).val().length == 0) {
 		var message = "Must be between 4-12 characters long. Permitted characters: uppercase and lowercase letters, numbers, and underscore";
-		showHint(message, obj, "250px", false);
-		obj.onblur = function(obj2, event) {
-			if (hintTextMatch(obj, message))
-				hideHint(obj);
-			obj.onblur = null;
-		};
+		showHint(message, $(this), "250px", false);
+
+		$(this).on('blur', function(e2) {
+			if (hintTextMatch($(this), message))
+				hideHint($(this));
+			$(this).off('blur');
+		});
 	} else {
-		getHintBox(obj).style.zIndex = nextZ++;
+		getHintBox($(this)).css('z-index', nextZ++);
 	}
 }
 
-function changingUsername(obj, event) {
-	var code = event.charCode;
+function changingUsername(e) {
+	var code = e.which;
 	if (code != 0)
-		hideHint(obj);
-	if (!(code >= 48 && code <= 57 || code >= 65 && code <= 90 || code >= 97 && code <= 122 || code == 95 || code == 13 || code == 0)) {
-		showHint("Permitted characters: uppercase and lowercase letters, numbers, and underscore", obj, "250px", false);
-		event.returnValue = false;
-		event.preventDefault();
+		hideHint($(this));
+	if (!(code >= 48 && code <= 57 || code >= 65 && code <= 90 || code >= 97 && code <= 122 || code == 95 || code == 13 || code == 0 || code == 8 || code == 46)) {
+		showHint("Permitted characters: uppercase and lowercase letters, numbers, and underscore", $(this), "250px", false);
+		e.returnValue = false;
+		(e.preventDefault) ? e.preventDefault() : e.returnValue = false;
 	}
 }
 
-function usernameChanged(obj, event) {
-	var code = event.keyCode;
+function usernameChanged(e) {
+	var code = e.which;
 	if (code == 8 || code == 46)
-		hideHint(obj); //backspace and delete will not fire onkeypress/changingUsername in webkit, so we have to remove hintbox here
-	if (!hintVisible(obj)) {
-		var length = obj.value.length;
+		hideHint($(this)); //backspace and delete will not fire keypress in webkit, so we have to remove hintbox here
+	if (!hintVisible($(this))) {
+		var length = $(this).val().length;
 		if (length < 4) {
 			usernameOk = false;
-			showHint("Must be at least 4 characters long", obj, "250px", true);
+			showHint("Must be at least 4 characters long", $(this), "250px", true);
 		} else if (length > 12) {
 			usernameOk = false;
-			showHint("Must be less than 13 characters long", obj, "250px", true);
+			showHint("Must be less than 13 characters long", $(this), "250px", true);
 		} else {
-			checkUsername(obj);
+			checkUsername($(this));
 			usernameOk = true;
 		}
 		updateSubmitButton();
 	}
 }
 
-function showPasswordHint(obj) {
-	if (!hintVisible(obj) && obj.value.length == 0) {
+function showPasswordHint(e) {
+	if (!hintVisible($(this)) && $(this).val().length == 0) {
 		var message = "Must be between 5-12 characters long. Permitted characters: uppercase and lowercase letters, numbers, and underscore";
-		showHint(message, obj, "250px", false);
-		obj.onblur = function(obj2, event) {
-			if (hintTextMatch(obj, message))
-				hideHint(obj);
-			obj.onblur = null;
-		};
+		showHint(message, $(this), "250px", false);
+		$(this).on('blur', function(e2) {
+			if (hintTextMatch($(this), message))
+				hideHint($(this));
+			$(this).off('blur');
+		});
 	} else {
-		getHintBox(obj).style.zIndex = nextZ++;
+		getHintBox($(this)).css('z-index', nextZ++);
 	}
 }
 
-function changingPassword(obj, event) {
-	var code = event.charCode;
+function changingPassword(e) {
+	var code = e.which;
 	if (code != 0)
-		hideHint(obj);
-	if (!(code >= 48 && code <= 57 || code >= 65 && code <= 90 || code >= 97 && code <= 122 || code == 95 || code == 13 || code == 0)) {
-		showHint("Permitted characters: uppercase and lowercase letters, numbers, and underscore", obj, "250px", false);
-		event.returnValue = false;
-		event.preventDefault();
+		hideHint($(this));
+	if (!(code >= 48 && code <= 57 || code >= 65 && code <= 90 || code >= 97 && code <= 122 || code == 95 || code == 13 || code == 0 || code == 8 || code == 46)) {
+		showHint("Permitted characters: uppercase and lowercase letters, numbers, and underscore", $(this), "250px", false);
+		(e.preventDefault) ? e.preventDefault() : e.returnValue = false;
 	}
 }
 
-function passwordChanged(obj, event) {
-	var code = event.keyCode;
+function passwordChanged(e) {
+	var code = e.which;
 	if (code == 8 || code == 46)
-		hideHint(obj); //backspace and delete will not fire onkeypress/changingPassword in webkit, so we have to remove hintbox here
-	if (!hintVisible(obj)) {
-		var length = obj.value.length;
+		hideHint($(this)); //backspace and delete will not fire keypress in webkit, so we have to remove hintbox here
+	if (!hintVisible($(this))) {
+		var length = $(this).val().length;
 		if (length < 5) {
 			passwordOk = false;
-			showHint("Must be at least 5 characters long", obj, "250px", true);
+			showHint("Must be at least 5 characters long", $(this), "250px", true);
 		} else if (length > 12) {
 			passwordOk = false;
-			showHint("Must be less than 13 characters long", obj, "250px", true);
+			showHint("Must be less than 13 characters long", $(this), "250px", true);
 		} else {
 			passwordOk = true;
 		}
@@ -442,11 +407,14 @@ function passwordChanged(obj, event) {
 }
 
 function updateSubmitButton() {
-	document.getElementById("register").disabled = (!usernameOk || !passwordOk);
+	if (!usernameOk || !passwordOk)
+		$("#register").attr('disabled', 'disabled');
+	else
+		$("#register").removeAttr('disabled');
 }
 
 function updateValidBirthdays(obj) {
-	var days = document.getElementById("birthdayselect");
+	var days = $("#birthdayselect")[0];
 	//february will always be a leap year...
 	switch (obj.selectedIndex) {
 		case 0: //january
@@ -511,56 +479,50 @@ function updateValidBirthdays(obj) {
 	}
 }
 
-function windowLoaded() {
-	window.onresize = function(event) {
-		var elements;
-		if (document.getElementsByClassName) {
-			elements = document.getElementsByClassName("hintbox");
-		} else {
-			var hasClassName = new RegExp("(?:^|\s)" + className + "(?:$|\s)");
-			var allElements = document.getElementsByTagName("*");
-			elements = [];
-
-			var element;
-			for (var i = 0; (element = allElements[i]) != null; i++) {
-				var elementClass = element.className;
-				if (elementClass && elementClass.indexOf(className) != -1 && hasClassName.test(elementClass))
-					elements.push(element);
+$(document).ready(function() {
+	$(window).on('resize', function(event) {
+		$('.hintbox').each(function(i, element) {
+			var dropmenuobj = $(element);
+			if (dropmenuobj.css('visibility') == "visible") {
+				var obj = $('#' + dropmenuobj.attr("id").substring("hintbox_".length));
+				var x = getPosOffset(obj, "left") + obj.outerWidth();
+				var y = getPosOffset(obj, "top");
+				dropmenuobj.css('left', x - clearBrowserEdge(dropmenuobj, obj, "right", x, y) + "px");
+				dropmenuobj.css('top', y - clearBrowserEdge(dropmenuobj, obj, "bottom", x, y) + "px");
 			}
-		}
-		var element;
-		for (var i = 0; i < elements.length; i++) {
-			element = elements[i];
-			if (element.style.visibility == "visible") {
-				var elementName = element.getAttribute("id");
-				var obj = document.getElementById(elementName.substring(8, elementName.length));
-				element.x = getPosOffset(obj, "left") + obj.offsetWidth;
-				element.y = getPosOffset(obj, "top");
-				element.style.left = element.x - clearBrowserEdge(element, obj, "right") + "px";
-				element.style.top = element.y - clearBrowserEdge(element, obj, "bottom") + "px";
-			}
-		}
-	};
+		});
+	});
 	//instead of just cutting off the user when > 12 characters, give them an error/hint if js is enabled
-	document.getElementById("unamefield").setAttribute("maxlength", null);
-	document.getElementById("pwdfield").setAttribute("maxlength", null);
+	$("#unamefield").removeAttr("maxlength");
+	$("#pwdfield").removeAttr("maxlength");
 
 	//in case the user's browser saved some of the form data for some reason,
 	//make sure our state is synced up.
-	var obj = document.getElementById("unamefield");
-	var length = obj.value.length;
+	var obj = $("#unamefield");
+	var length = obj.val().length;
 	if (length >= 4 && length <= 12) {
 		checkUsername(obj);
 		usernameOk = true;
 	}
-	obj = document.getElementById("pwdfield");
-	length = obj.value.length;
+	length = $("#pwdfield").val().length;
 	if (length >= 5 && length <= 12)
 		passwordOk = true;
 	updateSubmitButton();
-}
 
-setStartupFunction(windowLoaded);
+	$('#unamefield, #pwdfield').on('cut paste', function(e) {
+		//cut may delete character count to below requirement
+		//paste may insert character count to above limit or introduce illegal characters
+		//so just don't let either happen
+		(e.preventDefault) ? e.preventDefault() : e.returnValue = false;
+	});
+	$('#unamefield').on('click', showUsernameHint).on('keypress', changingUsername).on('keyup', usernameChanged);
+	$('#pwdfield').on('click', showPasswordHint).on('keypress', changingPassword).on('keyup', passwordChanged);
+	$('#birthyearfield').on('keydown', function(e) {
+		var code = e.which;
+		if (code < 48 || code > 57) //only let digits be entered into birthyear
+			(e.preventDefault) ? e.preventDefault() : e.returnValue = false;
+	});
+});
 // ]]>
 </script>
 EOD;

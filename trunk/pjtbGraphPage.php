@@ -76,105 +76,111 @@ EOD;
 		$header .=
 <<<EOD
 
+<script type="text/javascript" src="//code.highcharts.com/highcharts.js"></script>
 <script type="text/javascript">
 // <![CDATA[
-$(function () {
-	var activeTimes = {
+var activeTimes = {
 EOD;
 	for ($i = 0; $i < $entries; $i++)
 		$header .= $day[$i]->format("'n/j/y':'g:i:s A T'") . ","; // 'M/d/yy':'h:mm:ss a'
+	if ($entries > 0)
+		$header = substr($header, 0, -1);
 	$header .=
 <<<EOD
 };
-	var chart;
-	$(document).ready(function() {
-		chart = new Highcharts.Chart({
-			chart: {
-				renderTo: 'container',
-				type: 'line',
-				marginRight: 200,
-				marginBottom: 50
-			},
-			title: {
-				text: 'In Game Population Statistics',
-				x: -20 //center
-			},
-			subtitle: {
-				text: 'Since 
+var chart;
+$(document).ready(function() {
+	chart = new Highcharts.Chart({
+		chart: {
+			renderTo: 'container',
+			type: 'line',
+			marginRight: 200,
+			marginBottom: 50
+		},
+		title: {
+			text: 'In Game Population Statistics',
+			x: -20 //center
+		},
+		subtitle: {
+			text: 'Since 
 EOD;
 	if ($entries > 0)
 		$header .= $day[0]->format("F j, Y"); //MMMM d, yyyy
 	$header .=
 <<<EOD
 ',
-				x: -20
-			},
-			xAxis: {
-				categories: [
+			x: -20
+		},
+		xAxis: {
+			categories: [
 EOD;
 	for ($i = 0; $i < $entries; $i++)
 		$header .= "'" . $day[$i]->format("n/j/y") . "',"; //M/d/yy
+	if ($entries > 0)
+		$header = substr($header, 0, -1);
 	$header .=
 <<<EOD
 ],
-				tickInterval: {$xAxisTickInterval}
+			tickInterval: {$xAxisTickInterval}
+		},
+		yAxis: {
+			title: {
+				text: 'Player Count'
 			},
-			yAxis: {
-				title: {
-					text: 'Player Count'
-				},
-				plotLines: [{
-					value: 0,
-					width: 1,
-					color: '#808080'
-				}],
-				tickInterval: {$yAxisTickInterval}
-			},
-			tooltip: {
-				formatter: function() {
-					return '<b>' + this.x + '</b><br/>' +
-						this.series.name + ': '+ this.y + ' player(s)<br/>' +
-						
+			plotLines: [{
+				value: 0,
+				width: 1,
+				color: '#808080'
+			}],
+			tickInterval: {$yAxisTickInterval}
+		},
+		tooltip: {
+			formatter: function() {
+				return '<b>' + this.x + '</b><br/>' +
+					this.series.name + ': '+ this.y + ' player(s)<br/>' +
+					
 EOD;
 	$header .= "'Most active time: ' + activeTimes[this.x]";
 	$header .=
 <<<EOD
 ;
-				}
-			},
-			legend: {
-				layout: 'vertical',
-				align: 'right',
-				verticalAlign: 'top',
-				x: -10,
-				y: 100,
-				borderWidth: 0
-			},
-			series: [{
-				name: 'Highest Concurrent Logins',
-				data: [
+			}
+		},
+		legend: {
+			layout: 'vertical',
+			align: 'right',
+			verticalAlign: 'top',
+			x: -10,
+			y: 100,
+			borderWidth: 0
+		},
+		series: [{
+			name: 'Highest Concurrent Logins',
+			data: [
 EOD;
 	for ($i = 0; $i < $entries; $i++)
 		$header .= $max[$i] . ",";
+	if ($entries > 0)
+		$header = substr($header, 0, -1);
 	$header .=
 <<<EOD
 ]
-			}, {
-				name: 'Unique Logins',
-				data: [
+		}, {
+			name: 'Unique Logins',
+			data: [
 EOD;
 	for ($i = 0; $i < $entries; $i++)
 		$header .= $unique[$i] . ",";
+	if ($entries > 0)
+		$header = substr($header, 0, -1);
 	$header .=
 <<<EOD
 ]
-			}]
-		});
+		}]
 	});
 });
 // ]]>
 </script>
-<script type="text/javascript" src="highcharts.js"></script>
 EOD;
 		return $header;
 	}

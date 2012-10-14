@@ -95,6 +95,28 @@
 	* Corrected some mismatched div tags and unescaped internal JavaScript.
 	* Corrected supported browsers statement in footer.
 
+2012-10-14  GoldenKevin  (revision 14)
+
+	* Removed trailing commas in pjtbGraphPage's JavaScript code that were
+	causing errors in Internet Explorer 8.
+	* pjtbGraphPage now uses highcharts.js from a CDN.
+	* Removed extraneous $(document).ready in JavaScript for pjtbGraphPage.
+	* More extensive use of JQuery in pjtbRegistrationFormPage and elimination
+	of non-standard onpaste and oncut attributes for username and password text
+	fields.
+	* Removed common.js for now because its sole function is now unused.
+	* Fixed inability to use backspace or delete on the username and password
+	text fields in pjtbRegistrationFormPage in Opera.
+	* Use borders around sub menu items in the dropline menu instead of outlines
+	to fix rendering issues in Opera.
+	* Eliminated all margins for sub menu items in response to borders
+	separating sub menu items farther apart than outlines had.
+	* Color of borders for sub menu items is now white.
+	* Support for Opera is now reflected in list of browsers in footer.
+	* Refactored pjtbBasePage->getPageHeader()'s menu entries population so it
+	is easier to choose the behavior of the User top level menu item based on
+	whether or not the user is logged in.
+
 Copyright 2012 GoldenKevin
 Copying and distribution of this file, with or without modification, are
 permitted provided the copyright notice and this notice are preserved.

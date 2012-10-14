@@ -66,7 +66,7 @@ form#loginform {
 // <![CDATA[
 $(document).ready(function() {
 	$('#agree').click(function(event) {
-		event.preventDefault();
+		(event.preventDefault) ? event.preventDefault() : event.returnValue = false;
 		$('#terms').hide('blind', 500);
 	});
 });
