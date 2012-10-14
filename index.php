@@ -57,12 +57,14 @@ if (!isset($_REQUEST["action"])) {
 		'regform' => array('pjtbRegistrationFormPage.php', 'pjtbRegistrationFormPage'),
 		'regsubmit' => array('pjtbRegistrationSubmitPage.php', 'pjtbRegistrationSubmitPage'),
 		'about' => array('pjtbAboutPage.php', 'pjtbAboutPage'),
-		'letsbefriends' => array('pjtbFinalStatement.php', 'pjtbFinalStatement'),
+		'predmca' => array('pjtbFinalStatement.php', 'pjtbFinalStatement'),
 		'ad' => array('pjtbAdPage.php', 'pjtbAdPage'),
 		'ranking' => array('pjtbRankingPage.php', 'pjtbRankingPage'),
 		'status' => array('pjtbStatusPage.php', 'pjtbStatusPage'),
 		'graph' => array('pjtbGraphPage.php', 'pjtbGraphPage'),
-		'rates' => array('pjtbRatesPage.php', 'pjtbRatesPage')
+		'rates' => array('pjtbRatesPage.php', 'pjtbRatesPage'),
+		'contact' => array('pjtbContactPage.php', 'pjtbContactPage'),
+		'cp' => array('pjtbUserControlPanel.php', 'pjtbUserControlPanel')
 	);
 
 	if (array_key_exists($_REQUEST["action"], $actionArray)) {

@@ -28,10 +28,28 @@ require("pjtbBasePage.php");
  * @author GoldenKevin
  */
 class pjtbRankingPage extends pjtbBasePage {
+	protected function getHtmlHeader() {
+		return parent::getHtmlHeader() .
+<<<EOD
+
+<style type="text/css">
+table#ranking {
+	margin-left: auto;
+	margin-right: auto;
+}
+table#ranking td {
+	border: 1px solid #000;
+	margin: 0;
+	text-align: center;
+}
+</style>
+EOD;
+	}
+
 	protected function getBodyContent() {
 		$min = 1;
 		$max = 10;
-		$content = "<table>\n<tr><td>Position</td><td>Name</td><td>World</td><td>Job</td><td>Level</td><td>Exp</td></tr>\n";
+		$content = "<table id=\"ranking\">\n<tr><td>Position</td><td>Name</td><td>World</td><td>Job</td><td>Level</td><td>Exp</td></tr>\n";
 		require('databasemanager.php');
 		$con = makeDatabaseConnection();
 		$ps = $con->prepare("CALL fetchranks('overall', null, ?, ?)");

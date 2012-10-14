@@ -76,6 +76,8 @@ EOD;
 	}
 
 	protected function getHtmlBody() {
+		require('config.php');
+
 		$body = 
 <<<EOD
 <div id="content" class="outer">
@@ -100,18 +102,9 @@ EOD;
 <p>Should any user or outside party identify any content that is harmful or malicious to Nexon, or to the other users of the service, we request that he or she contact us via <a href="index.php?action=contact">this page</a> so we may rectify the problem.</p>
 <br />
 
-EOD
-			/*.
-<<<EOD
-<p>If you are a representative of Nexon, please read <a href="index.php?action=letsbefriends">this statement</a>, prepared by the staff, before serving us a DMCA notice.</p>
-<br />
-
-EOD*/
-			.
-<<<EOD
 <p>Please read the above statement carefully before proceeding.</p>
 <div class="buttonset">
-<a id="agree" class="positive" href="/pjtb/index.php?revealed">I agree</a>
+<a id="agree" class="positive" href="{$portal_path}?revealed">I agree</a>
 <a id="disagree" class="negative" href="http://www.google.com">I disagree</a>
 </div>
 </div>
