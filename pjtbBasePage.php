@@ -34,7 +34,7 @@ abstract class pjtbBasePage {
 		$title = $this->getTitle();
 		return
 <<<EOD
-<meta http-equiv="Content-Type" content="text/html;charset=us-ascii" />
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <title>{$title}</title>
 <link rel="stylesheet" type="text/css" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" />
 <link rel="stylesheet" type="text/css" href="common.css" />
@@ -59,12 +59,14 @@ EOD;
 			'Register' => $portal_path . '?action=regform'
 		));
 		$topLevelLinks['Forum'] = array('/forum', 'c', array());
-		$topLevelLinks['About'] = array($portal_path/* . '?action=about'*/, 'd', array(
-			//'About' => $portal_path . '?action=about',
-			//'Ad' => $portal_path . '?action=ad',
+		$topLevelLinks['About'] = array($portal_path . '?action=about', 'd', array(
+			'About' => $portal_path . '?action=about',
+			'Mission' => $portal_path . '?action=ad',
 			'Contact us' => $portal_path . '?action=contact',
-			'' => $portal_path . '?action=predmca',
 		));
+		$hiddenLinksDefaults = array(
+			$portal_path . '?action=predmca' => 'About'
+		);
 
 		$currentPage = $_SERVER['PHP_SELF'];
 		if ($currentPage == $portal_path)
@@ -72,6 +74,10 @@ EOD;
 				$currentPage .= '?action=' . $_REQUEST["action"];
 			else
 				$currentPage .= '?revealed';
+
+		$currentPageDefault = null;
+		if (array_key_exists($currentPage, $hiddenLinksDefaults))
+			$currentPageDefault = $hiddenLinksDefaults[$currentPage];
 
 		$header =
 <<<EOD
@@ -101,6 +107,8 @@ EOD;
 			} else {
 				$menuEntry .= "<li class=\"spacer\"></li>\n";
 			}
+			if ($currentPageDefault == $topLevelText)
+				$topLevelMenuItemClass = "default";
 			if ($topLevelMenuItemClass != NULL)
 				$menuEntry = "<li id=\"$subLevelLinks[1]\" class=\"$topLevelMenuItemClass\">\n" . $menuEntry;
 			else

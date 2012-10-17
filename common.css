@@ -1,3 +1,7 @@
+body {
+	background: #3B343C url('newbeginning.jpg') repeat-x;
+}
+
 .header, .body, .footer {
 	margin-left: auto;
 	margin-right: auto;
@@ -8,15 +12,15 @@
 .header {
 	width: 800px;
 	padding: 5px 0 0 0;
-	background: skyblue;
+	background: #8090A0;
 }
 
 .body {
-	background: #B8D1CA;
+	background: #80A090;
 }
 
 .footer {
-	background: #D9B7A4;
+	background: #A09080;
 	text-align: center;
 	font-size: 50%;
 }
@@ -148,19 +152,19 @@ ul.droplinemenu li ul li.spacer {
 }
 
 ul.droplinemenu li#a a, ul.droplinemenu li#a ul {
-	background: #6BC1E7;
+	background: #8D9CAA;
 }
 
 ul.droplinemenu li#b a, ul.droplinemenu li#b ul {
-	background: #5EBBE3;
+	background: #9AA7B4;
 }
 
 ul.droplinemenu li#c a, ul.droplinemenu li#c ul {
-	background: #44B0DF;
+	background: #A7B3BE;
 }
 
 ul.droplinemenu li#d a, ul.droplinemenu li#d ul {
-	background: #239BCF;
+	background: #B4BEC8;
 }
 
 ul.droplinemenu li.current a {

@@ -136,6 +136,18 @@
 	* Hardcoded link in pjtbTermsPage for non-JS enabled browsers now uses
 	$portal_path in config.php.
 
+2012-10-16  GoldenKevin  (revision 16)
+
+	* A more subdued color palette and a new background image designed to evoke
+	late dawn (i.e. an earlier time) while retaining header, body, and footer
+	pattern (i.e. sky, land, ground).
+	* Fixed Opera hiding registration form hints if using tab key to switch
+	between fields.
+	* Implemented more robust way of choosing the default menu to show for pages
+	that are not linked on the navigation menu.	
+	* Revised pjtbAboutPage and pjtbAdPage and added their links to the menu.
+	* Encoding of pages switched from us-ascii to utf-8.
+
 Copyright 2012 GoldenKevin
 Copying and distribution of this file, with or without modification, are
 permitted provided the copyright notice and this notice are preserved.

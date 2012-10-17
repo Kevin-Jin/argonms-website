@@ -334,7 +334,8 @@ function showUsernameHint(e) {
 
 function changingUsername(e) {
 	var code = e.which;
-	if (code != 0)
+	//enter; F5, arrow keys, etc.; tab key
+	if (code != 13 && code != 0 && code != 9)
 		hideHint($(this));
 	//digit keys; uppercase letter keys; lowercase letter keys; underscore; enter; F5, arrow keys, etc.; backspace; tab key
 	if (!(code >= 48 && code <= 57 || code >= 65 && code <= 90 || code >= 97 && code <= 122 || code == 95 || code == 13 || code == 0 || code == 8 || code == 9)) {
@@ -380,7 +381,8 @@ function showPasswordHint(e) {
 
 function changingPassword(e) {
 	var code = e.which;
-	if (code != 0)
+	//enter; F5, arrow keys, etc.; tab key
+	if (code != 13 && code != 0 && code != 9)
 		hideHint($(this));
 	//digit keys; uppercase letter keys; lowercase letter keys; enter; F5, arrow keys, etc.; backspace; tab key
 	//client supports sending practically any printable ASCII character in a password, but we'll make it easier on ourselves here
