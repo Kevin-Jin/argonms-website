@@ -50,14 +50,26 @@ EOD;
 		$topLevelLinks['Main'] = array($portal_path . '?revealed', 'a', array(
 			'Rankings' => $portal_path . '?action=ranking',
 			'Graphs' => $portal_path . '?action=graph',
-			'Server Status' => $portal_path . '?action=status',
+			'Server status' => $portal_path . '?action=status',
 			'Rates' => $portal_path . '?action=rates'
 		));
-		//TODO: "User" top level menu should have different links if logged in - i.e. Control Panel instead of Log in and Register
-		$topLevelLinks['User'] = array($portal_path . '?action=loginform', 'b', array(
-			'Log in' => $portal_path . '?action=loginform',
-			'Register' => $portal_path . '?action=regform'
-		));
+		if (isset($_SESSION['logged_in_account_id'])) {
+			$subLevelLinks = array(
+				'User control panel' => $portal_path . '?action=cp',
+				'Log out' => $portal_path . '?action=logout'
+			);
+			if (/*is_gm*/false)
+				$subLevelLinks['Moderator Control Panel'] = $portal_path . '?action=gmcp';
+			if (/*is_admin*/false)
+				$subLevelLinks['Administrator Control Panel'] = $portal_path . '?action=acp';
+
+			$topLevelLinks['User'] = array($portal_path . '?action=cp', 'b', $subLevelLinks);
+		} else {
+			$topLevelLinks['User'] = array($portal_path . '?action=loginform', 'b', array(
+				'Log in' => $portal_path . '?action=loginform',
+				'Register' => $portal_path . '?action=regform'
+			));
+		}
 		$topLevelLinks['Forum'] = array('/forum', 'c', array());
 		$topLevelLinks['About'] = array($portal_path . '?action=about', 'd', array(
 			'About' => $portal_path . '?action=about',
@@ -65,7 +77,10 @@ EOD;
 			'Contact us' => $portal_path . '?action=contact',
 		));
 		$hiddenLinksDefaults = array(
-			$portal_path . '?action=predmca' => 'About'
+			$portal_path . '?action=predmca' => 'About',
+			$portal_path . '?action=loginsubmit' => 'User',
+			$portal_path . '?action=regsubmit' => 'User',
+			$portal_path . '?action=logout' => 'User'
 		);
 
 		$currentPage = $_SERVER['PHP_SELF'];

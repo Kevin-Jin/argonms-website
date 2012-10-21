@@ -98,6 +98,7 @@ class pjtbRegistrationSubmitPage extends pjtbBasePage {
 				$ps = $con->prepare("INSERT INTO `accounts`(`name`,`password`,`salt`,`birthday`) VALUES (?,?,?,?)");
 				$ps->bind_param('sssi', $_POST["username"], $passhash, $salt, $birthday);
 				$ps->execute();
+				$_SESSION['logged_in_account_id'] = $con->insert_id;
 				$ps->close();
 
 				require('config.php');
