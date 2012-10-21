@@ -175,6 +175,12 @@
 
 	* Implemented persistent logins.
 
+2012-10-21  GoldenKevin  (revision 20)
+
+	* Since PHP has no naming conventions of its own, all PHP user defined
+	functions, variables, classes, etc. has been refactored to follow Java's
+	naming conventions so the codebase is more consistent.
+
 Copyright 2012 GoldenKevin
 Copying and distribution of this file, with or without modification, are
 permitted provided the copyright notice and this notice are preserved.

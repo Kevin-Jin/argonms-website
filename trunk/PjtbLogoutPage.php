@@ -18,34 +18,34 @@
  */
 
 if (!defined("allow entry"))
-	require_once('hackingattempt.php');
+	require_once('HackingAttempt.php');
 
-require_once("pjtbBasePage.php");
+require_once("PjtbBasePage.php");
 
 /**
  * 
  *
  * @author GoldenKevin
  */
-class pjtbLogoutPage extends pjtbBasePage {
+class PjtbLogoutPage extends PjtbBasePage {
 	private $timeout;
 	private $message;
 	private $url;
 
 	public function __construct() {
-		if (!isset($_SESSION['logged_in_account_id']))
-			require_once('hackingattempt.php');
+		if (!isset($_SESSION['loggedInAccountId']))
+			require_once('HackingAttempt.php');
 
-		unset($_SESSION['logged_in_account_id']);
+		unset($_SESSION['loggedInAccountId']);
 		if (isset($_COOKIE['auth'])) {
-			require_once('loginfunctions.php');
+			require_once('LoginFunctions.php');
 			destroyCookie();
 		}
 
-		require_once('config.php');
+		require_once('Config.php');
 		$this->timeout = 3;
 		$this->message = "You have been logged out. You will be brought to the front page";
-		$this->url = config::$portal_path . "?revealed";
+		$this->url = Config::$portalPath . "?revealed";
 	}
 
 	protected function getHtmlHeader() {

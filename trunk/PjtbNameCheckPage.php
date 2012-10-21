@@ -18,30 +18,29 @@
  */
 
 if (!defined("allow entry"))
-	require_once('hackingattempt.php');
-
-require_once("pjtbBasePage.php");
+	require_once('HackingAttempt.php');
 
 /**
  * 
  *
  * @author GoldenKevin
  */
-class pjtbUserControlPanel extends pjtbBasePage {
-	public function __construct() {
-		if (!isset($_SESSION['logged_in_account_id']))
-			require_once('hackingattempt.php');
-	}
+class PjtbNameCheckPage {
+	public final function getHtml() {
+		$name = "";
 
-	protected function getBodyContent() {
-		return
-<<<EOD
-<strong><em>This page is under construction!</em></strong>
-EOD;
-	}
+		require_once('DatabaseManager.php');
+		$con = makeDatabaseConnection();
+		$ps = $con->prepare("SELECT COUNT(*) FROM `accounts` WHERE `name` = ?");
+		$ps->bind_param('s', $_GET["name"]);
+		$ps->execute();
+		$ps->bind_result($userMatchCount);
+		if ($ps->fetch() && $userMatchCount > 0)
+			$name = $_GET["name"];
+		$ps->close();
+		$con->close();
 
-	protected function getTitle() {
-		return "Project Throwback";
+		return $name;
 	}
 }
 ?>

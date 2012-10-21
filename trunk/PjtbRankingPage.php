@@ -18,16 +18,16 @@
  */
 
 if (!defined("allow entry"))
-	require_once('hackingattempt.php');
+	require_once('HackingAttempt.php');
 
-require_once("pjtbBasePage.php");
+require_once("PjtbBasePage.php");
 
 /**
  * 
  *
  * @author GoldenKevin
  */
-class pjtbRankingPage extends pjtbBasePage {
+class PjtbRankingPage extends PjtbBasePage {
 	protected function getHtmlHeader() {
 		return parent::getHtmlHeader() .
 <<<EOD
@@ -50,7 +50,7 @@ EOD;
 		$min = 1;
 		$max = 10;
 		$content = "<table id=\"ranking\">\n<tr><td>Position</td><td>Name</td><td>World</td><td>Job</td><td>Level</td><td>Exp</td></tr>\n";
-		require_once('databasemanager.php');
+		require_once('DatabaseManager.php');
 		$con = makeDatabaseConnection();
 		$ps = $con->prepare("CALL fetchranks('overall', null, ?, ?)");
 		$ps->bind_param('dd', $min, $max);

@@ -18,25 +18,25 @@
  */
 
 if (!defined("allow entry"))
-	require_once('hackingattempt.php');
+	require_once('HackingAttempt.php');
 
-require_once("pjtbBasePage.php");
+require_once("PjtbBasePage.php");
 
 /**
  * 
  *
  * @author GoldenKevin
  */
-class pjtbLoginFormPage extends pjtbBasePage {
+class PjtbLoginFormPage extends PjtbBasePage {
 	protected function getBodyContent() {
-		require_once('config.php');
-		$portal_path = config::$portal_path;
+		require_once('Config.php');
+		$portalPath = Config::$portalPath;
 		return
 <<<EOD
-<form id="loginform" action="{$portal_path}?action=loginsubmit" method="post">
+<form id="loginform" action="{$portalPath}?action=loginsubmit" method="post">
 <p>You must log in in order to access your account control panel and other portions of this site.</p>
 <p>Username:<input type="text" id="unamefield" name="username" maxlength="12" />Password:<input type="password" id="passwordfield" name="password" maxlength="12" /><input type="checkbox" name="persistent" value="1" />Remember me<input id="loginsubmit" type="submit" value="Login" /></p>
-<p>Or click <a href="{$portal_path}?action=regform">here</a> to register.</p>
+<p>Or click <a href="{$portalPath}?action=regform">here</a> to register.</p>
 </form>
 EOD;
 	}

@@ -18,22 +18,40 @@
  */
 
 if (!defined("allow entry"))
-	require_once('hackingattempt.php');
+	require_once('HackingAttempt.php');
 
-require_once("pjtbBasePage.php");
+require_once("PjtbBasePage.php");
 
 /**
  * 
  *
  * @author GoldenKevin
  */
-class pjtbContactPage extends pjtbBasePage {
+class PjtbStatusPage extends PjtbBasePage {
 	protected function getBodyContent() {
-		return
-<<<EOD
-<strong><em>This page is under construction!</em></strong>
-<p>If you are a representative of Nexon, please read <a href="index.php?action=predmca">this statement</a>, prepared by the staff, before serving us a DMCA notice.</p>
-EOD;
+		require_once('Config.php');
+		$loginServerPort = 8484;
+		$connection = @fsockopen(Config::$loginServerIp, $loginServerPort);
+		if ($connection) {
+			fclose($connection);
+			$online = true;
+		} else {
+			$online = false;
+		}
+		$onlineCount = 0;
+		if ($online) {
+			require_once('DatabaseManager.php');
+			$con = makeDatabaseConnection();
+			$ps = $con->prepare("SELECT COUNT(*) FROM `accounts` WHERE `connected` <> 0");
+			if ($ps->execute()) {
+				$ps->bind_result($onlineCount);
+				$ps->fetch();
+			}
+			$ps->close();
+			$con->close();
+		}
+		return "<p>Login server status: " . ($online ? "online" : "offline") . "</p>\n"
+				. "<p>Number of players currently online: {$onlineCount}</p>";
 	}
 
 	protected function getTitle() {

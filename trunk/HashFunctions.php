@@ -18,7 +18,7 @@
  */
 
 if (!defined("allow entry"))
-	require_once('hackingattempt.php');
+	require_once('HackingAttempt.php');
 
 /**
  * 

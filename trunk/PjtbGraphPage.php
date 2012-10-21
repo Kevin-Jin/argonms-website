@@ -18,16 +18,16 @@
  */
 
 if (!defined("allow entry"))
-	require_once('hackingattempt.php');
+	require_once('HackingAttempt.php');
 
-require_once("pjtbBasePage.php");
+require_once("PjtbBasePage.php");
 
 /**
  * 
  *
  * @author GoldenKevin
  */
-class pjtbGraphPage extends pjtbBasePage {
+class PjtbGraphPage extends PjtbBasePage {
 	protected function getBodyContent() {
 		return
 <<<EOD
@@ -42,7 +42,7 @@ EOD;
 	}
 
 	protected function getHtmlHeader() {
-		require_once('databasemanager.php');
+		require_once('DatabaseManager.php');
 		$day = array(); //also includes mostactivetime data with date
 		$unique = array();
 		$max = array();
@@ -53,11 +53,11 @@ EOD;
 		if ($ps->execute()) {
 			$rs = $ps->get_result();
 
-			require_once('config.php');
+			require_once('Config.php');
 			for (; $array = $rs->fetch_array(); $entries++) {
 				//MySQL string representation of dates is yyyy-MM-dd
 				//(or Y-m-d in PHP, standardized as ISO 8601)
-				$day[$entries] = new DateTime($array[0] . " " . $array[3], new DateTimeZone(config::$timezone));
+				$day[$entries] = new DateTime($array[0] . " " . $array[3], new DateTimeZone(Config::$timeZone));
 				$unique[$entries] = $array[1];
 				$max[$entries] = $array[2];
 				if ($array[1] > $highestYValue)

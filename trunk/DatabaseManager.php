@@ -18,35 +18,16 @@
  */
 
 if (!defined("allow entry"))
-	require_once('hackingattempt.php');
+	require_once('HackingAttempt.php');
 
 /**
  * 
  *
  * @author GoldenKevin
  */
-final class config {
-	public static $dbhost = 'localhost';
-	public static $dbuser = 'root';
-	public static $dbpass = '';
-	public static $dbname = 'argonms';
 
-	public static $rates = array(
-		"1" => array(
-			"Exp" => 1,
-			"Meso" => 1,
-			"Drop" => 1
-		)
-	);
-
-	public static $timezone = 'America/Los_Angeles';
-
-	public static $login_server_ip = 'localhost';
-
-	public static $portal_path = '/index.php';
-
-	private function __construct() {
-		//uninstantiable...
-	}
+function makeDatabaseConnection() {
+	require_once('Config.php');
+	return new mysqli('p:' . Config::$dbHost, Config::$dbUser, Config::$dbPass, Config::$dbName);
 }
 ?>

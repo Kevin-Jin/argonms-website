@@ -18,29 +18,26 @@
  */
 
 if (!defined("allow entry"))
-	require_once('hackingattempt.php');
+	require_once('HackingAttempt.php');
+
+require_once("PjtbBasePage.php");
 
 /**
  * 
  *
  * @author GoldenKevin
  */
-class pjtbNameCheckPage {
-	public final function getHtml() {
-		$name = "";
+class PjtbContactPage extends PjtbBasePage {
+	protected function getBodyContent() {
+		return
+<<<EOD
+<strong><em>This page is under construction!</em></strong>
+<p>If you are a representative of Nexon, please read <a href="index.php?action=predmca">this statement</a>, prepared by the staff, before serving us a DMCA notice.</p>
+EOD;
+	}
 
-		require_once('databasemanager.php');
-		$con = makeDatabaseConnection();
-		$ps = $con->prepare("SELECT COUNT(*) FROM `accounts` WHERE `name` = ?");
-		$ps->bind_param('s', $_GET["name"]);
-		$ps->execute();
-		$ps->bind_result($usermatchcount);
-		if ($ps->fetch() && $usermatchcount > 0)
-			$name = $_GET["name"];
-		$ps->close();
-		$con->close();
-
-		return $name;
+	protected function getTitle() {
+		return "Project Throwback";
 	}
 }
 ?>

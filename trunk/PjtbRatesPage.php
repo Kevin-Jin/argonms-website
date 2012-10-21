@@ -18,16 +18,16 @@
  */
 
 if (!defined("allow entry"))
-	require_once('hackingattempt.php');
+	require_once('HackingAttempt.php');
 
-require_once("pjtbBasePage.php");
+require_once("PjtbBasePage.php");
 
 /**
  * 
  *
  * @author GoldenKevin
  */
-class pjtbRatesPage extends pjtbBasePage {
+class PjtbRatesPage extends PjtbBasePage {
 	protected function getHtmlHeader() {
 		return parent::getHtmlHeader() .
 <<<EOD
@@ -53,8 +53,8 @@ EOD;
 <tr><td>World</td><td>Exp Rate</td><td>Meso Rate</td><td>Drop Rate</td></tr>
 
 EOD;
-require_once('config.php');
-foreach (config::$rates as $key=>$value)
+require_once('Config.php');
+foreach (Config::$rates as $key=>$value)
 	$content .= "<tr><td>{$key}</td><td>{$value['Exp']}</td><td>{$value['Meso']}</td><td>{$value['Drop']}</td></tr>";
 $content .=
 <<<EOD
