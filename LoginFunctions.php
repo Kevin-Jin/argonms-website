@@ -18,7 +18,7 @@
  */
 
 if (!defined("allow entry"))
-	require_once('hackingattempt.php');
+	require_once('HackingAttempt.php');
 
 /**
  * 
@@ -32,14 +32,14 @@ function loadCookie() {
 	$token = $params[1];
 	$correct = false;
 
-	require_once('databasemanager.php');
+	require_once('DatabaseManager.php');
 	$con = makeDatabaseConnection();
 	$ps = $con->prepare("SELECT `accountid`,`tokenhash` FROM `websitecookies` WHERE `uniqueid` = ?");
 	$ps->bind_param('i', $uid);
 	if ($ps->execute()) {
 		$rs = $ps->get_result();
 		if ($array = $rs->fetch_array()) {
-			require_once('hashfunctions.php');
+			require_once('HashFunctions.php');
 			$accountid = $array[0];
 			$correct = checkSha512Hash($array[1], $token);
 		}
@@ -53,7 +53,7 @@ function loadCookie() {
 	$ps->close();
 
 	if ($correct) {
-		$_SESSION['logged_in_account_id'] = $accountid;
+		$_SESSION['loggedInAccountId'] = $accountid;
 		createNewCookie($con);
 	}
 
@@ -61,22 +61,22 @@ function loadCookie() {
 }
 
 function createNewCookie($con) {
-	$new_token = bin2hex(openssl_random_pseudo_bytes(16));
-	$token_hash = hexSha512($new_token);
+	$newToken = bin2hex(openssl_random_pseudo_bytes(16));
+	$tokenHash = hexSha512($newToken);
 	$ps = $con->prepare("INSERT INTO `websitecookies` (`accountid`,`tokenhash`) VALUES (?,?)");
-	$ps->bind_param('is', $_SESSION['logged_in_account_id'], $token_hash);
+	$ps->bind_param('is', $_SESSION['loggedInAccountId'], $tokenHash);
 	$ps->execute();
 	$uid = $con->insert_id;
 	$ps->close();
 
-	setcookie('auth', implode(':', array($uid, $new_token)), time() + 60 * 60 * 24 * 15, '', '', isset($_SERVER["HTTPS"]), true);
+	setcookie('auth', implode(':', array($uid, $newToken)), time() + 60 * 60 * 24 * 15, '', '', isset($_SERVER["HTTPS"]), true);
 }
 
 function destroyCookie() {
 	$params = explode(':', $_COOKIE['auth']);
 	$uid = intval($params[0]);
 
-	require_once('databasemanager.php');
+	require_once('DatabaseManager.php');
 	$con = makeDatabaseConnection();
 	$ps = $con->prepare("DELETE FROM `websitecookies` WHERE `uniqueid` = ?");
 	$ps->bind_param('i', $uid);

@@ -30,11 +30,11 @@ if (!isset($_SESSION['visited'])) {
 	//increment hit counter
 	$_SESSION['visited'] = true;
 
-	require_once('databasemanager.php');
+	require_once('DatabaseManager.php');
 	$con = makeDatabaseConnection();
 
-	require_once('config.php');
-	$now = new DateTime(NULL, new DateTimeZone(config::$timezone));
+	require_once('Config.php');
+	$now = new DateTime(NULL, new DateTimeZone(Config::$timeZone));
 	$now = $now->format("Y-m-d");
 	$ps = $con->prepare("INSERT INTO `websitestats` (`day`,`uniquesessions`) VALUES (?,1) ON DUPLICATE KEY UPDATE `uniquesessions` = `uniquesessions` + 1");
 	$ps->bind_param('s', $now);
@@ -43,38 +43,38 @@ if (!isset($_SESSION['visited'])) {
 
 	$con->close();
 }
-if (!isset($_SESSION['logged_in_account_id']) && isset($_COOKIE['auth'])) {
-	require_once('loginfunctions.php');
+if (!isset($_SESSION['loggedInAccountId']) && isset($_COOKIE['auth'])) {
+	require_once('LoginFunctions.php');
 	loadCookie();
 }
 
 if (!isset($_REQUEST["action"])) {
-	$file = "pjtbTermsPage.php";
-	$class = "pjtbTermsPage";
+	$file = "PjtbTermsPage.php";
+	$class = "PjtbTermsPage";
 } else {
 	$actionArray = array(
-		'loginform' => array('pjtbLoginFormPage.php', 'pjtbLoginFormPage'),
-		'loginsubmit' => array('pjtbLoginSubmitPage.php', 'pjtbLoginSubmitPage'),
-		'namecheck' => array('pjtbNameCheckPage.php', 'pjtbNameCheckPage'),
-		'regform' => array('pjtbRegistrationFormPage.php', 'pjtbRegistrationFormPage'),
-		'regsubmit' => array('pjtbRegistrationSubmitPage.php', 'pjtbRegistrationSubmitPage'),
-		'about' => array('pjtbAboutPage.php', 'pjtbAboutPage'),
-		'predmca' => array('pjtbFinalStatement.php', 'pjtbFinalStatement'),
-		'ad' => array('pjtbAdPage.php', 'pjtbAdPage'),
-		'ranking' => array('pjtbRankingPage.php', 'pjtbRankingPage'),
-		'status' => array('pjtbStatusPage.php', 'pjtbStatusPage'),
-		'graph' => array('pjtbGraphPage.php', 'pjtbGraphPage'),
-		'rates' => array('pjtbRatesPage.php', 'pjtbRatesPage'),
-		'contact' => array('pjtbContactPage.php', 'pjtbContactPage'),
-		'cp' => array('pjtbUserControlPanel.php', 'pjtbUserControlPanel'),
-		'logout' => array('pjtbLogoutPage.php', 'pjtbLogoutPage')
+		'loginform' => array('PjtbLoginFormPage.php', 'PjtbLoginFormPage'),
+		'loginsubmit' => array('PjtbLoginSubmitPage.php', 'PjtbLoginSubmitPage'),
+		'namecheck' => array('PjtbNameCheckPage.php', 'PjtbNameCheckPage'),
+		'regform' => array('PjtbRegistrationFormPage.php', 'PjtbRegistrationFormPage'),
+		'regsubmit' => array('PjtbRegistrationSubmitPage.php', 'PjtbRegistrationSubmitPage'),
+		'about' => array('PjtbAboutPage.php', 'PjtbAboutPage'),
+		'predmca' => array('PjtbFinalStatement.php', 'PjtbFinalStatement'),
+		'ad' => array('PjtbAdPage.php', 'PjtbAdPage'),
+		'ranking' => array('PjtbRankingPage.php', 'PjtbRankingPage'),
+		'status' => array('PjtbStatusPage.php', 'PjtbStatusPage'),
+		'graph' => array('PjtbGraphPage.php', 'PjtbGraphPage'),
+		'rates' => array('PjtbRatesPage.php', 'PjtbRatesPage'),
+		'contact' => array('PjtbContactPage.php', 'PjtbContactPage'),
+		'cp' => array('PjtbUserControlPanel.php', 'PjtbUserControlPanel'),
+		'logout' => array('PjtbLogoutPage.php', 'PjtbLogoutPage')
 	);
 
 	if (array_key_exists($_REQUEST["action"], $actionArray)) {
 		$file = $actionArray[$_REQUEST["action"]][0];
 		$class = $actionArray[$_REQUEST["action"]][1];
 	} else {
-		require_once('hackingattempt.php');
+		require_once('HackingAttempt.php');
 	}
 }
 

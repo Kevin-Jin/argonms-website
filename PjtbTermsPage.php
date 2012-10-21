@@ -18,22 +18,22 @@
  */
 
 if (!defined("allow entry"))
-	require_once('hackingattempt.php');
+	require_once('HackingAttempt.php');
 
-require_once("pjtbLoginFormPage.php");
+require_once("PjtbLoginFormPage.php");
 
 /**
  * 
  *
  * @author GoldenKevin
  */
-class pjtbTermsPage extends pjtbLoginFormPage {
+class PjtbTermsPage extends PjtbLoginFormPage {
 	protected function getBodyContent() {
 		$content = '';
-		if (isset($_SESSION['logged_in_account_id'])) {
-			require_once('config.php');
-			$portal_path = config::$portal_path;
-			$content = "Click <a href=\"$portal_path?action=cp\">here to open your control panel.</a>";
+		if (isset($_SESSION['loggedInAccountId'])) {
+			require_once('Config.php');
+			$portalPath = Config::$portalPath;
+			$content = "Click <a href=\"$portalPath?action=cp\">here to open your control panel.</a>";
 		} else {
 			$content = parent::getBodyContent();
 		}
@@ -85,8 +85,8 @@ EOD;
 	}
 
 	protected function getHtmlBody() {
-		require_once('config.php');
-		$portal_path = config::$portal_path;
+		require_once('Config.php');
+		$portalPath = Config::$portalPath;
 
 		$body = 
 <<<EOD
@@ -114,7 +114,7 @@ EOD;
 
 <p>Please read the above statement carefully before proceeding.</p>
 <div class="buttonset">
-<a id="agree" class="positive" href="{$portal_path}?revealed">I agree</a>
+<a id="agree" class="positive" href="{$portalPath}?revealed">I agree</a>
 <a id="disagree" class="negative" href="http://www.google.com">I disagree</a>
 </div>
 </div>

@@ -18,32 +18,32 @@
  */
 
 if (!defined("allow entry"))
-	require_once('hackingattempt.php');
+	require_once('HackingAttempt.php');
 
-require_once("pjtbBasePage.php");
+require_once("PjtbBasePage.php");
 
 /**
  * 
  *
  * @author GoldenKevin
  */
-class pjtbLoginSubmitPage extends pjtbBasePage {
+class PjtbLoginSubmitPage extends PjtbBasePage {
 	private $timeout;
 	private $message;
 	private $url;
 
 	public function __construct() {
 		if (!isset($_POST["username"]) || !isset($_POST["password"]))
-			require_once('hackingattempt.php');
+			require_once('HackingAttempt.php');
 
-		require_once('databasemanager.php');
+		require_once('DatabaseManager.php');
 		$con = makeDatabaseConnection();
 		$ps = $con->prepare("SELECT `id`,`password`,`salt` FROM `accounts` WHERE `name` = ?");
 		$ps->bind_param('s', $_POST["username"]);
 		if ($ps->execute()) {
 			$rs = $ps->get_result();
 			if ($array = $rs->fetch_array()) {
-				require_once('hashfunctions.php');
+				require_once('HashFunctions.php');
 				$correct = false;
 				$hasSalt = isset($array[2]);
 				switch (strlen($array[1])) {
@@ -85,27 +85,27 @@ class pjtbLoginSubmitPage extends pjtbBasePage {
 						$ps->execute();
 					}
 
-					$_SESSION['logged_in_account_id'] = $array[0];
+					$_SESSION['loggedInAccountId'] = $array[0];
 					if (isset($_POST["persistent"])) {
-						require_once('loginfunctions.php');
+						require_once('LoginFunctions.php');
 						createNewCookie($con);
 					}
 
-					require_once('config.php');
+					require_once('Config.php');
 					$this->timeout = 3;
 					$this->message = "You have successfully logged in. You will be brought to your account's control panel";
-					$this->url = config::$portal_path . "?action=cp";
+					$this->url = Config::$portalPath . "?action=cp";
 				} else {
-					require_once('config.php');
+					require_once('Config.php');
 					$this->timeout = 3;
 					$this->message = "That password is incorrect. You will be brought back to the last page";
-					$this->url = config::$portal_path . "?action=loginform";
+					$this->url = Config::$portalPath . "?action=loginform";
 				}
 			} else {
-				require_once('config.php');
+				require_once('Config.php');
 				$this->timeout = 3;
 				$this->message = "That username is incorrect. You will be brought back to the last page";
-				$this->url = config::$portal_path . "?action=loginform";
+				$this->url = Config::$portalPath . "?action=loginform";
 			}
 			$rs->close();
 		}

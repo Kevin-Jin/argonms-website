@@ -18,24 +18,24 @@
  */
 
 if (!defined("allow entry"))
-	require_once('hackingattempt.php');
+	require_once('HackingAttempt.php');
 
-require_once("pjtbBasePage.php");
+require_once("PjtbBasePage.php");
 
 /**
  * 
  *
  * @author GoldenKevin
  */
-class pjtbRegistrationFormPage extends pjtbBasePage {
+class PjtbRegistrationFormPage extends PjtbBasePage {
 	protected function getBodyContent() {
-		require_once('config.php');
-		$portal_path = config::$portal_path;
+		require_once('Config.php');
+		$portalPath = Config::$portalPath;
 		return
 <<<EOD
 
 <div id="stylized" class="regform">
-<form action="{$portal_path}?action=regsubmit" method="post">
+<form action="{$portalPath}?action=regsubmit" method="post">
 <h1>Project Throwback Registration</h1>
 <p>Please be sure to read and act on any red prompt before hitting Register.</p>
 <div class="row">
@@ -116,8 +116,8 @@ EOD;
 	}
 
 	protected function getHtmlHeader() {
-		require_once('config.php');
-		$portal_path = config::$portal_path;
+		require_once('Config.php');
+		$portalPath = Config::$portalPath;
 		return parent::getHtmlHeader() .
 <<<EOD
 
@@ -310,7 +310,7 @@ function hintTextMatch(obj, menucontents) {
 }
 
 function checkUsername(obj) {
-	$.get("{$portal_path}?action=namecheck&name=" + obj.val(), function(resp) {
+	$.get("{$portalPath}?action=namecheck&name=" + obj.val(), function(resp) {
 		if (resp != "") { //we'll return an empty string for no conflicts
 			showHint("The username " + resp + " is already being used.", obj, "250px", true);
 			usernameOk = false;

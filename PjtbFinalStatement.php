@@ -18,16 +18,16 @@
  */
 
 if (!defined("allow entry"))
-	require_once('hackingattempt.php');
+	require_once('HackingAttempt.php');
 
-require_once("pjtbBasePage.php");
+require_once("PjtbBasePage.php");
 
 /**
  * 
  *
  * @author GoldenKevin
  */
-class pjtbFinalStatement extends pjtbBasePage {
+class PjtbFinalStatement extends PjtbBasePage {
 	protected function getBodyContent() {
 		return
 <<<EOD

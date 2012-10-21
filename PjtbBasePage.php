@@ -18,14 +18,14 @@
  */
 
 if (!defined("allow entry"))
-	require_once('hackingattempt.php');
+	require_once('HackingAttempt.php');
 
 /**
  * 
  *
  * @author GoldenKevin
  */
-abstract class pjtbBasePage {
+abstract class PjtbBasePage {
 	protected abstract function getTitle();
 
 	protected abstract function getBodyContent();
@@ -44,47 +44,47 @@ EOD;
 	}
 
 	protected function getPageHeader() {
-		require_once('config.php');
+		require_once('Config.php');
 
 		$topLevelLinks = array();
-		$topLevelLinks['Main'] = array(config::$portal_path . '?revealed', 'a', array(
-			'Rankings' => config::$portal_path . '?action=ranking',
-			'Graphs' => config::$portal_path . '?action=graph',
-			'Server status' => config::$portal_path . '?action=status',
-			'Rates' => config::$portal_path . '?action=rates'
+		$topLevelLinks['Main'] = array(Config::$portalPath . '?revealed', 'a', array(
+			'Rankings' => Config::$portalPath . '?action=ranking',
+			'Graphs' => Config::$portalPath . '?action=graph',
+			'Server status' => Config::$portalPath . '?action=status',
+			'Rates' => Config::$portalPath . '?action=rates'
 		));
-		if (isset($_SESSION['logged_in_account_id'])) {
+		if (isset($_SESSION['loggedInAccountId'])) {
 			$subLevelLinks = array(
-				'User control panel' => config::$portal_path . '?action=cp',
-				'Log out' => config::$portal_path . '?action=logout'
+				'User control panel' => Config::$portalPath . '?action=cp',
+				'Log out' => Config::$portalPath . '?action=logout'
 			);
-			if (/*is_gm*/false)
-				$subLevelLinks['Moderator Control Panel'] = config::$portal_path . '?action=gmcp';
-			if (/*is_admin*/false)
-				$subLevelLinks['Administrator Control Panel'] = config::$portal_path . '?action=acp';
+			if (/*isGm*/false)
+				$subLevelLinks['Moderator Control Panel'] = Config::$portalPath . '?action=gmcp';
+			if (/*isAdmin*/false)
+				$subLevelLinks['Administrator Control Panel'] = Config::$portalPath . '?action=acp';
 
-			$topLevelLinks['User'] = array(config::$portal_path . '?action=cp', 'b', $subLevelLinks);
+			$topLevelLinks['User'] = array(Config::$portalPath . '?action=cp', 'b', $subLevelLinks);
 		} else {
-			$topLevelLinks['User'] = array(config::$portal_path . '?action=loginform', 'b', array(
-				'Log in' => config::$portal_path . '?action=loginform',
-				'Register' => config::$portal_path . '?action=regform'
+			$topLevelLinks['User'] = array(Config::$portalPath . '?action=loginform', 'b', array(
+				'Log in' => Config::$portalPath . '?action=loginform',
+				'Register' => Config::$portalPath . '?action=regform'
 			));
 		}
 		$topLevelLinks['Forum'] = array('/forum', 'c', array());
-		$topLevelLinks['About'] = array(config::$portal_path . '?action=about', 'd', array(
-			'About' => config::$portal_path . '?action=about',
-			'Mission' => config::$portal_path . '?action=ad',
-			'Contact us' => config::$portal_path . '?action=contact',
+		$topLevelLinks['About'] = array(Config::$portalPath . '?action=about', 'd', array(
+			'About' => Config::$portalPath . '?action=about',
+			'Mission' => Config::$portalPath . '?action=ad',
+			'Contact us' => Config::$portalPath . '?action=contact',
 		));
 		$hiddenLinksDefaults = array(
-			config::$portal_path . '?action=predmca' => 'About',
-			config::$portal_path . '?action=loginsubmit' => 'User',
-			config::$portal_path . '?action=regsubmit' => 'User',
-			config::$portal_path . '?action=logout' => 'User'
+			Config::$portalPath . '?action=predmca' => 'About',
+			Config::$portalPath . '?action=loginsubmit' => 'User',
+			Config::$portalPath . '?action=regsubmit' => 'User',
+			Config::$portalPath . '?action=logout' => 'User'
 		);
 
 		$currentPage = $_SERVER['PHP_SELF'];
-		if ($currentPage == config::$portal_path)
+		if ($currentPage == Config::$portalPath)
 			if (isset($_REQUEST["action"]))
 				$currentPage .= '?action=' . $_REQUEST["action"];
 			else
