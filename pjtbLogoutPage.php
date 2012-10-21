@@ -37,6 +37,10 @@ class pjtbLogoutPage extends pjtbBasePage {
 			require_once('hackingattempt.php');
 
 		unset($_SESSION['logged_in_account_id']);
+		if (isset($_COOKIE['auth'])) {
+			require_once('loginfunctions.php');
+			destroyCookie();
+		}
 
 		require_once('config.php');
 		$this->timeout = 3;

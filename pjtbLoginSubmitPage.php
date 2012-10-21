@@ -86,6 +86,10 @@ class pjtbLoginSubmitPage extends pjtbBasePage {
 					}
 
 					$_SESSION['logged_in_account_id'] = $array[0];
+					if (isset($_POST["persistent"])) {
+						require_once('loginfunctions.php');
+						createNewCookie($con);
+					}
 
 					require_once('config.php');
 					$this->timeout = 3;
