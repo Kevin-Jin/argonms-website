@@ -17,7 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-if (!defined("allow entry"))
+if (!defined("allowEntry"))
 	require_once('HackingAttempt.php');
 
 require_once("PjtbBasePage.php");
@@ -57,7 +57,7 @@ EOD;
 			for (; $array = $rs->fetch_array(); $entries++) {
 				//MySQL string representation of dates is yyyy-MM-dd
 				//(or Y-m-d in PHP, standardized as ISO 8601)
-				$day[$entries] = new DateTime($array[0] . " " . $array[3], new DateTimeZone(Config::$timeZone));
+				$day[$entries] = new DateTime($array[0] . " " . $array[3], new DateTimeZone(Config::getInstance()->timeZone));
 				$unique[$entries] = $array[1];
 				$max[$entries] = $array[2];
 				if ($array[1] > $highestYValue)

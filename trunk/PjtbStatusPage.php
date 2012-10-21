@@ -17,7 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-if (!defined("allow entry"))
+if (!defined("allowEntry"))
 	require_once('HackingAttempt.php');
 
 require_once("PjtbBasePage.php");
@@ -31,7 +31,7 @@ class PjtbStatusPage extends PjtbBasePage {
 	protected function getBodyContent() {
 		require_once('Config.php');
 		$loginServerPort = 8484;
-		$connection = @fsockopen(Config::$loginServerIp, $loginServerPort);
+		$connection = @fsockopen(Config::getInstance()->loginServerIp, $loginServerPort);
 		if ($connection) {
 			fclose($connection);
 			$online = true;

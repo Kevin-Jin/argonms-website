@@ -17,7 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-if (!defined("allow entry"))
+if (!defined("allowEntry"))
 	require_once('HackingAttempt.php');
 
 require_once("PjtbBasePage.php");
@@ -54,7 +54,7 @@ EOD;
 
 EOD;
 require_once('Config.php');
-foreach (Config::$rates as $key=>$value)
+foreach (Config::getInstance()->rates as $key=>$value)
 	$content .= "<tr><td>{$key}</td><td>{$value['Exp']}</td><td>{$value['Meso']}</td><td>{$value['Drop']}</td></tr>";
 $content .=
 <<<EOD

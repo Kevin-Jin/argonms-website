@@ -17,7 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-if (!defined("allow entry"))
+if (!defined("allowEntry"))
 	require_once('HackingAttempt.php');
 
 require_once("PjtbLoginFormPage.php");
@@ -32,7 +32,7 @@ class PjtbTermsPage extends PjtbLoginFormPage {
 		$content = '';
 		if (isset($_SESSION['loggedInAccountId'])) {
 			require_once('Config.php');
-			$portalPath = Config::$portalPath;
+			$portalPath = Config::getInstance()->portalPath;
 			$content = "Click <a href=\"$portalPath?action=cp\">here to open your control panel.</a>";
 		} else {
 			$content = parent::getBodyContent();
@@ -86,7 +86,7 @@ EOD;
 
 	protected function getHtmlBody() {
 		require_once('Config.php');
-		$portalPath = Config::$portalPath;
+		$portalPath = Config::getInstance()->portalPath;
 
 		$body = 
 <<<EOD

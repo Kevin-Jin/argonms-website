@@ -17,7 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-if (!defined("allow entry"))
+if (!defined("allowEntry"))
 	require_once('HackingAttempt.php');
 
 /**
@@ -25,28 +25,36 @@ if (!defined("allow entry"))
  *
  * @author GoldenKevin
  */
-final class Config {
-	public static $dbHost = 'localhost';
-	public static $dbUser = 'root';
-	public static $dbPass = '';
-	public static $dbName = 'argonms';
+class Config {
+	private static $CFG_FILE = 'config.ini';
 
-	public static $rates = array(
-		"1" => array(
-			"Exp" => 1,
-			"Meso" => 1,
-			"Drop" => 1
-		)
-	);
+	public $dbHost;
+	public $dbUser;
+	public $dbPass;
+	public $dbName;
+	public $rates;
+	public $timeZone;
+	public $loginServerIp;
+	public $portalPath;
 
-	public static $timeZone = 'America/Los_Angeles';
+	private function __construct($configFile) {
+		$props = parse_ini_file($configFile, true);
+		$this->dbHost = $props['dbhost'];
+		$this->dbUser = $props['dbuser'];
+		$this->dbPass = $props['dbpass'];
+		$this->dbName = $props['dbname'];
+		$this->rates = $props['rates'];
+		$this->timeZone = $props['timezone'];
+		$this->loginServerIp = $props['loginserverip'];
+		$this->portalPath = $props['portalpath'];
+	}
 
-	public static $loginServerIp = 'localhost';
+	private static $instance;
 
-	public static $portalPath = '/index.php';
-
-	private function __construct() {
-		//uninstantiable...
+	public static function getInstance() {
+		if (self::$instance == null)
+			self::$instance = new Config(self::$CFG_FILE);
+		return self::$instance;
 	}
 }
 ?>

@@ -17,7 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-if (!defined("allow entry"))
+if (!defined("allowEntry"))
 	require_once('HackingAttempt.php');
 
 require_once("PjtbBasePage.php");
@@ -94,18 +94,18 @@ class PjtbLoginSubmitPage extends PjtbBasePage {
 					require_once('Config.php');
 					$this->timeout = 3;
 					$this->message = "You have successfully logged in. You will be brought to your account's control panel";
-					$this->url = Config::$portalPath . "?action=cp";
+					$this->url = Config::getInstance()->portalPath . "?action=cp";
 				} else {
 					require_once('Config.php');
 					$this->timeout = 3;
 					$this->message = "That password is incorrect. You will be brought back to the last page";
-					$this->url = Config::$portalPath . "?action=loginform";
+					$this->url = Config::getInstance()->portalPath . "?action=loginform";
 				}
 			} else {
 				require_once('Config.php');
 				$this->timeout = 3;
 				$this->message = "That username is incorrect. You will be brought back to the last page";
-				$this->url = Config::$portalPath . "?action=loginform";
+				$this->url = Config::getInstance()->portalPath . "?action=loginform";
 			}
 			$rs->close();
 		}
