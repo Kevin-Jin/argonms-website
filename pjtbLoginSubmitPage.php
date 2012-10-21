@@ -48,7 +48,7 @@ class pjtbLoginSubmitPage extends pjtbBasePage {
 				$hasSalt = isset($array[2]);
 				switch (strlen($array[1])) {
 					case 20: //sha-1 (160 bits = 20 bytes)
-						$correct = $hasSalt && checkSaltedSha1Hash($array[1], $_POST["password"], $array[2]) || !$hasSalt && checkSha1Hash($array[1], $pwd);
+						$correct = $hasSalt && checkSaltedSha1Hash($array[1], $_POST["password"], $array[2]) || !$hasSalt && checkSha1Hash($array[1], $_POST["password"]);
 						//only update to SHA512 w/ salt if we are sure the given password matches the SHA1 hash
 						$hashUpdate = $correct;
 						break;
@@ -84,6 +84,8 @@ class pjtbLoginSubmitPage extends pjtbBasePage {
 						$ps->bind_param('ssi', $passhash, $salt, $array[0]);
 						$ps->execute();
 					}
+					$_SESSION['logged_in_account_id'] = $array[0];
+
 					require('config.php');
 					$this->timeout = 3;
 					$this->message = "You have successfully logged in. You will be brought to your account's control panel";
@@ -100,6 +102,7 @@ class pjtbLoginSubmitPage extends pjtbBasePage {
 				$this->message = "That username is incorrect. You will be brought back to the last page";
 				$this->url = $portal_path . "?action=loginform";
 			}
+			$rs->close();
 		}
 		$ps->close();
 		$con->close();

@@ -29,7 +29,15 @@ require("pjtbLoginFormPage.php");
  */
 class pjtbTermsPage extends pjtbLoginFormPage {
 	protected function getBodyContent() {
-		return parent::getBodyContent() . "\n<p>You may navigate the site through the bar above.</p>";
+		$content = '';
+		if (isset($_SESSION['logged_in_account_id'])) {
+			require('config.php');
+			$content = "Click <a href=\"$portal_path?action=cp\">here to open your control panel.</a>";
+		} else {
+			$content = parent::getBodyContent();
+		}
+		$content .= "\n<p>You may navigate the site through the bar above.</p>";
+		return $content;
 	}
 
 	protected function getHtmlHeader() {

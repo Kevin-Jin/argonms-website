@@ -65,6 +65,7 @@ EOD;
 				if ($array[2] > $highestYValue)
 					$highestYValue = $array[2];
 			}
+			$rs->close();
 		}
 		$ps->close();
 		$con->close();

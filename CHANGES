@@ -148,6 +148,19 @@
 	* Revised pjtbAboutPage and pjtbAdPage and added their links to the menu.
 	* Encoding of pages switched from us-ascii to utf-8.
 
+2012-10-21  GoldenKevin  (revison 17)
+
+	* Call mysqli_result::close() after done using every mysqli_result returned
+	by mysqli_statement::get_result().
+	* pjtbLoginSubmitPage and pjtbRegistrationSubmitPage now default the menu to
+	the User tab.
+	* Revised pjtbFinalStatement.
+	* Change User tab menu entries and front page content when user is logged
+	in.
+	* Users can now log out.
+	* Fixed bug when trying to log in to an account with an unsalted SHA-1
+	password hash.
+
 Copyright 2012 GoldenKevin
 Copying and distribution of this file, with or without modification, are
 permitted provided the copyright notice and this notice are preserved.
