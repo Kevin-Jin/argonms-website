@@ -148,7 +148,7 @@
 	* Revised pjtbAboutPage and pjtbAdPage and added their links to the menu.
 	* Encoding of pages switched from us-ascii to utf-8.
 
-2012-10-21  GoldenKevin  (revison 17)
+2012-10-21  GoldenKevin  (revision 17)
 
 	* Call mysqli_result::close() after done using every mysqli_result returned
 	by mysqli_statement::get_result().
@@ -160,6 +160,16 @@
 	* Users can now log out.
 	* Fixed bug when trying to log in to an account with an unsalted SHA-1
 	password hash.
+
+2012-10-21  GoldenKevin  (revision 18)
+
+	* config is now a static class so using require_once on it will make the
+	variables global. $timezone now is a string rather than a DateTimeZone
+	instance, so a DateTimeZone now has to be instantiated everywhere $timezone
+	is used.
+	* All usages of require replaced with require_once to fix redeclared
+	function warnings.
+	* Forbid access to user control panel if no user is logged in.
 
 Copyright 2012 GoldenKevin
 Copying and distribution of this file, with or without modification, are

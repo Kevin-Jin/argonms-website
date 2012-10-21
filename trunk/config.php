@@ -18,30 +18,35 @@
  */
 
 if (!defined("allow entry"))
-	require('hackingattempt.php');
+	require_once('hackingattempt.php');
 
 /**
  * 
  *
  * @author GoldenKevin
  */
+final class config {
+	public static $dbhost = 'localhost';
+	public static $dbuser = 'root';
+	public static $dbpass = '';
+	public static $dbname = 'argonms';
 
-$dbhost = 'localhost';
-$dbuser = 'root';
-$dbpass = '';
-$dbname = 'argonms';
+	public static $rates = array(
+		"1" => array(
+			"Exp" => 1,
+			"Meso" => 1,
+			"Drop" => 1
+		)
+	);
 
-$rates = array(
-	"1" => array(
-		"Exp" => 1,
-		"Meso" => 1,
-		"Drop" => 1
-	)
-);
+	public static $timezone = 'America/Los_Angeles';
 
-$timezone = new DateTimeZone('America/Los_Angeles');
+	public static $login_server_ip = 'localhost';
 
-$login_server_ip = 'localhost';
+	public static $portal_path = '/index.php';
 
-$portal_path = '/index.php';
+	private function __construct() {
+		//uninstantiable...
+	}
+}
 ?>

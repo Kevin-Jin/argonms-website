@@ -18,7 +18,7 @@
  */
 
 if (!defined("allow entry"))
-	require('hackingattempt.php');
+	require_once('hackingattempt.php');
 
 /**
  * 
@@ -44,47 +44,47 @@ EOD;
 	}
 
 	protected function getPageHeader() {
-		require('config.php');
+		require_once('config.php');
 
 		$topLevelLinks = array();
-		$topLevelLinks['Main'] = array($portal_path . '?revealed', 'a', array(
-			'Rankings' => $portal_path . '?action=ranking',
-			'Graphs' => $portal_path . '?action=graph',
-			'Server status' => $portal_path . '?action=status',
-			'Rates' => $portal_path . '?action=rates'
+		$topLevelLinks['Main'] = array(config::$portal_path . '?revealed', 'a', array(
+			'Rankings' => config::$portal_path . '?action=ranking',
+			'Graphs' => config::$portal_path . '?action=graph',
+			'Server status' => config::$portal_path . '?action=status',
+			'Rates' => config::$portal_path . '?action=rates'
 		));
 		if (isset($_SESSION['logged_in_account_id'])) {
 			$subLevelLinks = array(
-				'User control panel' => $portal_path . '?action=cp',
-				'Log out' => $portal_path . '?action=logout'
+				'User control panel' => config::$portal_path . '?action=cp',
+				'Log out' => config::$portal_path . '?action=logout'
 			);
 			if (/*is_gm*/false)
-				$subLevelLinks['Moderator Control Panel'] = $portal_path . '?action=gmcp';
+				$subLevelLinks['Moderator Control Panel'] = config::$portal_path . '?action=gmcp';
 			if (/*is_admin*/false)
-				$subLevelLinks['Administrator Control Panel'] = $portal_path . '?action=acp';
+				$subLevelLinks['Administrator Control Panel'] = config::$portal_path . '?action=acp';
 
-			$topLevelLinks['User'] = array($portal_path . '?action=cp', 'b', $subLevelLinks);
+			$topLevelLinks['User'] = array(config::$portal_path . '?action=cp', 'b', $subLevelLinks);
 		} else {
-			$topLevelLinks['User'] = array($portal_path . '?action=loginform', 'b', array(
-				'Log in' => $portal_path . '?action=loginform',
-				'Register' => $portal_path . '?action=regform'
+			$topLevelLinks['User'] = array(config::$portal_path . '?action=loginform', 'b', array(
+				'Log in' => config::$portal_path . '?action=loginform',
+				'Register' => config::$portal_path . '?action=regform'
 			));
 		}
 		$topLevelLinks['Forum'] = array('/forum', 'c', array());
-		$topLevelLinks['About'] = array($portal_path . '?action=about', 'd', array(
-			'About' => $portal_path . '?action=about',
-			'Mission' => $portal_path . '?action=ad',
-			'Contact us' => $portal_path . '?action=contact',
+		$topLevelLinks['About'] = array(config::$portal_path . '?action=about', 'd', array(
+			'About' => config::$portal_path . '?action=about',
+			'Mission' => config::$portal_path . '?action=ad',
+			'Contact us' => config::$portal_path . '?action=contact',
 		));
 		$hiddenLinksDefaults = array(
-			$portal_path . '?action=predmca' => 'About',
-			$portal_path . '?action=loginsubmit' => 'User',
-			$portal_path . '?action=regsubmit' => 'User',
-			$portal_path . '?action=logout' => 'User'
+			config::$portal_path . '?action=predmca' => 'About',
+			config::$portal_path . '?action=loginsubmit' => 'User',
+			config::$portal_path . '?action=regsubmit' => 'User',
+			config::$portal_path . '?action=logout' => 'User'
 		);
 
 		$currentPage = $_SERVER['PHP_SELF'];
-		if ($currentPage == $portal_path)
+		if ($currentPage == config::$portal_path)
 			if (isset($_REQUEST["action"]))
 				$currentPage .= '?action=' . $_REQUEST["action"];
 			else

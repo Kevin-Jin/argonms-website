@@ -18,7 +18,7 @@
  */
 
 if (!defined("allow entry"))
-	require('hackingattempt.php');
+	require_once('hackingattempt.php');
 
 /**
  * 
@@ -29,7 +29,7 @@ class pjtbNameCheckPage {
 	public final function getHtml() {
 		$name = "";
 
-		require('databasemanager.php');
+		require_once('databasemanager.php');
 		$con = makeDatabaseConnection();
 		$ps = $con->prepare("SELECT COUNT(*) FROM `accounts` WHERE `name` = ?");
 		$ps->bind_param('s', $_GET["name"]);

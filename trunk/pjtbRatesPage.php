@@ -18,9 +18,9 @@
  */
 
 if (!defined("allow entry"))
-	require('hackingattempt.php');
+	require_once('hackingattempt.php');
 
-require("pjtbBasePage.php");
+require_once("pjtbBasePage.php");
 
 /**
  * 
@@ -53,8 +53,8 @@ EOD;
 <tr><td>World</td><td>Exp Rate</td><td>Meso Rate</td><td>Drop Rate</td></tr>
 
 EOD;
-require('config.php');
-foreach ($rates as $key=>$value)
+require_once('config.php');
+foreach (config::$rates as $key=>$value)
 	$content .= "<tr><td>{$key}</td><td>{$value['Exp']}</td><td>{$value['Meso']}</td><td>{$value['Drop']}</td></tr>";
 $content .=
 <<<EOD

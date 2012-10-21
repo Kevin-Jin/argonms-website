@@ -18,7 +18,7 @@
  */
 
 if (!defined("allow entry"))
-	require('hackingattempt.php');
+	require_once('hackingattempt.php');
 
 /**
  * 
@@ -27,7 +27,7 @@ if (!defined("allow entry"))
  */
 
 function makeDatabaseConnection() {
-	require('config.php');
-	return new mysqli('p:'.$dbhost, $dbuser, $dbpass, $dbname);
+	require_once('config.php');
+	return new mysqli('p:' . config::$dbhost, config::$dbuser, config::$dbpass, config::$dbname);
 }
 ?>

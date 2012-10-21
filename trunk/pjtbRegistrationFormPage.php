@@ -18,9 +18,9 @@
  */
 
 if (!defined("allow entry"))
-	require('hackingattempt.php');
+	require_once('hackingattempt.php');
 
-require("pjtbBasePage.php");
+require_once("pjtbBasePage.php");
 
 /**
  * 
@@ -29,7 +29,8 @@ require("pjtbBasePage.php");
  */
 class pjtbRegistrationFormPage extends pjtbBasePage {
 	protected function getBodyContent() {
-		require('config.php');
+		require_once('config.php');
+		$portal_path = config::$portal_path;
 		return
 <<<EOD
 
@@ -115,7 +116,8 @@ EOD;
 	}
 
 	protected function getHtmlHeader() {
-		require('config.php');
+		require_once('config.php');
+		$portal_path = config::$portal_path;
 		return parent::getHtmlHeader() .
 <<<EOD
 

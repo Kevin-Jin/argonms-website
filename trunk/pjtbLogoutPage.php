@@ -18,9 +18,9 @@
  */
 
 if (!defined("allow entry"))
-	require('hackingattempt.php');
+	require_once('hackingattempt.php');
 
-require("pjtbBasePage.php");
+require_once("pjtbBasePage.php");
 
 /**
  * 
@@ -34,14 +34,14 @@ class pjtbLogoutPage extends pjtbBasePage {
 
 	public function __construct() {
 		if (!isset($_SESSION['logged_in_account_id']))
-			require('hackingattempt.php');
+			require_once('hackingattempt.php');
 
 		unset($_SESSION['logged_in_account_id']);
 
-		require('config.php');
+		require_once('config.php');
 		$this->timeout = 3;
 		$this->message = "You have been logged out. You will be brought to the front page";
-		$this->url = $portal_path . "?revealed";
+		$this->url = config::$portal_path . "?revealed";
 	}
 
 	protected function getHtmlHeader() {

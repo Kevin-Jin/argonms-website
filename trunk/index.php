@@ -30,11 +30,11 @@ if (!isset($_SESSION['visited'])) {
 	//increment hit counter
 	$_SESSION['visited'] = true;
 
-	require('databasemanager.php');
+	require_once('databasemanager.php');
 	$con = makeDatabaseConnection();
 
-	require('config.php');
-	$now = new DateTime(NULL, $timezone);
+	require_once('config.php');
+	$now = new DateTime(NULL, new DateTimeZone(config::$timezone));
 	$now = $now->format("Y-m-d");
 	$ps = $con->prepare("INSERT INTO `websitestats` (`day`,`uniquesessions`) VALUES (?,1) ON DUPLICATE KEY UPDATE `uniquesessions` = `uniquesessions` + 1");
 	$ps->bind_param('s', $now);
@@ -44,8 +44,6 @@ if (!isset($_SESSION['visited'])) {
 	$con->close();
 }
 
-$file;
-$class;
 if (!isset($_REQUEST["action"])) {
 	$file = "pjtbTermsPage.php";
 	$class = "pjtbTermsPage";
@@ -72,11 +70,11 @@ if (!isset($_REQUEST["action"])) {
 		$file = $actionArray[$_REQUEST["action"]][0];
 		$class = $actionArray[$_REQUEST["action"]][1];
 	} else {
-		require('hackingattempt.php');
+		require_once('hackingattempt.php');
 	}
 }
 
-require($file);
+require_once($file);
 $instance = new $class();
 echo $instance->getHtml();
 ?>

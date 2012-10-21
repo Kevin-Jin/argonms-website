@@ -18,9 +18,9 @@
  */
 
 if (!defined("allow entry"))
-	require('hackingattempt.php');
+	require_once('hackingattempt.php');
 
-require("pjtbBasePage.php");
+require_once("pjtbBasePage.php");
 
 /**
  * 
@@ -29,9 +29,9 @@ require("pjtbBasePage.php");
  */
 class pjtbStatusPage extends pjtbBasePage {
 	protected function getBodyContent() {
-		require('config.php');
+		require_once('config.php');
 		$login_server_port = 8484;
-		$connection = @fsockopen($login_server_ip, $login_server_port);
+		$connection = @fsockopen(config::$login_server_ip, $login_server_port);
 		if ($connection) {
 			fclose($connection);
 			$online = true;
@@ -40,7 +40,7 @@ class pjtbStatusPage extends pjtbBasePage {
 		}
 		$onlineCount = 0;
 		if ($online) {
-			require('databasemanager.php');
+			require_once('databasemanager.php');
 			$con = makeDatabaseConnection();
 			$ps = $con->prepare("SELECT COUNT(*) FROM `accounts` WHERE `connected` <> 0");
 			if ($ps->execute()) {
