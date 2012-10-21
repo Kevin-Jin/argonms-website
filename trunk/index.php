@@ -43,6 +43,10 @@ if (!isset($_SESSION['visited'])) {
 
 	$con->close();
 }
+if (!isset($_SESSION['logged_in_account_id']) && isset($_COOKIE['auth'])) {
+	require_once('loginfunctions.php');
+	loadCookie();
+}
 
 if (!isset($_REQUEST["action"])) {
 	$file = "pjtbTermsPage.php";
