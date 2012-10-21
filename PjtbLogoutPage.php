@@ -17,7 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-if (!defined("allow entry"))
+if (!defined("allowEntry"))
 	require_once('HackingAttempt.php');
 
 require_once("PjtbBasePage.php");
@@ -45,7 +45,7 @@ class PjtbLogoutPage extends PjtbBasePage {
 		require_once('Config.php');
 		$this->timeout = 3;
 		$this->message = "You have been logged out. You will be brought to the front page";
-		$this->url = Config::$portalPath . "?revealed";
+		$this->url = Config::getInstance()->portalPath . "?revealed";
 	}
 
 	protected function getHtmlHeader() {

@@ -17,7 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-if (!defined("allow entry"))
+if (!defined("allowEntry"))
 	require_once('HackingAttempt.php');
 
 /**
@@ -47,44 +47,44 @@ EOD;
 		require_once('Config.php');
 
 		$topLevelLinks = array();
-		$topLevelLinks['Main'] = array(Config::$portalPath . '?revealed', 'a', array(
-			'Rankings' => Config::$portalPath . '?action=ranking',
-			'Graphs' => Config::$portalPath . '?action=graph',
-			'Server status' => Config::$portalPath . '?action=status',
-			'Rates' => Config::$portalPath . '?action=rates'
+		$topLevelLinks['Main'] = array(Config::getInstance()->portalPath . '?revealed', 'a', array(
+			'Rankings' => Config::getInstance()->portalPath . '?action=ranking',
+			'Graphs' => Config::getInstance()->portalPath . '?action=graph',
+			'Server status' => Config::getInstance()->portalPath . '?action=status',
+			'Rates' => Config::getInstance()->portalPath . '?action=rates'
 		));
 		if (isset($_SESSION['loggedInAccountId'])) {
 			$subLevelLinks = array(
-				'User control panel' => Config::$portalPath . '?action=cp',
-				'Log out' => Config::$portalPath . '?action=logout'
+				'User control panel' => Config::getInstance()->portalPath . '?action=cp',
+				'Log out' => Config::getInstance()->portalPath . '?action=logout'
 			);
 			if (/*isGm*/false)
-				$subLevelLinks['Moderator Control Panel'] = Config::$portalPath . '?action=gmcp';
+				$subLevelLinks['Moderator Control Panel'] = Config::getInstance()->portalPath . '?action=gmcp';
 			if (/*isAdmin*/false)
-				$subLevelLinks['Administrator Control Panel'] = Config::$portalPath . '?action=acp';
+				$subLevelLinks['Administrator Control Panel'] = Config::getInstance()->portalPath . '?action=acp';
 
-			$topLevelLinks['User'] = array(Config::$portalPath . '?action=cp', 'b', $subLevelLinks);
+			$topLevelLinks['User'] = array(Config::getInstance()->portalPath . '?action=cp', 'b', $subLevelLinks);
 		} else {
-			$topLevelLinks['User'] = array(Config::$portalPath . '?action=loginform', 'b', array(
-				'Log in' => Config::$portalPath . '?action=loginform',
-				'Register' => Config::$portalPath . '?action=regform'
+			$topLevelLinks['User'] = array(Config::getInstance()->portalPath . '?action=loginform', 'b', array(
+				'Log in' => Config::getInstance()->portalPath . '?action=loginform',
+				'Register' => Config::getInstance()->portalPath . '?action=regform'
 			));
 		}
 		$topLevelLinks['Forum'] = array('/forum', 'c', array());
-		$topLevelLinks['About'] = array(Config::$portalPath . '?action=about', 'd', array(
-			'About' => Config::$portalPath . '?action=about',
-			'Mission' => Config::$portalPath . '?action=ad',
-			'Contact us' => Config::$portalPath . '?action=contact',
+		$topLevelLinks['About'] = array(Config::getInstance()->portalPath . '?action=about', 'd', array(
+			'About' => Config::getInstance()->portalPath . '?action=about',
+			'Mission' => Config::getInstance()->portalPath . '?action=ad',
+			'Contact us' => Config::getInstance()->portalPath . '?action=contact',
 		));
 		$hiddenLinksDefaults = array(
-			Config::$portalPath . '?action=predmca' => 'About',
-			Config::$portalPath . '?action=loginsubmit' => 'User',
-			Config::$portalPath . '?action=regsubmit' => 'User',
-			Config::$portalPath . '?action=logout' => 'User'
+			Config::getInstance()->portalPath . '?action=predmca' => 'About',
+			Config::getInstance()->portalPath . '?action=loginsubmit' => 'User',
+			Config::getInstance()->portalPath . '?action=regsubmit' => 'User',
+			Config::getInstance()->portalPath . '?action=logout' => 'User'
 		);
 
 		$currentPage = $_SERVER['PHP_SELF'];
-		if ($currentPage == Config::$portalPath)
+		if ($currentPage == Config::getInstance()->portalPath)
 			if (isset($_REQUEST["action"]))
 				$currentPage .= '?action=' . $_REQUEST["action"];
 			else

@@ -17,7 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-if (!defined("allow entry"))
+if (!defined("allowEntry"))
 	require_once('HackingAttempt.php');
 
 /**
@@ -28,6 +28,6 @@ if (!defined("allow entry"))
 
 function makeDatabaseConnection() {
 	require_once('Config.php');
-	return new mysqli('p:' . Config::$dbHost, Config::$dbUser, Config::$dbPass, Config::$dbName);
+	return new mysqli('p:' . Config::getInstance()->dbHost, Config::getInstance()->dbUser, Config::getInstance()->dbPass, Config::getInstance()->dbName);
 }
 ?>

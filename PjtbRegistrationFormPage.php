@@ -17,7 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-if (!defined("allow entry"))
+if (!defined("allowEntry"))
 	require_once('HackingAttempt.php');
 
 require_once("PjtbBasePage.php");
@@ -30,7 +30,7 @@ require_once("PjtbBasePage.php");
 class PjtbRegistrationFormPage extends PjtbBasePage {
 	protected function getBodyContent() {
 		require_once('Config.php');
-		$portalPath = Config::$portalPath;
+		$portalPath = Config::getInstance()->portalPath;
 		return
 <<<EOD
 
@@ -117,7 +117,7 @@ EOD;
 
 	protected function getHtmlHeader() {
 		require_once('Config.php');
-		$portalPath = Config::$portalPath;
+		$portalPath = Config::getInstance()->portalPath;
 		return parent::getHtmlHeader() .
 <<<EOD
 

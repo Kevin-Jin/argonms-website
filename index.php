@@ -17,7 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-define("allow entry", 1);
+define("allowEntry", true);
 
 /**
  * 
@@ -34,7 +34,7 @@ if (!isset($_SESSION['visited'])) {
 	$con = makeDatabaseConnection();
 
 	require_once('Config.php');
-	$now = new DateTime(NULL, new DateTimeZone(Config::$timeZone));
+	$now = new DateTime(NULL, new DateTimeZone(Config::getInstance()->timeZone));
 	$now = $now->format("Y-m-d");
 	$ps = $con->prepare("INSERT INTO `websitestats` (`day`,`uniquesessions`) VALUES (?,1) ON DUPLICATE KEY UPDATE `uniquesessions` = `uniquesessions` + 1");
 	$ps->bind_param('s', $now);
