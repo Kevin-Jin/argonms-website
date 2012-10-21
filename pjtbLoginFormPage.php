@@ -18,9 +18,9 @@
  */
 
 if (!defined("allow entry"))
-	require('hackingattempt.php');
+	require_once('hackingattempt.php');
 
-require("pjtbBasePage.php");
+require_once("pjtbBasePage.php");
 
 /**
  * 
@@ -29,7 +29,8 @@ require("pjtbBasePage.php");
  */
 class pjtbLoginFormPage extends pjtbBasePage {
 	protected function getBodyContent() {
-		require('config.php');
+		require_once('config.php');
+		$portal_path = config::$portal_path;
 		return
 <<<EOD
 <form id="loginform" action="{$portal_path}?action=loginsubmit" method="post">

@@ -18,9 +18,9 @@
  */
 
 if (!defined("allow entry"))
-	require('hackingattempt.php');
+	require_once('hackingattempt.php');
 
-require("pjtbBasePage.php");
+require_once("pjtbBasePage.php");
 
 /**
  * 
@@ -34,44 +34,44 @@ class pjtbRegistrationSubmitPage extends pjtbBasePage {
 
 	public function __construct() {
 		if (!isset($_POST["username"]) || !isset($_POST["password"]))
-			require('hackingattempt.php');
+			require_once('hackingattempt.php');
 
 		//client side JS should've checked these, but just in case there was a glitch, or js is disabled...
 		if (!is_numeric($_POST["birthyear"])) {
-			require('config.php');
+			require_once('config.php');
 			$this->timeout = 3;
 			$this->message = "Birthyear must be a number! You will be brought back to the last page";
-			$this->url = $portal_path . "?action=regform";
+			$this->url = config::$portal_path . "?action=regform";
 		} else if (strlen($_POST["password"]) < 5) {
-			require('config.php');
+			require_once('config.php');
 			$this->timeout = 3;
 			$this->message = "Password is too short. Your password must be at between 5-12 characters long. Please try another.<br />You will be brought back to the last page";
-			$this->url = $portal_path . "?action=regform";
+			$this->url = config::$portal_path . "?action=regform";
 		} else if (strlen($_POST["password"]) > 12) {
-			require('config.php');
+			require_once('config.php');
 			$this->timeout = 3;
 			$this->message = "Password is too long. Your password must be at between 5-12 characters long. Please try another.<br />You will be brought back to the last page";
-			$this->url = $portal_path . "?action=regform";
+			$this->url = config::$portal_path . "?action=regform";
 		} else if (strlen($_POST["username"]) < 4) {
-			require('config.php');
+			require_once('config.php');
 			$this->timeout = 3;
 			$this->message = "Username is too short. Your username must be between 4-12 characters long. Please try another.<br />You will be brought back to the last page";
-			$this->url = $portal_path . "?action=regform";
+			$this->url = config::$portal_path . "?action=regform";
 		} else if (strlen($_POST["username"]) > 12) {
-			require('config.php');
+			require_once('config.php');
 			$this->timeout = 3;
 			$this->message = "Username is too long. Your username must be between 4-12 characters long. Please try another.<br />You will be brought back to the last page";
-			$this->url = $portal_path . "?action=regform";
+			$this->url = config::$portal_path . "?action=regform";
 		} else if (!preg_match('/^[A-Za-z0-9_]+$/', $_POST["username"])) {
 			//Surprisingly enough, the client does not give "You have entered an incorrect LOGIN ID" for any
 			//names with at least one non-alphanumeric character (and underscore), except for period and at sign.
 			//But, let's just limit them to alphanumeric and underscore anyway.
-			require('config.php');
+			require_once('config.php');
 			$this->timeout = 3;
 			$this->message = "Username must only consist of the characters a-z (lowercase letters), A-Z (uppercase letters), 0-9 (numbers), and _ (underscore). Please try another.<br />You will be brought back to the last page";
-			$this->url = $portal_path . "?action=regform";
+			$this->url = config::$portal_path . "?action=regform";
 		} else {
-			require('databasemanager.php');
+			require_once('databasemanager.php');
 			$con = makeDatabaseConnection();
 
 			$alreadyexists = false;
@@ -84,12 +84,12 @@ class pjtbRegistrationSubmitPage extends pjtbBasePage {
 			$ps->close();
 
 			if ($alreadyexists) {
-				require('config.php');
+				require_once('config.php');
 				$this->timeout = 3;
 				$this->message = "That username is already being used. Please try another.<br />You will be brought back to the last page";
-				$this->url = $portal_path . "?action=regform";
+				$this->url = config::$portal_path . "?action=regform";
 			} else {
-				require('hashfunctions.php');
+				require_once('hashfunctions.php');
 				$salt = makeSalt();
 				$passhash = makeSaltedSha512Hash($_POST["password"], $salt);
 
@@ -101,8 +101,8 @@ class pjtbRegistrationSubmitPage extends pjtbBasePage {
 				$_SESSION['logged_in_account_id'] = $con->insert_id;
 				$ps->close();
 
-				require('config.php');
-				$now = new DateTime(NULL, $timezone);
+				require_once('config.php');
+				$now = new DateTime(NULL, new DateTimeZone(config::$timezone));
 				$now = $now->format("Y-m-d");
 				$ps = $con->prepare("INSERT INTO `websitestats` (`day`,`registrations`) VALUES (?,1) ON DUPLICATE KEY UPDATE `registrations` = `registrations` + 1");
 				$ps->bind_param('s', $now);
@@ -111,7 +111,7 @@ class pjtbRegistrationSubmitPage extends pjtbBasePage {
 
 				$this->timeout = 3;
 				$this->message = "User {$_POST["username"]} registered successfully. You will be brought to your account's control panel";
-				$this->url = $portal_path . "?action=cp";
+				$this->url = config::$portal_path . "?action=cp";
 			}
 			$con->close();
 		}

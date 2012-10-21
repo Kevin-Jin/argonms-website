@@ -18,9 +18,9 @@
  */
 
 if (!defined("allow entry"))
-	require('hackingattempt.php');
+	require_once('hackingattempt.php');
 
-require("pjtbLoginFormPage.php");
+require_once("pjtbLoginFormPage.php");
 
 /**
  * 
@@ -31,7 +31,8 @@ class pjtbTermsPage extends pjtbLoginFormPage {
 	protected function getBodyContent() {
 		$content = '';
 		if (isset($_SESSION['logged_in_account_id'])) {
-			require('config.php');
+			require_once('config.php');
+			$portal_path = config::$portal_path;
 			$content = "Click <a href=\"$portal_path?action=cp\">here to open your control panel.</a>";
 		} else {
 			$content = parent::getBodyContent();
@@ -84,7 +85,8 @@ EOD;
 	}
 
 	protected function getHtmlBody() {
-		require('config.php');
+		require_once('config.php');
+		$portal_path = config::$portal_path;
 
 		$body = 
 <<<EOD

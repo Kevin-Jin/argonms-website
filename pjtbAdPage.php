@@ -18,9 +18,9 @@
  */
 
 if (!defined("allow entry"))
-	require('hackingattempt.php');
+	require_once('hackingattempt.php');
 
-require("pjtbBasePage.php");
+require_once("pjtbBasePage.php");
 
 /**
  * 

@@ -18,9 +18,9 @@
  */
 
 if (!defined("allow entry"))
-	require('hackingattempt.php');
+	require_once('hackingattempt.php');
 
-require("pjtbBasePage.php");
+require_once("pjtbBasePage.php");
 
 /**
  * 
@@ -28,6 +28,11 @@ require("pjtbBasePage.php");
  * @author GoldenKevin
  */
 class pjtbUserControlPanel extends pjtbBasePage {
+	public function __construct() {
+		if (!isset($_SESSION['logged_in_account_id']))
+			require_once('hackingattempt.php');
+	}
+
 	protected function getBodyContent() {
 		return
 <<<EOD

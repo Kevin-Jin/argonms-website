@@ -18,9 +18,9 @@
  */
 
 if (!defined("allow entry"))
-	require('hackingattempt.php');
+	require_once('hackingattempt.php');
 
-require("pjtbBasePage.php");
+require_once("pjtbBasePage.php");
 
 /**
  * 
@@ -50,7 +50,7 @@ EOD;
 		$min = 1;
 		$max = 10;
 		$content = "<table id=\"ranking\">\n<tr><td>Position</td><td>Name</td><td>World</td><td>Job</td><td>Level</td><td>Exp</td></tr>\n";
-		require('databasemanager.php');
+		require_once('databasemanager.php');
 		$con = makeDatabaseConnection();
 		$ps = $con->prepare("CALL fetchranks('overall', null, ?, ?)");
 		$ps->bind_param('dd', $min, $max);

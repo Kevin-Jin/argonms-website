@@ -18,9 +18,9 @@
  */
 
 if (!defined("allow entry"))
-	require('hackingattempt.php');
+	require_once('hackingattempt.php');
 
-require("pjtbBasePage.php");
+require_once("pjtbBasePage.php");
 
 /**
  * 
@@ -34,16 +34,16 @@ class pjtbLoginSubmitPage extends pjtbBasePage {
 
 	public function __construct() {
 		if (!isset($_POST["username"]) || !isset($_POST["password"]))
-			require('hackingattempt.php');
+			require_once('hackingattempt.php');
 
-		require('databasemanager.php');
+		require_once('databasemanager.php');
 		$con = makeDatabaseConnection();
 		$ps = $con->prepare("SELECT `id`,`password`,`salt` FROM `accounts` WHERE `name` = ?");
 		$ps->bind_param('s', $_POST["username"]);
 		if ($ps->execute()) {
 			$rs = $ps->get_result();
 			if ($array = $rs->fetch_array()) {
-				require('hashfunctions.php');
+				require_once('hashfunctions.php');
 				$correct = false;
 				$hasSalt = isset($array[2]);
 				switch (strlen($array[1])) {
@@ -84,23 +84,24 @@ class pjtbLoginSubmitPage extends pjtbBasePage {
 						$ps->bind_param('ssi', $passhash, $salt, $array[0]);
 						$ps->execute();
 					}
+
 					$_SESSION['logged_in_account_id'] = $array[0];
 
-					require('config.php');
+					require_once('config.php');
 					$this->timeout = 3;
 					$this->message = "You have successfully logged in. You will be brought to your account's control panel";
-					$this->url = $portal_path . "?action=cp";
+					$this->url = config::$portal_path . "?action=cp";
 				} else {
-					require('config.php');
+					require_once('config.php');
 					$this->timeout = 3;
 					$this->message = "That password is incorrect. You will be brought back to the last page";
-					$this->url = $portal_path . "?action=loginform";
+					$this->url = config::$portal_path . "?action=loginform";
 				}
 			} else {
-				require('config.php');
+				require_once('config.php');
 				$this->timeout = 3;
 				$this->message = "That username is incorrect. You will be brought back to the last page";
-				$this->url = $portal_path . "?action=loginform";
+				$this->url = config::$portal_path . "?action=loginform";
 			}
 			$rs->close();
 		}
