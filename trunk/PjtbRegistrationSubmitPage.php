@@ -70,6 +70,11 @@ class PjtbRegistrationSubmitPage extends PjtbBasePage {
 			$this->timeout = 3;
 			$this->message = "Username must only consist of the characters a-z (lowercase letters), A-Z (uppercase letters), 0-9 (numbers), and _ (underscore). Please try another.<br />You will be brought back to the last page";
 			$this->url = Config::getInstance()->portalPath . "?action=regform";
+		} else if (!self::emailValid($_POST["email"])) {
+			require_once('Config.php');
+			$this->timeout = 3;
+			$this->message = "Email address invalid. Please try another.<br />You will be brought back to the last page";
+			$this->url = Config::getInstance()->portalPath . "?action=regform";
 		} else {
 			require_once('DatabaseManager.php');
 			$con = makeDatabaseConnection();
@@ -95,8 +100,8 @@ class PjtbRegistrationSubmitPage extends PjtbBasePage {
 
 				$birthday = $_POST["birthyear"] * 10000 + intval($_POST["birthmonth"]) * 100 + intval($_POST["birthday"]);
 
-				$ps = $con->prepare("INSERT INTO `accounts`(`name`,`password`,`salt`,`birthday`) VALUES (?,?,?,?)");
-				$ps->bind_param('sssi', $_POST["username"], $passHash, $salt, $birthday);
+				$ps = $con->prepare("INSERT INTO `accounts`(`name`,`password`,`salt`,`birthday`,`email`) VALUES (?,?,?,?,?)");
+				$ps->bind_param('sssis', $_POST["username"], $passHash, $salt, $birthday, $_POST["email"]);
 				$ps->execute();
 				$_SESSION['loggedInAccountId'] = $con->insert_id;
 				$ps->close();
@@ -115,6 +120,72 @@ class PjtbRegistrationSubmitPage extends PjtbBasePage {
 			}
 			$con->close();
 		}
+	}
+
+	private function emailValid($address) {
+		if (get_magic_quotes_gpc())  
+			$address = stripslashes($address);
+
+		if (strlen($address) > 254)
+			return false;
+		$localpart = true;
+		$quotedstring = false;
+		$escape = false;
+		for ($i = 0; $i < strlen($address); $i++) {
+			$ch = $address[$i];
+			if ($localpart) {
+				//simple cases
+				if (
+						//uppercase letters, lowercase letters, digits
+						$ch >= 'A' && $ch <= 'Z' || $ch >= 'a' && $ch <= 'z' || $ch >= '0' && $ch <= '9'
+						//!#$%&'*+-/=?^_`{|}~
+						|| $ch == '!' || $ch >= '#' && $ch <= '\'' || $ch == '*' || $ch == '+' || $ch == '-' || $ch == '/' || $ch == '=' || $ch == '?' || $ch >= '^' && $ch <= '`' || $ch >= '{' && $ch <= '~'
+						//periods are allowed if not at start of local part and are not consecutive
+						|| $ch == '.' && $i != 0 && $address[$i - 1] != '.'
+				) {
+					$escape = false; //in case ch is preceded by a backslash
+					continue;
+				}
+
+				if ($ch == '"') {
+					if (!$escape) {
+						if (!$quotedstring && $i != 0 && $address[$i - 1] != '.') //don't start quoted string if not at beginning or after a period
+							return false;
+						if ($quotedstring && $i != strlen($address) - 1 && $address[$i + 1] != '@' && $address[$i + 1] != '.') //don't end quoted string if not at end of local part or before a period
+							return false;
+						$quotedstring = !$quotedstring;
+					}
+					$escape = false; //in case ch is preceded by a backslash
+				} else if ($ch == '@') {
+					if (!$quotedstring && !$escape) {
+						if ($address[$i - 1] == '.') //periods are not allowed at end of local part
+							return false;
+						if ($i > 64 || strlen($address) - $i - 1 > 255) //local part or domain part exceeds max length
+							return false;
+						$localpart = false;
+					}
+					$escape = false; //in case ch is preceded by a backslash
+				} else if ($ch == '\\') {
+					//double consecutive backslashes means unescaped single backslash, so set escape = false if we're already escaped
+					//otherwise just set escape = true and escape the next character
+					$escape = !$escape;
+				} else if ($escape) {
+					$escape = false; //backslash only escapes one character
+				} else if (!$quotedstring) { //always allow any quoted/escaped characters
+					return false;
+				}
+			} else {
+				//uppercase letters, lowercase letters, digits, hyphen, period
+				if ($ch >= 'A' && $ch <= 'Z' || $ch >= 'a' && $ch <= 'z' || $ch >= '0' && $ch <= '9' || $ch == '-' || $ch == '.')
+					continue;
+				//TODO: handle IP address literals, hyphen restrictions at start/end
+				return false;
+			}
+		}
+		//TODO: check min lengths of local and domain parts and whether domain part has at least one period
+		if ($localpart) //no domain part
+			return false;
+		return true;
 	}
 
 	protected function getHtmlHeader() {

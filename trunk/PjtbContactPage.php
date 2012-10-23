@@ -32,6 +32,7 @@ class PjtbContactPage extends PjtbBasePage {
 		return
 <<<EOD
 <strong><em>This page is under construction!</em></strong>
+<p>If you wish to report a bug, please <a href="/forum/index.php?action=login">log in</a> or <a href="/forum/index.php?action=register">register</a> to our forum and <a href="/forum/index.php?board=7.0">visit the appropriate board</a>. Please make use of the search function before creating a new topic to see if anyone else had found the bug before you had.</p>
 <p>If you are a representative of Nexon, please read <a href="index.php?action=predmca">this statement</a>, prepared by the staff, before serving us a DMCA notice.</p>
 EOD;
 	}
