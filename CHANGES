@@ -189,6 +189,13 @@
 	This .ini file can be placed outside the www folder for increased security.
 	* "allow entry" is now "allowEntry".
 
+2012-10-23  GoldenKevin  (revision 22)
+
+	* Contact page now refers to forum board for bug reports.
+	* Removed username/password OK check on document load because there is no
+	guarantee that autofilled forms will be loaded by then.
+	* Added email address field to register form.
+
 Copyright 2012 GoldenKevin
 Copying and distribution of this file, with or without modification, are
 permitted provided the copyright notice and this notice are preserved.
