@@ -67,7 +67,8 @@ if (!isset($_REQUEST["action"])) {
 		'rates' => array('PjtbRatesPage.php', 'PjtbRatesPage'),
 		'contact' => array('PjtbContactPage.php', 'PjtbContactPage'),
 		'cp' => array('PjtbUserControlPanel.php', 'PjtbUserControlPanel'),
-		'logout' => array('PjtbLogoutPage.php', 'PjtbLogoutPage')
+		'logout' => array('PjtbLogoutPage.php', 'PjtbLogoutPage'),
+		'staff' => array('PjtbStaffPage.php', 'PjtbStaffPage')
 	);
 
 	if (array_key_exists($_REQUEST["action"], $actionArray)) {

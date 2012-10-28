@@ -37,7 +37,11 @@ class PjtbTermsPage extends PjtbLoginFormPage {
 		} else {
 			$content = parent::getBodyContent();
 		}
-		$content .= "\n<p>You may navigate the site through the bar above.</p>";
+		$content .= 
+<<<EOD
+<p>You may navigate the site through the bar above.</p>
+<p>Please <a href="http://gigatoplist.com/index.php?p=Vote&uid=1423" target="_blank">vote</a> <a href="http://www.gtop100.com/in.php?site=75338" title="Top 100 MapleStory sites" target="_blank">for</a> <a href="http://www.ultimateprivateservers.com/maple-story/index.php?a=in&u=goldenkevin">our</a> service if you like it. Increased recognition will lead to a larger community and a better in game experience!</p>
+EOD;
 		return $content;
 	}
 
