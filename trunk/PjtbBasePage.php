@@ -74,6 +74,7 @@ EOD;
 		$topLevelLinks['About'] = array(Config::getInstance()->portalPath . '?action=about', 'd', array(
 			'About' => Config::getInstance()->portalPath . '?action=about',
 			'Mission' => Config::getInstance()->portalPath . '?action=ad',
+			'Staff' => Config::getInstance()->portalPath . '?action=staff',
 			'Contact us' => Config::getInstance()->portalPath . '?action=contact',
 		));
 		$hiddenLinksDefaults = array(

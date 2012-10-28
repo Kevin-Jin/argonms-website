@@ -598,6 +598,8 @@ $(document).ready(function() {
 	$("#pwdfield").removeAttr("maxlength");
 	$("#emailfield").removeAttr("maxlength");
 
+	updateSubmitButton();
+
 	//TODO: disable paste in Opera
 	$('#unamefield, #pwdfield, #emailfield').on('cut paste', function(e) {
 		//cut may delete character count to below requirement

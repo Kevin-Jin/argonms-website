@@ -196,6 +196,14 @@
 	guarantee that autofilled forms will be loaded by then.
 	* Added email address field to register form.
 
+2012-10-28  GoldenKevin  (revision 23)
+
+	* Fixed Register button on registration page being clickable immediately on
+	page load if JavaScript is enabled.
+	* Author subtitle in PjtbAboutPage is now a signature.
+	* Added PjtbStaffPage.
+	* Added new vote links to front page.
+
 Copyright 2012 GoldenKevin
 Copying and distribution of this file, with or without modification, are
 permitted provided the copyright notice and this notice are preserved.

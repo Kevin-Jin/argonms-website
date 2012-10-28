@@ -28,11 +28,23 @@ require_once("PjtbBasePage.php");
  * @author GoldenKevin
  */
 class PjtbAboutPage extends PjtbBasePage {
+	protected function getHtmlHeader() {
+		return parent::getHtmlHeader() .
+<<<EOD
+
+<style type="text/css">
+p.signature {
+	text-align: right;
+	font-style: italic;
+}
+</style>
+EOD;
+	}
+
 	protected function getBodyContent() {
 		return
 <<<EOD
 <h1>ArgonMS</h1>
-<h4><em>This article written by GoldenKevin - sole programmer of ArgonMS and founder, administrator, manager, and moderator of Project Throwback.</em></h4>
 <p>The core of the Project Throwback service is a huge application that I've been writing for the past two years called ArgonMS. It is a new engine that I built from the ground up that consists of code from the highest quality open source MapleStory emulators cemented by my own implementations and glue code.</p>
 
 <h2>Purpose/Credits</h1>
@@ -46,6 +58,7 @@ class PjtbAboutPage extends PjtbBasePage {
 <h2>Future</h1>
 <p>I plan on releasing ArgonMS publicly as open source software when I am satisified with its progress or if I feel threatened that the project will shut down early. Once this happens, anyone is free to fork the source as they wish to add features that would not normally be in a GMS-like source. The more help I get, the faster this process will play out.</p>
 <p>If you have extensive knowledge and experience of "before Big Bang" MapleStory, please consider assisting the development team. Recalling the behavior of v0.62 MapleStory be pretty difficult as a result of the limited amount of resources we have of MapleStory's past versions. If you spot something that is not faithful to v0.62 MapleStory, or if you wish to help us in piecing together memories of the past, please contact us. We can use all the help that we can get, and getting the community more involved in our effort is one of our goals!</p>
+<p class="signature">-GoldenKevin</p>
 EOD;
 	}
 
