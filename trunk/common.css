@@ -29,6 +29,12 @@ body {
 	text-align: center;
 }
 
+.header h2 {
+	text-align: center;
+	font-style: italic;
+	font-size: 100%;
+}
+
 .buttonset {
 	text-align: center;
 }

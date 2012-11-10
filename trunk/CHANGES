@@ -204,6 +204,12 @@
 	* Added PjtbStaffPage.
 	* Added new vote links to front page.
 
+2012-11-10  GoldenKevin  (revision 24)
+
+	* PjtbGraphPage and related strings renamed to PjtbActivityPage.
+	* Graphs now fill in gaps in dates.
+	* Added a new subtitle in the heading.
+
 Copyright 2012 GoldenKevin
 Copying and distribution of this file, with or without modification, are
 permitted provided the copyright notice and this notice are preserved.
