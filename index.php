@@ -63,7 +63,7 @@ if (!isset($_REQUEST["action"])) {
 		'ad' => array('PjtbAdPage.php', 'PjtbAdPage'),
 		'ranking' => array('PjtbRankingPage.php', 'PjtbRankingPage'),
 		'status' => array('PjtbStatusPage.php', 'PjtbStatusPage'),
-		'graph' => array('PjtbGraphPage.php', 'PjtbGraphPage'),
+		'activity' => array('PjtbActivityPage.php', 'PjtbActivityPage'),
 		'rates' => array('PjtbRatesPage.php', 'PjtbRatesPage'),
 		'contact' => array('PjtbContactPage.php', 'PjtbContactPage'),
 		'cp' => array('PjtbUserControlPanel.php', 'PjtbUserControlPanel'),

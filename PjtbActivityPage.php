@@ -27,7 +27,7 @@ require_once("PjtbBasePage.php");
  *
  * @author GoldenKevin
  */
-class PjtbGraphPage extends PjtbBasePage {
+class PjtbActivityPage extends PjtbBasePage {
 	protected function getBodyContent() {
 		return
 <<<EOD
@@ -43,23 +43,32 @@ EOD;
 
 	protected function getHtmlHeader() {
 		require_once('DatabaseManager.php');
-		$day = array(); //also includes mostactivetime data with date
-		$unique = array();
-		$max = array();
+		$points = array();
 		$con = makeDatabaseConnection();
 		$ps = $con->prepare("SELECT `day`,`uniquelogins`,`maxconcurrentlogins`,`mostactivetime` FROM `dailystats` ORDER BY `day`");
-		$entries = 0;
 		$highestYValue = 0;
 		if ($ps->execute()) {
 			$rs = $ps->get_result();
 
 			require_once('Config.php');
-			for (; $array = $rs->fetch_array(); $entries++) {
+			$tz = new DateTimeZone(Config::getInstance()->timeZone);
+			for ($first = true; $array = $rs->fetch_array(); $first = false) {
+				if ($first) {
+					//fill all dates from the first date of population to today
+					//with zeros, and overwrite them with any values in the database.
+					//this is to fill in any missing dates in the graphs in case
+					//the population stayed at 0 that day.
+
+					//TODO: reset most active time for points that remain at 0
+					$period = new DatePeriod(new DateTime($array[0] . " " . $array[3], $tz), new DateInterval("P1D"), new DateTime("now", $tz));
+					foreach ($period as $dt)
+						$points[$dt->format("Ymd")] = array($dt, 0, 0);
+				}
+
 				//MySQL string representation of dates is yyyy-MM-dd
 				//(or Y-m-d in PHP, standardized as ISO 8601)
-				$day[$entries] = new DateTime($array[0] . " " . $array[3], new DateTimeZone(Config::getInstance()->timeZone));
-				$unique[$entries] = $array[1];
-				$max[$entries] = $array[2];
+				$dt = new DateTime($array[0] . " " . $array[3], $tz);
+				$points[$dt->format("Ymd")] = array($dt, $array[1], $array[2]);
 				if ($array[1] > $highestYValue)
 					$highestYValue = $array[1];
 				if ($array[2] > $highestYValue)
@@ -70,7 +79,7 @@ EOD;
 		$ps->close();
 		$con->close();
 
-		$xAxisTickInterval = max((int) ($entries / 7), 1);
+		$xAxisTickInterval = max((int) (count($points) / 7), 1);
 		$yAxisTickInterval = max((int) ($highestYValue / 10), 1);
 
 		$header = parent::getHtmlHeader();
@@ -82,11 +91,11 @@ EOD;
 // <![CDATA[
 var activeTimes = {
 EOD;
-	for ($i = 0; $i < $entries; $i++)
-		$header .= $day[$i]->format("'n/j/y':'g:i:s A T'") . ","; // 'M/d/yy':'h:mm:ss a'
-	if ($entries > 0)
-		$header = substr($header, 0, -1);
-	$header .=
+		foreach ($points as $value)
+			$header .= $value[0]->format("'n/j/y':'g:i:s A T'") . ","; // 'M/d/yy':'h:mm:ss a'
+		if (count($points) > 0)
+			$header = substr($header, 0, -1);
+		$header .=
 <<<EOD
 };
 var chart;
@@ -105,9 +114,11 @@ $(document).ready(function() {
 		subtitle: {
 			text: 'Since 
 EOD;
-	if ($entries > 0)
-		$header .= $day[0]->format("F j, Y"); //MMMM d, yyyy
-	$header .=
+		if (count($points) > 0) {
+			$first = reset($points);
+			$header .= $first[0]->format("F j, Y"); //MMMM d, yyyy
+		}
+		$header .=
 <<<EOD
 ',
 			x: -20
@@ -115,11 +126,11 @@ EOD;
 		xAxis: {
 			categories: [
 EOD;
-	for ($i = 0; $i < $entries; $i++)
-		$header .= "'" . $day[$i]->format("n/j/y") . "',"; //M/d/yy
-	if ($entries > 0)
-		$header = substr($header, 0, -1);
-	$header .=
+		foreach ($points as $value)
+			$header .= "'" . $value[0]->format("n/j/y") . "',"; //M/d/yy
+		if (count($points) > 0)
+			$header = substr($header, 0, -1);
+		$header .=
 <<<EOD
 ],
 			tickInterval: {$xAxisTickInterval}
@@ -139,12 +150,7 @@ EOD;
 			formatter: function() {
 				return '<b>' + this.x + '</b><br/>' +
 					this.series.name + ': '+ this.y + ' player(s)<br/>' +
-					
-EOD;
-	$header .= "'Most active time: ' + activeTimes[this.x]";
-	$header .=
-<<<EOD
-;
+					'Most active time: ' + activeTimes[this.x];
 			}
 		},
 		legend: {
@@ -159,22 +165,22 @@ EOD;
 			name: 'Highest Concurrent Logins',
 			data: [
 EOD;
-	for ($i = 0; $i < $entries; $i++)
-		$header .= $max[$i] . ",";
-	if ($entries > 0)
-		$header = substr($header, 0, -1);
-	$header .=
+		foreach ($points as $value)
+			$header .= $value[2] . ",";
+		if (count($points) > 0)
+			$header = substr($header, 0, -1);
+		$header .=
 <<<EOD
 ]
 		}, {
 			name: 'Unique Logins',
 			data: [
 EOD;
-	for ($i = 0; $i < $entries; $i++)
-		$header .= $unique[$i] . ",";
-	if ($entries > 0)
-		$header = substr($header, 0, -1);
-	$header .=
+		foreach ($points as $value)
+			$header .= $value[1] . ",";
+		if (count($points) > 0)
+			$header = substr($header, 0, -1);
+		$header .=
 <<<EOD
 ]
 		}]

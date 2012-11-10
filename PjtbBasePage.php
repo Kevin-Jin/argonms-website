@@ -49,7 +49,7 @@ EOD;
 		$topLevelLinks = array();
 		$topLevelLinks['Main'] = array(Config::getInstance()->portalPath . '?revealed', 'a', array(
 			'Rankings' => Config::getInstance()->portalPath . '?action=ranking',
-			'Graphs' => Config::getInstance()->portalPath . '?action=graph',
+			'Activity' => Config::getInstance()->portalPath . '?action=activity',
 			'Server status' => Config::getInstance()->portalPath . '?action=status',
 			'Rates' => Config::getInstance()->portalPath . '?action=rates'
 		));
@@ -99,6 +99,7 @@ EOD;
 <<<EOD
 <div class="header">
 <h1>Project Throwback</h1>
+<h2>A small town feel for the masses</h2>
 <ul class="droplinemenu">
 
 EOD;
