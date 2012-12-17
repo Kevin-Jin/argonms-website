@@ -38,20 +38,7 @@ class PjtbStatusPage extends PjtbBasePage {
 		} else {
 			$online = false;
 		}
-		$onlineCount = 0;
-		if ($online) {
-			require_once('DatabaseManager.php');
-			$con = makeDatabaseConnection();
-			$ps = $con->prepare("SELECT COUNT(*) FROM `accounts` WHERE `connected` <> 0");
-			if ($ps->execute()) {
-				$ps->bind_result($onlineCount);
-				$ps->fetch();
-			}
-			$ps->close();
-			$con->close();
-		}
-		return "<p>Login server status: " . ($online ? "online" : "offline") . "</p>\n"
-				. "<p>Number of players currently online: {$onlineCount}</p>";
+		return "<p>Login server status: " . ($online ? "online" : "offline") . "</p>";
 	}
 
 	protected function getTitle() {

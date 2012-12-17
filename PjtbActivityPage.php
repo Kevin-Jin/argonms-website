@@ -28,9 +28,57 @@ require_once("PjtbBasePage.php");
  * @author GoldenKevin
  */
 class PjtbActivityPage extends PjtbBasePage {
+	private function getUsersCount() {
+		require_once('DatabaseManager.php');
+		$con = makeDatabaseConnection();
+		$ps = $con->prepare("SELECT COUNT(*) FROM `accounts`");
+		if ($ps->execute()) {
+			$ps->bind_result($registeredCount);
+			$ps->fetch();
+		}
+		$ps->close();
+		$con->close();
+
+		return $registeredCount;
+	}
+
+	private function isServerOnline() {
+		require_once('Config.php');
+		$loginServerPort = 8484;
+		$connection = @fsockopen(Config::getInstance()->loginServerIp, $loginServerPort);
+		if ($connection) {
+			fclose($connection);
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	private function getOnlineCount() {
+		if (!self::isServerOnline())
+			return 0;
+
+		require_once('DatabaseManager.php');
+		$con = makeDatabaseConnection();
+		$ps = $con->prepare("SELECT COUNT(*) FROM `accounts` WHERE `connected` <> 0");
+		if ($ps->execute()) {
+			$ps->bind_result($onlineCount);
+			$ps->fetch();
+		}
+		$ps->close();
+		$con->close();
+
+		return $onlineCount;
+	}
+
 	protected function getBodyContent() {
+		$registeredCount = self::getUsersCount();
+		$onlineCount = self::getOnlineCount();
+
 		return
 <<<EOD
+<p>Number of registered players: {$registeredCount}</p>
+<p>Number of players currently online: {$onlineCount}</p>
 <div id="container" style="min-width: 400px; height: 400px; margin: 0 auto">
 <p>JavaScript must be enabled in order to view this content.</p>
 </div>
@@ -38,7 +86,7 @@ EOD;
 	}
 
 	protected function getTitle() {
-		return "Project Throwback In Game Population Statistics";
+		return "Project Throwback Activity Records";
 	}
 
 	protected function getHtmlHeader() {
@@ -59,8 +107,7 @@ EOD;
 					//this is to fill in any missing dates in the graphs in case
 					//the population stayed at 0 that day.
 
-					//TODO: reset most active time for points that remain at 0
-					$period = new DatePeriod(new DateTime($array[0] . " " . $array[3], $tz), new DateInterval("P1D"), new DateTime("now", $tz));
+					$period = new DatePeriod(new DateTime($array[0] . " " . $array[3], $tz), new DateInterval("P1D"), new DateTime("tomorrow", $tz));
 					foreach ($period as $dt)
 						$points[$dt->format("Ymd")] = array($dt, 0, 0);
 				}
@@ -98,9 +145,8 @@ EOD;
 		$header .=
 <<<EOD
 };
-var chart;
 $(document).ready(function() {
-	chart = new Highcharts.Chart({
+	new Highcharts.Chart({
 		chart: {
 			renderTo: 'container',
 			type: 'line',
@@ -108,7 +154,7 @@ $(document).ready(function() {
 			marginBottom: 50
 		},
 		title: {
-			text: 'In Game Population Statistics',
+			text: 'In Game Population',
 			x: -20 //center
 		},
 		subtitle: {
@@ -124,6 +170,9 @@ EOD;
 			x: -20
 		},
 		xAxis: {
+			title: {
+				text: 'Date'
+			},
 			categories: [
 EOD;
 		foreach ($points as $value)
@@ -150,7 +199,7 @@ EOD;
 			formatter: function() {
 				return '<b>' + this.x + '</b><br/>' +
 					this.series.name + ': '+ this.y + ' player(s)<br/>' +
-					'Most active time: ' + activeTimes[this.x];
+					'Most active time: ' + (this.y != 0 ? activeTimes[this.x] : 'N/A');
 			}
 		},
 		legend: {
