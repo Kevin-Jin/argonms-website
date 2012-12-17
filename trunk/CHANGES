@@ -210,6 +210,17 @@
 	* Graphs now fill in gaps in dates.
 	* Added a new subtitle in the heading.
 
+2012-12-17  GoldenKevin  (revision 25)
+
+	* Display N/A as the most active time for points with 0 players in activity
+	page and display a label for the x-axis of the graph.
+	* Fixed activity page not displaying current day if no one went online yet.
+	* Display registered users and online users counts in activity page and
+	remove them from Server status page.
+	* Updated the tagline and the staff page.
+	* PjtbFinalStatementPage and PjtbTermsPage revised to indicate a cash shop
+	will be launched and no donations will be taken.
+
 Copyright 2012 GoldenKevin
 Copying and distribution of this file, with or without modification, are
 permitted provided the copyright notice and this notice are preserved.

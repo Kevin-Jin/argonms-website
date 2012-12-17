@@ -45,7 +45,10 @@ EOD;
 		return
 <<<EOD
 <h3>GoldenKevin</h3>
-<p class="description">Founder, administrator, manager, advertiser, and moderator of Project Throwback; maintainer and programmer of ArgonMS</p>
+<p class="description">Founder, administrator, director, moderator, accountant, and public relations manager of Project Throwback</p>
+<p class="description">Maintainer and lead programmer of ArgonMS</p>
+<h3>Viegar</h3>
+<p class="description">Event coordinator, gamemaster, and public relations specialist of Project Throwback</p>
 EOD;
 	}
 

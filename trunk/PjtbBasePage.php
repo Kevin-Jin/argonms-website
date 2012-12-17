@@ -99,7 +99,7 @@ EOD;
 <<<EOD
 <div class="header">
 <h1>Project Throwback</h1>
-<h2>A small town feel for the masses</h2>
+<h2>A small town feel free for everyone</h2>
 <ul class="droplinemenu">
 
 EOD;
