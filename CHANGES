@@ -221,13 +221,22 @@
 	* PjtbFinalStatementPage and PjtbTermsPage revised to indicate a cash shop
 	will be launched and no donations will be taken.
 
-2012-01-19  GoldenKevin  (revision 26)
+2013-01-19  GoldenKevin  (revision 26)
 
 	* Fixed invalid XHTML in redirect pages.
 	* Record registration date for newly registered accounts.
 	* Show human readable job titles in rankings page.
 	* Begin work on vote registering mechanism for in game cash bonuses.
 
-Copyright 2012 GoldenKevin
+2013-01-19  GoldenKevin  (revision 27)
+
+	* Updated copyright years.
+	* Added "svn:eol-style native" property to *.php and config.ini files.
+	* Added "svn:mime-type text/x-php" property to *.php files.
+	* Added AGPL license notice to config.ini.
+	* Removed whitespace for each class's Javadoc to make them more congruent
+	with the class Javadocs in ArgonMS Java source.
+
+Copyright 2012-2013 GoldenKevin
 Copying and distribution of this file, with or without modification, are
 permitted provided the copyright notice and this notice are preserved.
