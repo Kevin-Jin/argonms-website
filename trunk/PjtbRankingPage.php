@@ -55,9 +55,10 @@ EOD;
 		$ps = $con->prepare("CALL fetchranks('overall', null, ?, ?)");
 		$ps->bind_param('dd', $min, $max);
 		if ($ps->execute()) {
+			require_once('StringData.php');
 			$rs = $ps->get_result();
 			while ($array = $rs->fetch_array())
-				$content .= "<tr><td>" . $array[0] . "</td><td>" . $array[2] . "</td><td>" . $array[3] . "</td><td>" . $array[4] . "</td><td>" . $array[5] . "</td><td>" . $array[6] . "</td></tr>\n";
+				$content .= "<tr><td>" . $array[0] . "</td><td>" . $array[2] . "</td><td>" . $array[3] . "</td><td>" . StringData::getJobName($array[4]) . "</td><td>" . $array[5] . "</td><td>" . $array[6] . "</td></tr>\n";
 			$rs->close();
 		}
 		$ps->close();

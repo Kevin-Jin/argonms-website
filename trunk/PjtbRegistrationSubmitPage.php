@@ -94,21 +94,22 @@ class PjtbRegistrationSubmitPage extends PjtbBasePage {
 				$this->message = "That username is already being used. Please try another.<br />You will be brought back to the last page";
 				$this->url = Config::getInstance()->portalPath . "?action=regform";
 			} else {
+				require_once('Config.php');
+				$now = new DateTime(NULL, new DateTimeZone(Config::getInstance()->timeZone));
+				$now = $now->format("Y-m-d");
+
 				require_once('HashFunctions.php');
 				$salt = makeSalt();
 				$passHash = makeSaltedSha512Hash($_POST["password"], $salt);
 
 				$birthday = $_POST["birthyear"] * 10000 + intval($_POST["birthmonth"]) * 100 + intval($_POST["birthday"]);
 
-				$ps = $con->prepare("INSERT INTO `accounts`(`name`,`password`,`salt`,`birthday`,`email`) VALUES (?,?,?,?,?)");
-				$ps->bind_param('sssis', $_POST["username"], $passHash, $salt, $birthday, $_POST["email"]);
+				$ps = $con->prepare("INSERT INTO `accounts`(`name`,`password`,`salt`,`birthday`,`email`,`registerdate`) VALUES (?,?,?,?,?,?)");
+				$ps->bind_param('sssiss', $_POST["username"], $passHash, $salt, $birthday, $_POST["email"], $now);
 				$ps->execute();
 				$_SESSION['loggedInAccountId'] = $con->insert_id;
 				$ps->close();
 
-				require_once('Config.php');
-				$now = new DateTime(NULL, new DateTimeZone(Config::getInstance()->timeZone));
-				$now = $now->format("Y-m-d");
 				$ps = $con->prepare("INSERT INTO `websitestats` (`day`,`registrations`) VALUES (?,1) ON DUPLICATE KEY UPDATE `registrations` = `registrations` + 1");
 				$ps->bind_param('s', $now);
 				$ps->execute();
@@ -189,7 +190,7 @@ class PjtbRegistrationSubmitPage extends PjtbBasePage {
 	}
 
 	protected function getHtmlHeader() {
-		return parent::getHtmlHeader() . "\n<meta http-equiv=\"Refresh\" content=\"{$this->timeout}; {$this->url}\">";
+		return parent::getHtmlHeader() . "\n<meta http-equiv=\"Refresh\" content=\"{$this->timeout}; {$this->url}\" />";
 	}
 
 	protected function getBodyContent() {
