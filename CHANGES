@@ -221,6 +221,13 @@
 	* PjtbFinalStatementPage and PjtbTermsPage revised to indicate a cash shop
 	will be launched and no donations will be taken.
 
+2012-01-19  GoldenKevin  (revision 26)
+
+	* Fixed invalid XHTML in redirect pages.
+	* Record registration date for newly registered accounts.
+	* Show human readable job titles in rankings page.
+	* Begin work on vote registering mechanism for in game cash bonuses.
+
 Copyright 2012 GoldenKevin
 Copying and distribution of this file, with or without modification, are
 permitted provided the copyright notice and this notice are preserved.

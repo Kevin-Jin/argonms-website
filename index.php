@@ -68,7 +68,9 @@ if (!isset($_REQUEST["action"])) {
 		'contact' => array('PjtbContactPage.php', 'PjtbContactPage'),
 		'cp' => array('PjtbUserControlPanel.php', 'PjtbUserControlPanel'),
 		'logout' => array('PjtbLogoutPage.php', 'PjtbLogoutPage'),
-		'staff' => array('PjtbStaffPage.php', 'PjtbStaffPage')
+		'staff' => array('PjtbStaffPage.php', 'PjtbStaffPage'),
+		'vote' => array('PjtbVotePage.php', 'PjtbVotePage'),
+		'voter' => array('PjtbVotePopup.php', 'PjtbVotePopup')
 	);
 
 	if (array_key_exists($_REQUEST["action"], $actionArray)) {

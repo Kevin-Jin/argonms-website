@@ -55,6 +55,7 @@ EOD;
 		));
 		if (isset($_SESSION['loggedInAccountId'])) {
 			$subLevelLinks = array(
+				'Vote' => Config::getInstance()->portalPath . '?action=vote',
 				'User control panel' => Config::getInstance()->portalPath . '?action=cp',
 				'Log out' => Config::getInstance()->portalPath . '?action=logout'
 			);

@@ -49,7 +49,7 @@ class PjtbLogoutPage extends PjtbBasePage {
 	}
 
 	protected function getHtmlHeader() {
-		return parent::getHtmlHeader() . "\n<meta http-equiv=\"Refresh\" content=\"{$this->timeout}; {$this->url}\">";
+		return parent::getHtmlHeader() . "\n<meta http-equiv=\"Refresh\" content=\"{$this->timeout}; {$this->url}\" />";
 	}
 
 	protected function getBodyContent() {
