@@ -237,6 +237,27 @@
 	* Removed whitespace for each class's Javadoc to make them more congruent
 	with the class Javadocs in ArgonMS Java source.
 
+2013-01-20  GoldenKevin  (revision 28)
+
+	* Pass voting site key as integer rather than a string ("site#").
+	* Disable a voting site's button after being clicked and re-enable it if the
+	vote popup is closed before the vote is registered. Doesn't work with Opera.
+	* Front page vote links replaced with directions on how to vote for in game
+	cash.
+	* PjtbNameCheckPage is now a general purpose AJAX responder called
+	PjtbQueryPage. Added functionality for the vote page.
+	* Added additional checks into voting mechanism to discourage automation.
+	* Voting site properties moved to Config so classes outside of PjtbVotePage
+	can access them.  A future update will remove unnecessary parameter passing
+	in HTTP query strings.
+	* Implemented PjtbVotePage. JavaScript is used to dynamically update the
+	page's timers and to automatically enable and disable buttons. Database
+	operations are atomic (one query per operation) so malicious users are not
+	able to successfully spam a certain token before expire date and token
+	fields are updated from an earlier request.
+	* PjtbVotePage now indicates how a user's in game cash balance will be
+	affected and gives directions on how to view the current balance.
+
 Copyright 2012-2013 GoldenKevin
 Copying and distribution of this file, with or without modification, are
 permitted provided the copyright notice and this notice are preserved.

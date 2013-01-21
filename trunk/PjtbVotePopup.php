@@ -31,13 +31,35 @@ class PjtbVotePopup {
 	private $reloads;
 
 	public function __construct() {
-		if (!isset($_GET["key"]) || !isset($_GET["url"]) || !isset($_GET["text"]) || !isset($_GET["reloads"]))
+		if (!isset($_SESSION['loggedInAccountId']) || !isset($_GET["key"]) || !isset($_GET["url"]) || !isset($_GET["text"]) || !isset($_GET["reloads"]))
 			require_once('HackingAttempt.php');
 
 		$this->id = $_GET["key"];
 		$this->url = $_GET["url"];
 		$this->text = $_GET["text"];
 		$this->reloads = $_GET["reloads"];
+
+		$spoof = false;
+		$token = openssl_random_pseudo_bytes(16);
+		$ip = sprintf("%u", ip2long($_SERVER['REMOTE_ADDR']));
+		$currentTimeMillis = round(microtime(true) * 1000);
+		require_once('DatabaseManager.php');
+		$con = makeDatabaseConnection();
+		$ps = $con->prepare("INSERT INTO `websitevotes` (`accountid`,`ip`,`token`,`site`,`expiredate`) VALUES (?,?,?,?,?) ON DUPLICATE KEY UPDATE "
+				. "`accountid` = IF(`site` = VALUES(`site`) AND `expiredate` < VALUES(`expiredate`), VALUES(`accountid`), `accountid`), "
+				. "`ip` = IF(`site` = VALUES(`site`) AND `expiredate` < VALUES(`expiredate`), VALUES(`ip`), `ip`), "
+				. "`token` = IF(`site` = VALUES(`site`) AND `expiredate` < VALUES(`expiredate`), VALUES(`token`), `token`)");
+		$ps->bind_param('issii', $_SESSION['loggedInAccountId'], $ip, $token, $this->id, $currentTimeMillis);
+		$ps->execute();
+		if ($con->affected_rows == 0)
+			$spoof = true;
+		$ps->close();
+		$con->close();
+
+		if ($spoof)
+			require_once('HackingAttempt.php');
+
+		$_SESSION['votetoken'] = $token;
 	}
 
 	public final function getHtml() {
@@ -74,7 +96,7 @@ var NEEDED_RELOADS = {$this->reloads};
 var reloadedCount = 0;
 
 function notify() {
-	window.opener.completedVote("{$this->id}", "{$this->text}");
+	window.opener.completedVote({$this->id}, "{$this->text}");
 	window.close();
 }
 
@@ -83,6 +105,10 @@ function reloaded() {
 	if (reloadedCount == NEEDED_RELOADS)
 		notify();
 }
+
+window.onbeforeunload = function() {
+	window.opener.resetButton({$this->id});
+};
 // ]]>
 </script>
 </head>

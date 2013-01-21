@@ -54,7 +54,7 @@ if (!isset($_REQUEST["action"])) {
 	$actionArray = array(
 		'loginform' => array('PjtbLoginFormPage.php', 'PjtbLoginFormPage'),
 		'loginsubmit' => array('PjtbLoginSubmitPage.php', 'PjtbLoginSubmitPage'),
-		'namecheck' => array('PjtbNameCheckPage.php', 'PjtbNameCheckPage'),
+		'query' => array('PjtbQueryPage.php', 'PjtbQueryPage'),
 		'regform' => array('PjtbRegistrationFormPage.php', 'PjtbRegistrationFormPage'),
 		'regsubmit' => array('PjtbRegistrationSubmitPage.php', 'PjtbRegistrationSubmitPage'),
 		'about' => array('PjtbAboutPage.php', 'PjtbAboutPage'),
