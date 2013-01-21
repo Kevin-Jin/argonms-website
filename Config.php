@@ -35,6 +35,8 @@ class Config {
 	public $timeZone;
 	public $loginServerIp;
 	public $portalPath;
+	public $voteSites;
+	public $voteRewardNx;
 
 	private function __construct($configFile) {
 		$props = parse_ini_file($configFile, true);
@@ -46,6 +48,8 @@ class Config {
 		$this->timeZone = $props['timezone'];
 		$this->loginServerIp = $props['loginserverip'];
 		$this->portalPath = $props['portalpath'];
+		$this->voteSites = $props['votesites'];
+		$this->voteRewardNx = $props['voterewardnx'];
 	}
 
 	private static $instance;

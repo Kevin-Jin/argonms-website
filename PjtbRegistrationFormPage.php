@@ -314,7 +314,7 @@ function hintTextMatch(obj, menucontents) {
 }
 
 function checkUsername(obj) {
-	$.get("{$portalPath}?action=namecheck&name=" + obj.val(), function(resp) {
+	$.get("{$portalPath}?action=query&type=name&name=" + obj.val(), function(resp) {
 		if (resp != "") { //we'll return an empty string for no conflicts
 			showHint("The username " + resp + " is already being used.", obj, "250px", true);
 			usernameOk = false;

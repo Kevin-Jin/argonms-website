@@ -39,7 +39,7 @@ class PjtbTermsPage extends PjtbLoginFormPage {
 		$content .= 
 <<<EOD
 <p>You may navigate the site through the bar above.</p>
-<p>Please <a href="http://gigatoplist.com/index.php?p=Vote&uid=1423" target="_blank">vote</a> <a href="http://www.gtop100.com/in.php?site=75338" title="Top 100 MapleStory sites" target="_blank">for</a> <a href="http://www.ultimateprivateservers.com/maple-story/index.php?a=in&u=goldenkevin">our</a> service if you like it. Increased recognition will lead to a larger community and a better in game experience!</p>
+<p>If you like this server, please show your appreciation by voting for us. You will get an in game cash reward as a bonus and could potentionally attract more players to make your experience on this server even better. In order to do so, you will have to log in and then select the Vote link under the User tab.</p>
 EOD;
 		return $content;
 	}
